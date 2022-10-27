@@ -1,0 +1,32 @@
+main {
+    overflow: auto;
+}
+
+.help {
+    padding: 60px 60px 32px 60px;
+}
+
+.help h1 {
+    font-size: var(--font-h1);
+    color: var(--primary);
+    margin-bottom: 34px;
+}
+
+.help h3 {
+    font-size: var(--font-h3);
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.help p {
+    font-size: var(--font-body);
+    text-align: justify;
+    margin-bottom: 35px;
+}
+
+.help li::marker {
+    font-size: var(--font-h5);
+    font-weight: bold;
+    color: var(--primary);
+}
+
