@@ -25,6 +25,7 @@
     --primary-light: #D2E3FF;
     --secondary: #005DFF;
     --active: #091931;
+    --font: #42526E;
     --urgent: #FF3D00;
     --urgent-light: #FFD2D2;
     --medium: #FFA800;
@@ -43,6 +44,7 @@
     --font-body: 1.0rem;
     --font-label: 0.812rem;
 }
+
 
 * {
     margin: 0;
