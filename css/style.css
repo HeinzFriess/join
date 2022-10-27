@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/open_sans/OpenSans-Regular.ttf');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/open_sans/OpenSans-Medium.ttf');
+    font-style: medium;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/open_sans/OpenSans-Bold.ttf');
+    font-style: bold;
+    font-weight: 700;
+}
+
+
+:root {
+    --primary: #4589FF;
+    --primary-light: #D2E3FF;
+    --secondary: #005DFF;
+    --active: #091931;
+    --urgent: #FF3D00;
+    --urgent-light: #FFD2D2;
+    --medium: #FFA800;
+    --medium-light: #FFEBB9;
+    --low: #7AE229;
+    --low-light: #CBFFC2;
+    --white: #FFFFFF;
+    --shadow-small: 0px 4px 4px rgba(0, 0, 0, 0.12);
+    --shadow-medium: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    --font-h1: 3rem;
+    --font-h2: 2.5rem;
+    --font-h3: 2.062rem;
+    --font-h4: 1.75rem;
+    --font-h5: 1.438rem;
+    --font-h6: 1.188rem;
+    --font-body: 1.0rem;
+    --font-label: 0.812rem;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+}
+
+html {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: var(--white);
+}
