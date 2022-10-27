@@ -63,3 +63,9 @@ body {
     width: 100%;
     background: var(--white);
 }
+
+
+.container {
+    display: flex; 
+    height: calc(100% - 98px); /* Calculates the page height and subtracted the header height */
+}
