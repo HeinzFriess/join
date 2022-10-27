@@ -73,6 +73,6 @@ body {
 
 @media screen and (max-width: 700px) {
     .container {
-        height: calc(100% - 80px);
+        height: calc(100% - 160px);
     }
 }
