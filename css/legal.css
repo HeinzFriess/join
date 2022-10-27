@@ -1,0 +1,25 @@
+main {
+    overflow: auto;
+}
+
+.legal {
+    padding: 60px 60px 32px 60px;
+}
+
+.legal h1 {
+    font-size: var(--font-h1);
+    color: var(--primary);
+    margin-bottom: 34px;
+}
+
+.legal h3 {
+    font-size: var(--font-h3);
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.legal p {
+    font-size: var(--font-body);
+    text-align: justify;
+    margin-bottom: 35px;
+}
