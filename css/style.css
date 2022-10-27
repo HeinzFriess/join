@@ -69,3 +69,10 @@ body {
     display: flex; 
     height: calc(100% - 98px); /* Calculates the page height and subtracted the header height */
 }
+
+
+@media screen and (max-width: 700px) {
+    .container {
+        height: calc(100% - 80px);
+    }
+}

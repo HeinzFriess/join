@@ -43,3 +43,10 @@
 .navigation a > span {
     white-space: nowrap;
 }
+
+
+@media screen and (max-width: 700px) {
+    .navigation {
+        display: none;
+    }
+}

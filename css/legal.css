@@ -3,7 +3,7 @@ main {
 }
 
 .legal {
-    padding: 60px 60px 32px 60px;
+    padding: 40px 32px 32px 32px;
 }
 
 .legal h1 {
@@ -22,4 +22,10 @@ main {
     font-size: var(--font-body);
     text-align: justify;
     margin-bottom: 35px;
+}
+
+@media screen and (max-width: 700px) {
+    .legal h3 {
+        font-size: var(--font-h5);
+    }
 }

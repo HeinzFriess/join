@@ -37,3 +37,27 @@
     border-radius: 100%;
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 700px) {
+    .header {
+        height: 80px;
+    }
+
+    .header > img {
+        width: 32px;
+    }
+
+    .header span {
+        display: none;
+    }
+
+    .header a {
+        display: none;
+    }
+
+    .profile-picture {
+        width: 44px;
+        height: 44px;
+    }
+}
