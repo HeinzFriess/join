@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/script.js"></script>
+    <style>
+        body{
+             background-color: var(--white); /*var(--primary) */
+        }
+
+        #startView{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        #mainView{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        #logoMain{
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+
+        .d-none{
+            display: none;
+        }
+
+        #card{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid black;
+            border-radius: 8px;
+            height: 300px;
+            width: 500px;
+        }
+    </style>
+    <script>
+        
+    </script>
+</head>
+
+<body>
+    <div id="headMenu" class="d-none">
+
+    </div>
+    <div id="startView d-none">
+        <img src="assets/img/Capa 1LogoWhite.svg" alt="">
+    </div>
+    <div id="mainView">
+        <img id="logoMain" src="assets/img/Capa 2LogoBlue.svg" alt="">
+        <div id="card">
+            <div id="cardHead">
+                <h1>Log in</h4>
+            </div>
+            <div id="cardInput">
+                <input type="text" placeholder="Email" id="inputEmail">
+                <img src="assets/img/letterIcon.png" alt="">
+            </div>
+            <div id="cardInput">
+                <input type="text" placeholder="Password" id="inputPassword">
+                <img src="assets/img/lockIcon.png" alt="">
+            </div>
+            <div id="cardCheckBox">
+                <input type="checkbox">
+                <label class="container">Remember me
+                </label>
+                <a href="#">Forgot my Password</a>
+            </div>
+            <div id="cardButtons">
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
