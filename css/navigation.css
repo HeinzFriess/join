@@ -1,0 +1,45 @@
+.navigation {
+    width: 232px;
+    height: 100%;
+    padding: 66px 20px 32px 20px;
+    box-shadow: var(--shadow-small);
+}
+
+.navigation ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    list-style: none;
+}
+
+.navigation li:last-child {
+    margin-top: auto;
+}
+
+.navigation a {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 13.5px 40px 13.5px 30px;
+    margin-bottom: 15px;
+    color: var(--font);
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.navigation a:hover,
+.navigation a:focus,
+.active {
+    background: var(--primary-light);
+    outline: none;
+}
+
+.navigation a > img {
+    width: 30px;
+    height: 30px;
+}
+
+.navigation a > span {
+    white-space: nowrap;
+}
