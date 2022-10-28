@@ -11,10 +11,10 @@
     <script src="./js/script.js"></script>
     <style>
         body {
-            background-color: var(--primary);
+            background-color: var(--white);
             /*var(--primary) */
         }
-        
+
         #startView {
             display: flex;
             justify-content: center;
@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             height: 100%;
-            
+
         }
 
         #logInMain {
@@ -52,27 +52,26 @@
             position: absolute;
             top: calc(50% - 150px);
             left: calc(50% - 250px);
-            background-color: white;
         }
 
-        #cardInput{
+        #cardInput {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid lightgray;
             padding: 4px;
         }
 
-        #cardCheckBox{
+        #cardCheckBox {
             display: flex;
             justify-content: space-between;
             padding: 4px;
         }
 
-        #card form{
+        #card form {
             width: 60%;
         }
 
-        #cardButtons{
+        #cardButtons {
             display: flex;
             justify-content: space-evenly;
             padding: 4px;
@@ -88,64 +87,67 @@
             scale: 1.1;
         }
 
-
-        .btnBlue{
+        .btnBlue {
             background-color: var(--primary);
             color: white;
         }
 
-        .btnWhite{
+        .btnWhite {
             background-color: var(--white);
         }
 
-        .noBorder{
+        .noBorder {
             border: none;
         }
 
-        .flexBoxEnd{
+        .flexBoxEnd {
             display: flex;
             justify-content: flex-end;
         }
 
-        .flexBoxSpaceBetween{
+        .flexBoxSpaceBetween {
             display: flex;
             justify-content: space-between;
         }
 
-        .headRight{
+        .headRight {
             width: 20%;
             margin: 24px;
         }
     </style>
     <script>
         let users = JSON.parse(localStorage.getItem('users'));
-        function signUp(){
-            let name = document.getElementById('inputName').value;
+        function logIn() {
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            users.push({'name': name, 'email': email, 'password': password});
-            storeUsers();
+            users = JSON.parse(localStorage.getItem('users'));
+            let user = users.find( u => u.email == email && u.password == password);
+            window.location('summary.html');
         }
 
-        function storeUsers(){  //ToDo auf miniBackend Speichern
-            let usersAsString = JSON.stringify(users);
-            localStorage.setItem('users', usersAsString);
-        }
+        
     </script>
 </head>
 
 <body>
+    <div id="headMenu" class="d-none flexBoxEnd">
+        <!--ToDo class über Script steuern-->
+        <div class="flexBoxSpaceBetween headRight">
+            Not a Join user?
+            <button onclick="location.href='signUp.html'" class="btn btnBlue">Sign up</button>
+        </div>
+
+    </div>
+    <div id="startView d-none">
+        <img src="assets/img/logo_white.svg" alt="">
+    </div>
     <div id="mainView">
-        <img id="logInMain" src="assets/img/logo_white.svg" alt="">
+        <img id="logInMain" src="assets/img/logo_blue.svg" alt="">
         <div id="card">
             <div id="cardHead">
-                <h1>Sign up</h4>
+                <h1>Log in</h4>
             </div>
-            <form onsubmit="signUp()">
-                <div id="cardInput">
-                    <input type="text" required placeholder="Name" id="inputName" class="noBorder">
-                    <img src="assets/img/personIcon.png" alt="">
-                </div>
+            <form onsubmit="logIn()">
                 <div id="cardInput">
                     <input type="text" required placeholder="Email" id="inputEmail" class="noBorder">
                     <img src="assets/img/letterIcon.png" alt="">
@@ -154,9 +156,15 @@
                     <input type="text" required placeholder="Password" id="inputPassword" class="noBorder">
                     <img src="assets/img/lockIcon.png" alt="">
                 </div>
-                
+                <div id="cardCheckBox">
+                    <input type="checkbox">
+                    <label class="container">Remember me
+                    </label>
+                    <a href="#">Forgot my Password</a>
+                </div>
                 <div id="cardButtons">
-                    <button class="btn btnBlue">Sign up</button>
+                    <button class="btn btnBlue">Log in</button>
+                    <button class="btn btnWhite" onclick="location.href='summary.html'">Guest log in</button>
                 </div>
             </form>
 
