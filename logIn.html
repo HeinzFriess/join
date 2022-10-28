@@ -117,7 +117,7 @@
     </style>
     <script>
         async function loadUsers(){
-            users = await JSON.parse(localStorage.getItem('users'));
+            users = await JSON.parse(localStorage.getItem('users')) || [];
             return users;
         }
 

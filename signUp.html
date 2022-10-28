@@ -126,11 +126,11 @@
             let password = document.getElementById('inputPassword').value;
             users.push({'name': name, 'email': email, 'password': password});
             storeUsers(users);
-            window.location.href = 'signIn.html';
+            window.location.href = 'LogIn.html';
         }
 
         async function loadUsers(){
-            users = await JSON.parse(localStorage.getItem('users'));
+            users = await JSON.parse(localStorage.getItem('users')) || [];
             return users;
         }
 
