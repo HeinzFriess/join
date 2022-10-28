@@ -118,16 +118,23 @@
         }
     </style>
     <script>
-        let users = JSON.parse(localStorage.getItem('users'));
-        function signUp(){
+        
+        async function signUp(){
+            let users = await loadUsers();
             let name = document.getElementById('inputName').value;
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
             users.push({'name': name, 'email': email, 'password': password});
-            storeUsers();
+            storeUsers(users);
+            window.location.href = 'signIn.html';
         }
 
-        function storeUsers(){  //ToDo auf miniBackend Speichern
+        async function loadUsers(){
+            users = await JSON.parse(localStorage.getItem('users'));
+            return users;
+        }
+
+        function storeUsers(users){  //ToDo auf miniBackend Speichern
             let usersAsString = JSON.stringify(users);
             localStorage.setItem('users', usersAsString);
         }
@@ -141,7 +148,7 @@
             <div id="cardHead">
                 <h1>Sign up</h4>
             </div>
-            <form onsubmit="signUp()">
+            <form onsubmit="signUp(); return false;">
                 <div id="cardInput">
                     <input type="text" required placeholder="Name" id="inputName" class="noBorder">
                     <img src="assets/img/personIcon.png" alt="">

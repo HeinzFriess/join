@@ -116,13 +116,18 @@
         }
     </style>
     <script>
+        async function loadUsers(){
+            users = await JSON.parse(localStorage.getItem('users'));
+            return users;
+        }
+
         let users = JSON.parse(localStorage.getItem('users'));
-        function logIn() {
+        async function logIn() {
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            users = JSON.parse(localStorage.getItem('users'));
+            users = await loadUsers();
             let user = users.find( u => u.email == email && u.password == password);
-            window.location('summary.html');
+            window.location.href = 'summary.html';
         }
 
         
@@ -147,7 +152,7 @@
             <div id="cardHead">
                 <h1>Log in</h4>
             </div>
-            <form onsubmit="logIn()">
+            <form onsubmit="logIn(); return false;">
                 <div id="cardInput">
                     <input type="text" required placeholder="Email" id="inputEmail" class="noBorder">
                     <img src="assets/img/letterIcon.png" alt="">
@@ -164,7 +169,7 @@
                 </div>
                 <div id="cardButtons">
                     <button class="btn btnBlue">Log in</button>
-                    <button class="btn btnWhite" onclick="location.href='summary.html'">Guest log in</button>
+                    <button class="btn btnWhite" onclick="location.href = 'summary.html'">Guest log in</button>
                 </div>
             </form>
 
