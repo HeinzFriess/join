@@ -14,7 +14,7 @@
             background-color: var(--primary);
             /*var(--primary) */
         }
-        
+
         #startView {
             display: flex;
             justify-content: center;
@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             height: 100%;
-            
+
         }
 
         #logInMain {
@@ -55,24 +55,37 @@
             background-color: white;
         }
 
-        #cardInput{
+        #cardHead {
+            display: flex;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .cardHeadIcon {
+            position: absolute;
+            left: 25px;
+            cursor: pointer;
+        }
+
+        #cardInput {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid lightgray;
             padding: 4px;
         }
 
-        #cardCheckBox{
+        #cardCheckBox {
             display: flex;
             justify-content: space-between;
             padding: 4px;
         }
 
-        #card form{
+        #card form {
             width: 60%;
         }
 
-        #cardButtons{
+        #cardButtons {
             display: flex;
             justify-content: space-evenly;
             padding: 4px;
@@ -84,57 +97,58 @@
             border-style: solid;
             cursor: pointer;
         }
+
         .btn:hover {
             scale: 1.1;
         }
 
 
-        .btnBlue{
+        .btnBlue {
             background-color: var(--primary);
             color: white;
         }
 
-        .btnWhite{
+        .btnWhite {
             background-color: var(--white);
         }
 
-        .noBorder{
+        .noBorder {
             border: none;
         }
 
-        .flexBoxEnd{
+        .flexBoxEnd {
             display: flex;
             justify-content: flex-end;
         }
 
-        .flexBoxSpaceBetween{
+        .flexBoxSpaceBetween {
             display: flex;
             justify-content: space-between;
         }
 
-        .headRight{
+        .headRight {
             width: 20%;
             margin: 24px;
         }
     </style>
     <script>
-        
-        async function signUp(){
+
+        async function signUp() {
             let users = await loadUsers();
             let name = document.getElementById('inputName').value;
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            users.push({'name': name, 'email': email, 'password': password});
+            users.push({ 'name': name, 'email': email, 'password': password });
             storeUsers(users);
             window.location.href = 'LogIn.html';
         }
 
-        async function loadUsers(){
+        async function loadUsers() {
             users = await JSON.parse(localStorage.getItem('users')) || [];
             return users;
         }
 
-        function storeUsers(users){  //ToDo auf miniBackend Speichern
+        function storeUsers(users) {  //ToDo auf miniBackend Speichern
             let usersAsString = JSON.stringify(users);
             localStorage.setItem('users', usersAsString);
         }
@@ -146,6 +160,9 @@
         <img id="logInMain" src="assets/img/logo_white.svg" alt="">
         <div id="card">
             <div id="cardHead">
+                <div class="cardHeadIcon">
+                    <img src="assets/img/backIcon.png" onclick="location.href = 'logIn.html'"alt="">
+                </div>
                 <h1>Sign up</h4>
             </div>
             <form onsubmit="signUp(); return false;">
@@ -161,7 +178,7 @@
                     <input type="text" required placeholder="Password" id="inputPassword" class="noBorder">
                     <img src="assets/img/lockIcon.png" alt="">
                 </div>
-                
+
                 <div id="cardButtons">
                     <button class="btn btnBlue">Sign up</button>
                 </div>
