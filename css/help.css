@@ -3,7 +3,7 @@ main {
 }
 
 .help {
-    padding: 40px 32px 32px 32px;
+    padding: 60px 60px 32px 60px;
 }
 
 .help h1 {
@@ -32,6 +32,10 @@ main {
 
 
 @media screen and (max-width: 700px) {
+    .help {
+        padding: 40px 32px 32px 32px;
+    }
+
     .help h3 {
         font-size: var(--font-h5);
     }
