@@ -68,6 +68,12 @@
     padding-left: 65px;
 }
 
+.contacts-details img {
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+}
+
 .detail-header {
     display: flex;
     gap: 54px;
@@ -86,6 +92,46 @@
     border-radius: 100%;
     color: white;
     background: blueviolet;
+}
+
+.add-task {
+    font-size: var(--font-body);
+    color: var(--primary);
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.detail-body {
+    font-weight: 700;
+}
+
+.detail-body a {
+    font-weight: 400;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.heading {
+    display: flex;
+    align-items: flex-end;
+    gap: 60px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    font-size: var(--font-h5);
+}
+
+.edit-contact {
+    font-size: var(--font-body);
+    font-weight: 400;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.information div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
 
