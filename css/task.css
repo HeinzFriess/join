@@ -1,0 +1,125 @@
+.new-task {
+    width: 422px;
+    margin: 40px 85px;
+}
+
+.new-task form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.new-task form>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-task [for="date"],
+.new-task [for="category"],
+.new-task [for="description"],
+.new-task [for="subtasks"] {
+    font-weight: 700;
+    color: var(--font);
+    margin-bottom: 8px;
+}
+
+.new-task *::placeholder {
+    color: var(--gray-light);
+}
+
+.new-task input[type="text"] {
+    font-size: var(--font-h2);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+}
+
+/* .new-task input[type="date"] {
+
+} */
+
+.new-task textarea {
+    font-size: var(--font-h6);
+    padding: 12px;
+    border: 1px solid var(--gray-light);
+    border-radius: 0 10px 10px 10px;
+}
+
+#priority {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#priority input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+#priority .icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#priority i[class*="urgent"] {
+    background-image: url(/assets/icons/urgent.svg);
+}
+
+#priority i[class*="medium"] {
+    background-image: url(/assets/icons/medium.svg);
+}
+
+#priority i[class*="low"] {
+    background-image: url(/assets/icons/low.svg);
+}
+
+#priority input[type="radio"]:checked + label[for="urgent"] i {
+    background-image: url(/assets/icons/urgent_white.svg);
+}
+
+#priority input[type="radio"]:checked + label[for="medium"] i {
+    background-image: url(/assets/icons/medium_white.svg);
+}
+
+#priority input[type="radio"]:checked + label[for="low"] i {
+    background-image: url(/assets/icons/low_white.svg);
+}
+
+#priority input[type="radio"]:checked + label[for="urgent"] {
+    color: var(--white);
+    background: var(--urgent);
+}
+
+#priority input[type="radio"]:checked + label[for="medium"] {
+    color: var(--white);
+    background: var(--medium);
+}
+
+#priority input[type="radio"]:checked + label[for="low"] {
+    color: var(--white);
+    background: var(--low);
+}
+
+#priority label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: var(--font-h6);
+    box-shadow: var(--shadow-small);
+    cursor: pointer;
+}
+
+#priority label:hover {
+    background: var(--primary-light);
+}

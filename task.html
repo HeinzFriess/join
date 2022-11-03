@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/task.css">
+    <script src="./js/script.js"></script>
+
+</head>
+
+<body>
+    <header template-html="./assets/templates/header.html"></header>
+
+    <section class="container">
+        <nav template-html="./assets/templates/navigation.html"></nav>
+
+        <main>
+            <div class="new-task">
+                <form action="">
+                    <!-- Title -->
+                    <input type="text" name="title" id="title" placeholder="Enter a title">
+                    <!-- Assignee -->
+                    <select name="assignee" id="assignee">
+                        <option value="" disabled selected hidden>Select contacts to assign</option>
+                        <option value="Name 1">Name 1</option>
+                        <option value="Name 2">Name 2</option>
+                        <option value="Name 3">Name 3</option>
+                    </select>
+                    <!-- Due Date -->
+                    <div>
+                        <label for="date">Due date</label>
+                        <input type="date" name="date" id="date">
+                    </div>
+                    <!-- Category -->
+                    <div>
+                        <label for="category">Category</label>
+                        <select name="category" id="category">
+                            <option value="" disabled selected hidden>Select task category</option>
+                            <option value="sales">Sales</option>
+                            <option value="backoffice">Backoffice</option>
+                            <option value="legal">Legal</option>
+                        </select>
+                    </div>
+                    <!-- Priority -->
+                    <div id="priority">
+                        <input type="radio" name="priority" id="urgent">
+                        <label for="urgent">
+                            <span class="checkmark">Urgent</span>
+                            <i class="icon icon-urgent"></i>
+                        </label>
+                        <input type="radio" name="priority" id="medium">
+                        <label for="medium">
+                            <span class="checkmark">Medium</span>
+                            <i class="icon icon-medium"></i>
+                        </label>
+                        <input type="radio" name="priority" id="low">
+                        <label for="low">
+                            <span class="checkmark">Low</span>
+                            <i class="icon icon-low"></i>
+                        </label>
+
+                    </div>
+                    <!-- Desctiption -->
+                    <div>
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" cols="1" rows="3" placeholder="Enter a description"
+                            style="resize: none;"></textarea>
+                    </div>
+                    <!-- Subtasks -->
+                    <div>
+
+                    </div>
+                </form>
+            </div>
+        </main>
+    </section>
+</body>
+
+</html>
