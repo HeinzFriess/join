@@ -4,9 +4,22 @@
 }
 
 .contacts-container {
+    position: relative;
     padding: 16px 65px;
     box-shadow: var(--shadow-medium);
     overflow-x: auto;
+}
+
+.add-contact {
+    position: fixed;
+    right: 48px;
+    bottom: 64px;
+}
+
+.add-contact img {
+    width: 33px;
+    height: 30px;
+    margin-left: 10px;
 }
 
 .contact {
@@ -99,6 +112,7 @@
     color: var(--primary);
     margin-top: 16px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .detail-body {
@@ -118,6 +132,7 @@
     margin-top: 24px;
     margin-bottom: 24px;
     font-size: var(--font-h5);
+    white-space: nowrap;
 }
 
 .edit-contact {
@@ -125,6 +140,7 @@
     font-weight: 400;
     color: var(--primary);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .information div {
@@ -147,5 +163,12 @@
 
     .contacts section:last-child {
         display: none;
+    }
+
+    .add-contact {
+        position: relative;
+        inset: 0;
+        display: block;
+        margin-left: auto;
     }
 }
