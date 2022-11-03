@@ -70,6 +70,21 @@ body {
     height: calc(100% - 98px); /* Calculates the page height and subtracted the header height */
 }
 
+.btn-primary {
+    padding: 12px 10px;
+    font-size: var(--font-h5);
+    color: var(--white);
+    background: var(--primary);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+}
+
 /* Custom Scollbar */
 ::-webkit-scrollbar {
     width: 5px;
