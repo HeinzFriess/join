@@ -18,6 +18,7 @@
 .new-task [for="category"],
 .new-task [for="description"],
 .new-task [for="subtasks"] {
+    font-size: var(--font-h6);
     font-weight: 700;
     color: var(--font);
     margin-bottom: 8px;
@@ -35,6 +36,28 @@
     outline: none;
 }
 
+.new-task input[type="date"] {
+    font-size: var(--font-h6);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.new-task select[id="category"] {
+    font-size: var(--font-h6);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.new-task select[id="category"] option::after {
+    width: 10px;
+    height: 10px;
+    background: black;
+}
+
 /* .new-task input[type="date"] {
 
 } */
@@ -46,6 +69,8 @@
     border-radius: 0 10px 10px 10px;
 }
 
+
+/* Custom radio buttons for priority selection */
 #priority {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
