@@ -71,6 +71,11 @@ body {
     height: calc(100% - 98px); /* Calculates the page height and subtracted the header height */
 }
 
+.d-none {
+    display: none;
+}
+
+/* Custom Button */
 .btn-primary {
     padding: 12px 10px;
     font-size: var(--font-h5);
@@ -80,10 +85,28 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
+    transition: all 0.24s ease-in-out;
 }
 
 .btn-primary:hover {
     background: var(--secondary);
+}
+
+.btn-secondary {
+    padding: 12px 10px;
+    font-size: var(--font-h5);
+    color: var(--font);
+    background: var(--white);
+    border-radius: 10px;
+    border: 2px solid var(--font);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.24s ease-in-out;
+}
+
+.btn-secondary:hover {
+    border: 2px solid var(--primary);
+    color: var(--primary);
 }
 
 /* Custom Scollbar */
