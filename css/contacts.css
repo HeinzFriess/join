@@ -1,3 +1,4 @@
+/* Contacts Container */
 .contacts {
     display: grid;
     grid-template-columns: 450px 1fr;
@@ -76,6 +77,7 @@
     font-size: var(--font-h6);
 }
 
+/* Contact Details */
 .contacts-details {
     padding-top: 60px;
     padding-left: 65px;
@@ -150,6 +152,124 @@
     margin-bottom: 24px;
 }
 
+/* Modal */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(4px);
+    z-index: 9;
+}
+
+.modal-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 580px;
+    border-radius: 0 30px 30px 30px;
+    background: var(--white);
+    box-shadow: var(--shadow-small);
+    overflow: hidden;
+    z-index: 9;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    height: 360px;
+    background: var(--primary);
+    box-shadow: var(--shadow-small);
+}
+
+.modal-header img {
+    width: 55px;
+    height: 66px;
+}
+
+.modal-header span {
+    font-size: var(--font-h1);
+    font-weight: 700;
+    color: var(--white);
+}
+
+#close-modal {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+    padding: 40px 80px 0 80px;
+}
+
+.modal-body>img {
+    width: 120px;
+    height: 120px;
+}
+
+.modal-body input {
+    width: 100%;
+    font-size: var(--font-h6);
+    padding: 12px 22px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.modal-body>div:last-child {
+    display: flex;
+    gap: 25px;
+}
+
+.modal-body ::placeholder {
+    color: var(--gray-light);
+}
+
+.contact-data {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.contact-data input:nth-child(1) {
+    background: url('./../assets/icons/user.svg') no-repeat right 25px center;
+    background-size: 24px 24px;
+}
+
+.contact-data input:nth-child(2) {
+    background: url('./../assets/icons/mail.svg') no-repeat right 25px center;
+    background-size: 20px 20px;
+}
+
+.contact-data input:nth-child(3) {
+    background: url('./../assets/icons/phone.svg') no-repeat right 25px center;
+    background-size: 24px 24px;
+}
+
+.modal-slide-in {
+    animation: modal-slide-in 0.5s ease-in-out;
+}
+
+.modal-background-blur {
+    animation: background-blur 0.5s linear;
+}
+
 
 @media screen and (max-width: 700px) {
     .contacts {
@@ -161,7 +281,7 @@
         padding: 16px 24px;
     }
 
-    .contacts section:last-child {
+    .contacts .contacts-details {
         display: none;
     }
 
@@ -170,5 +290,37 @@
         inset: 0;
         display: block;
         margin-left: auto;
+    }
+
+    .modal-content {
+        right: 0;
+        width: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        border-radius: 0;
+    }
+}
+
+
+@keyframes modal-slide-in {
+    from {
+        left: -600px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+@keyframes background-blur {
+    from {
+        backdrop-filter: blur(0);
+    }
+
+    to {
+        backdrop-filter: blur(4px);
     }
 }
