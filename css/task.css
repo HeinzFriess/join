@@ -69,6 +69,47 @@
     border-radius: 0 10px 10px 10px;
 }
 
+/* Custom checkbox dropdown */
+#assignee {
+    position: relative;
+    font-size: var(--font-h6);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+}
+
+.assignee-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.assignee-container {
+    position: absolute;
+    top: 51px;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-medium);
+    overflow-x: auto;
+}
+
+.assignee-container > label {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+
+.assignee-container > label:hover {
+    background: var(--primary-light);
+}
+
 
 /* Custom radio buttons for priority selection */
 #priority {
@@ -147,4 +188,59 @@
 
 #priority label:hover {
     background: var(--primary-light);
+}
+
+
+@media screen and (max-width: 700px) {
+    main {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .new-task {
+        margin: 0;
+        width: 100%;
+        padding: 32px;
+    }
+
+    .new-task input[type="text"] {
+        font-size: var(--font-h4);
+    }
+
+    .new-task [for="date"],
+    .new-task [for="category"],
+    .new-task [for="description"],
+    .new-task [for="subtasks"] {
+        font-size: var(--font-body);
+    }
+
+    .new-task input[type="date"] {
+        font-size: var(--font-body);
+    }
+    
+    .new-task select[id="category"] {
+        font-size: var(--font-body);
+    }
+
+    .checkmark {
+        font-size: var(--font-body);
+    }
+    
+    #assignee {
+        font-size: var(--font-body);
+    }
+
+    #priority .icon {
+        width: 16px;
+    }
+
+    .assignee-container {
+        top: 47px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    #priority {
+        grid-template-columns: 1fr;
+    }
 }
