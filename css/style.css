@@ -124,4 +124,9 @@ body {
     .container {
         height: calc(100% - 160px);
     }
+
+    .btn-primary,
+    .btn-secondary {
+        font-size: var(--font-h6);
+    }
 }
