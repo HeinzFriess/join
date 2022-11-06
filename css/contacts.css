@@ -312,7 +312,7 @@
 
     .modal-body {
         gap: 20px;
-        padding: 20px 28px 0 28px;
+        padding: 20px 28px 20px 28px;
     }
 
     .contact-data {
