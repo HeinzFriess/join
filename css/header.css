@@ -40,6 +40,7 @@
     padding: 10px 18px;
     font-size: var(--font-h6);
     color: var(--primary);
+    border: 1px solid var(--gray-light);
     border-radius: 20px 0 20px 20px;
     box-shadow: var(--shadow-medium);
     background: var(--white);
