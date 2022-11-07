@@ -146,7 +146,7 @@
                 <div class="detail-body">
                     <div class="heading">
                         <span>Contact Information</span>
-                        <div class="edit-contact">
+                        <div class="edit-contact" id="edit-contact">
                             <img src="./assets/icons/pencil.svg">
                             <span>Edit Contact</span>
                         </div>
@@ -169,7 +169,7 @@
                 <div class="modal-content d-none" id="modal-content">
                     <div class="modal-header">
                         <img src="./assets/img/logo_white.svg" draggable="false">
-                        <span>Add Contact</span>
+                        <span id="modal-label">Add Contact</span>
                         <img src="./assets/icons/close.svg" id="close-modal" draggable="false">
                     </div>
                     <div class="modal-body">
@@ -180,10 +180,10 @@
                             <input type="text" name="" id="" placeholder="Phone">
                         </div>
                         <div>
-                            <button class="btn-secondary" id="cancel">Cancel
+                            <button class="btn-secondary" id="modal-cancel">Cancel
                                 <img src="">
                             </button>
-                            <button class="btn-primary">Create Contact
+                            <button class="btn-primary" id="modal-confirm">Create Contact
                                 <img src="">
                             </button>
                         </div>

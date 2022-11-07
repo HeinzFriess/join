@@ -1,9 +1,11 @@
 /* Desktop Navigation */
 .navigation {
+    position: relative;
     width: 232px;
     height: 100%;
     padding: 66px 20px 32px 20px;
     box-shadow: var(--shadow-small);
+    z-index: 2;
 }
 
 .navigation ul {

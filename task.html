@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/task.css">
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/task.js"></script>
 
 </head>
 
@@ -27,12 +28,26 @@
                     <!-- Title -->
                     <input type="text" name="title" id="title" placeholder="Enter a title">
                     <!-- Assignee -->
-                    <select name="assignee" id="assignee">
-                        <option value="" disabled selected hidden>Select contacts to assign</option>
-                        <option value="Name 1">Name 1</option>
-                        <option value="Name 2">Name 2</option>
-                        <option value="Name 3">Name 3</option>
-                    </select>
+                    <div name="assignee" id="assignee">
+                        <span>Select contacts to assign</span>
+                        <div>
+                            <div class="assignee-background d-none" id="assignee-background"></div>
+                            <div class="assignee-container d-none" id="assignee-container">
+                                <label for="test-1">Test-1
+                                    <input type="checkbox" name="test-1" id="test-1">
+                                </label>
+                                <label for="test-2">Test-2
+                                    <input type="checkbox" name="test-2" id="test-2">
+                                </label>
+                                <label for="test-3">Test-3
+                                    <input type="checkbox" name="test-3" id="test-3">
+                                </label>
+                                <label for="test-4">Test-4
+                                    <input type="checkbox" name="test-4" id="test-4">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Due Date -->
                     <div>
                         <label for="date">Due date</label>
