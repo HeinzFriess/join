@@ -30,104 +30,7 @@
                     <img src="./assets/icons/new_contact.svg">
                 </button>
                 <!-- Container for contacts -->
-                <div>
-                    <div class="contact-seperator">
-                        <span>A</span>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact-seperator">
-                        <span>B</span>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact-seperator">
-                        <span>C</span>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact-seperator">
-                        <span>D</span>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div> 
-                    </div>
-                    <div class="contact-seperator">
-                        <span>E</span>
-                    </div>
-                    <div class="contact">
-                        <div>
-                            <span>FL</span>
-                        </div>
-                        <div>
-                            <span>Firstname Lastname</span>
-                            <span>email@email.com</span>
-                        </div>
-                    </div>
-                </div>
+                <div id="contacts-container"></div>
             </section>
             <!-- Contact Details -->
             <section class="contacts-details">
@@ -136,7 +39,7 @@
                         <span>FL</span>
                     </div>
                     <div>
-                        <span>Firstname Lastname</span>
+                        <span id="contact-detail-name">Firstname Lastname</span>
                         <div class="add-task">
                             <img src="./assets/icons/add.svg">
                             <span>Add Task</span>
@@ -154,11 +57,11 @@
                     <div class="information">
                         <div>
                             <span>E-Mail:</span>
-                            <a href="mailto:mail@mail.com">mail@mail.com</a>
+                            <a href="mailto:mail@mail.com" id="contact-detail-mail">mail@mail.com</a>
                         </div>
                         <div>
                             <span>Mobile:</span>
-                            <a href="tel:+491111111111">+49 1111 1111 11</a>
+                            <a href="tel:+491111111111" id="contact-detail-phone">+49 1111 1111 11</a>
                         </div>
                     </div>
                 </div>
@@ -175,7 +78,7 @@
                     <div class="modal-body">
                         <img src="./assets/img/contact.svg" draggable="false">
                         <div class="contact-data">
-                            <input type="text" name="" id="" placeholder="Name">
+                            <input type="text" name="" id="" placeholder="Lastname, Firstname">
                             <input type="text" name="" id="" placeholder="E-Mail">
                             <input type="text" name="" id="" placeholder="Phone">
                         </div>
