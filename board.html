@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <script defer src="./js/script.js"></script>
-    
+
 </head>
 
 <body>
@@ -28,9 +28,9 @@
                         <div class="searchDiv">
                             <input type="text" placeholder="Find Task" class="search">
                             <hr>
-                            <img src="./assets/icons/task.svg" alt="">
+                            <img src="./assets/icons/search.svg" alt="">
                         </div>
-                        <Button>Add task +</Button>
+                        <Button class="btn-primary">Add task <img src="./assets/icons/add_.svg" alt=""></Button>
                     </div>
                 </div>
                 <div class="categories">
@@ -44,7 +44,9 @@
                                 <div id="categoryNameX1" class="categoryName">Design</div>
                                 <span class="cardHeadline">Website redesign</span>
                                 <p class="cardContent">Modify the contents of the main Website</p>
-
+                                <div>
+                                    <progress id="file" value="1" max="3"></progress> 1/2 Done
+                                </div>
                             </div>
                         </div>
                     </div>

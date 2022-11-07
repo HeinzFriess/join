@@ -13,7 +13,7 @@ main {
 }
 
 .headline{
-    padding-bottom: 70px;
+    padding-bottom: 102px;
     width: 100%;
     height: 51px;
 }
@@ -24,7 +24,7 @@ main {
 }
 
 .category{
-    width: 250px;
+    width: 280px;
     padding-right: 30px;
 }
 
@@ -36,10 +36,12 @@ main {
 .categoryHead img{
     border: 2px solid var(--primary);
     border-radius: 6px;
+    height: fit-content;
 }
 
 .categoryHead span{
     font-weight: bold;
+    font-size: 23px;
 }
 
 .categoryCard{
@@ -51,7 +53,7 @@ main {
     margin-bottom: 30px;       
 }
 .categoryName{
-    font-size: 12px;
+    font-size: 16px;
     width: fit-content;
     border-radius: 6px;
     background-color: blue;
@@ -63,14 +65,14 @@ main {
 }
 .categoryCard span{
     /* font-size: var(--font-h6); */
-    font-size: 14px;
+    font-size: 19px;
     font-weight: bold;
     color: var(--primary);
     padding-top: 12px;
     padding-bottom: 12px;
 }
 .categoryCard p{
-    font-size: 14px;
+    font-size: 16px;
     color: var(--gray-light);
 }
 
@@ -81,9 +83,25 @@ main {
 
 .searchDiv{
     display: flex;
-    border: 1px solid black;
+    align-items: center;
+    border: 1px solid var(--gray-light);
     padding: 6px;
+    border-radius: 10px;
 }
+
+.searchDiv img{
+    height: 36px;
+    width: 36px;
+    padding-left: 12px;
+    
+}
+
+.searchDiv hr{
+    height: 31px;
+    color: var(--gray-light);
+}
+
 .search{
     border: none;
+    padding-left: 24px;
 }
