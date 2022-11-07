@@ -8,10 +8,11 @@
 
     <title>Join</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/summary.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <script defer src="./js/script.js"></script>
-
+    
 </head>
 
 <body>
@@ -21,8 +22,55 @@
         <nav template-html="./assets/templates/navigation.html"></nav>
 
         <main>
-            <!-- Hier landet der Hauptcontent (Summyary, Board, Task, Contacts etc.) jeweils als eigene Page -->
-            <h1>Summary</h1>
+             <div class="summary">
+                <div id="headline">
+                    <p>Good Morning, Heinz Friess</p><span></span>
+                    <!--ToDo Render incl. Name-->
+                </div>
+                <div class="line">
+                    <div class="bigButton" id="tasksUrgent">
+                        <div class="squareButton3">
+                            <img src="assets/img/ellipse.svg" style="background-image: url(assets/icons/urgentBoard.svg);"
+                                alt="">
+                            <p class="count">1</p>
+                            <p>Tasks Urgent</p>
+                        </div>
+                        <hr>
+                        <div>
+                            <p class="deadlineDate">November 30, 2022</p>
+                            <p>Upcomming Deadline</p>
+                        </div>
+
+                    </div>
+                    <div class="squareButton2" id="tasksToDo">
+                        <img src="assets/icons/tasksBoard.svg" alt="">
+                        <p class="count">1</p>
+                        <p class="category">Tasks To-do</p>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="squareButton" id="taskInBoard">
+                        <img src="assets/icons/tasksBoard.svg" alt="">
+                        <p class="count">5</p>
+                        <p class="category">Task in Board</p>
+                    </div>
+                    <div class="squareButton" id="tasksInProgress">
+                        <img src="assets/icons/inProgress.svg" alt="">
+                        <p class="count">2</p>
+                        <p class="category">Task in Progress</p>
+                    </div>
+                    <div class="squareButton" id="awaitingFeedback">
+                        <img src="assets/icons/awaitingFeedback.svg" alt="">
+                        <p class="count">2</p>
+                        <p class="category">Awaiting Feedback</p>
+                    </div>
+                    <div class="squareButton" id="tasksDone">
+                        <img src="assets/icons/done.svg" alt="">
+                        <p class="count">1</p>
+                        <p class="category">Tasks Done</p>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
 </body>

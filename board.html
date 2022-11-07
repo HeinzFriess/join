@@ -8,10 +8,11 @@
 
     <title>Join</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <script defer src="./js/script.js"></script>
-
+    
 </head>
 
 <body>
@@ -21,8 +22,82 @@
         <nav template-html="./assets/templates/navigation.html"></nav>
 
         <main>
-            <!-- Hier landet der Hauptcontent (Summyary, Board, Task, Contacts etc.) jeweils als eigene Page -->
-            <h1>Board</h1>
+            <div class="board">
+                <div class="headline">
+                    <div class="noColum">
+                        <div class="searchDiv">
+                            <input type="text" placeholder="Find Task" class="search">
+                            <hr>
+                            <img src="./assets/icons/task.svg" alt="">
+                        </div>
+                        <Button>Add task +</Button>
+                    </div>
+                </div>
+                <div class="categories">
+                    <div class="category">
+                        <div class="categoryHead">
+                            <span>To do</span>
+                            <img src="./assets/icons/add.svg" alt="">
+                        </div>
+                        <div id="toDo">
+                            <div class="categoryCard">
+                                <div id="categoryNameX1" class="categoryName">Design</div>
+                                <span class="cardHeadline">Website redesign</span>
+                                <p class="cardContent">Modify the contents of the main Website</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="categoryHead">
+                            <span>In progress</span>
+                            <img src="./assets/icons/add.svg" alt="">
+                        </div>
+                        <div id="inProgress">
+                            <div class="categoryCard">
+                                <div id="categoryNameX2" class="categoryName">Sales</div>
+                                <span class="cardHeadline">Call potential clients</span>
+                                <p class="cardContent">Make the product presentation to prospective buyers</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="categoryHead">
+                            <span>Awaiting feedback</span>
+                            <img src="./assets/icons/add.svg" alt="">
+                        </div>
+                        <div id="awaitingFeedback">
+                            <div class="categoryCard">
+                                <div id="categoryNameX3" class="categoryName">Backoffice</div>
+                                <span class="cardHeadline">Accounting invoices</span>
+                                <p class="cardContent">Write open invoices for customer</p>
+
+                            </div>
+                            <div class="categoryCard">
+                                <div id="categoryNameX4" class="categoryName">Media</div>
+                                <span class="cardHeadline">Video cut</span>
+                                <p class="cardContent">Edit the new company video</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category">
+                        <div class="categoryHead">
+                            <span>Done</span>
+                            <img src="./assets/icons/add.svg" alt="">
+                        </div>
+                        <div id="done">
+                            <div class="categoryCard">
+                                <div id="categoryNameX5" class="categoryName">Design</div>
+                                <span class="cardHeadline">Website redisign</span>
+                                <p class="cardContent">Modify the contents of the main Website</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
 </body>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script defer src="./js/index.js"></script>
+    
+</head>
+
+<body onload="animateStart()">
+    <div id="headMenu" class="d-none flexBoxEnd">
+        <!--ToDo class über Script steuern-->
+        <div class="flexBoxSpaceBetween headRight">
+            Not a Join user?
+            <button onclick="location.href='signUp.html'" class="btn btnBlue">Sign up</button>
+        </div>
+
+    </div>
+    <div id="startView">
+        <img src="assets/img/logo_white.svg" alt="">
+    </div>
+    <div id="mainView" class="d-none">
+        <img id="logInMain" src="assets/img/logo_blue.svg" alt="">
+        <div id="card">
+            <div id="cardHead">
+                <h1>Log in</h4>
+            </div>
+            <form onsubmit="logIn(); return false;">
+                <div id="cardInput">
+                    <input type="text" required placeholder="Email" id="inputEmail" class="noBorder">
+                    <img src="assets/img/letterIcon.png" alt="">
+                </div>
+                <div id="cardInput">
+                    <input type="text" required placeholder="Password" id="inputPassword" class="noBorder">
+                    <img src="assets/img/lockIcon.png" alt="">
+                </div>
+                <div id="cardCheckBox">
+                    <input type="checkbox">
+                    <label class="container">Remember me
+                    </label>
+                    <a href="#">Forgot my Password</a>
+                </div>
+                <div id="cardButtons">
+                    <button class="btn btnBlue">Log in</button>
+                    <button class="btn btnWhite" onclick="location.href = 'index.html'">Guest log in</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+main {
+    width: 100%;
+}
+
+.summary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+#headline p {
+    font-size: var(--font-h3);
+    padding-bottom: 70px;
+}
+
+.line {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 35px;
+    padding-top: 35px;
+}
+
+.bigButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 48px;
+    gap: 35px;
+    width: 682px;
+    height: 191px;
+    background: #4589FF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+    color: white;
+}
+
+.bigButton hr {
+    width: 0px;
+    height: 145px;
+    border: 3px solid #FFFFFF;
+}
+
+.squareButton {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    width: 204px;
+    height: 219px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+
+.squareButton2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    width: 208px;
+    height: 191px;
+    background: #D2E3FF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+
+.squareButton3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    width: 208px;
+    height: 191px;
+}
+
+.count {
+    font-size: var(--font-h3);
+    font-weight: bold;
+}
+
+.category {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 120%;
+    text-align: center;
+    color: #4589FF;
+}
+.deadlineDate{
+    font-size: var(--font-h4);
+    font-weight: bold;
+    padding-bottom: 8px;
+}
