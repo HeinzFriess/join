@@ -24,8 +24,9 @@
 }
 
 .contact {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    justify-items: start;
     align-items: center;
     gap: 35px;
     min-height: 77px;
