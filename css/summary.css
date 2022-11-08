@@ -2,6 +2,10 @@ main {
     width: 100%;
 }
 
+.summary{
+    overflow-y: scroll;
+}
+
 .summary {
     display: flex;
     justify-content: center;
@@ -18,9 +22,11 @@ main {
 
 .line {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 35px;
     padding-top: 35px;
+    max-width: 925px;
 }
 
 .bigButton {
@@ -39,9 +45,9 @@ main {
 }
 
 .bigButton hr {
-    width: 0px;
+    width: 3px;
     height: 145px;
-    border: 3px solid #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 .squareButton {
