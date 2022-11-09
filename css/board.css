@@ -34,7 +34,7 @@ main {
     display: flex;
     justify-content: space-between;
     padding-bottom: 70px;
-    min-width: 250px;
+    max-width: 240px;
     align-items: center;
 }
 
@@ -89,8 +89,13 @@ main {
     padding-bottom: 12px;
 }
 
-.progressDiv {
+#progressDiv {
     padding-bottom: 12px;
+    font-size: 13px;
+}
+
+progress{
+    width: 110px;
 }
 
 #cardMembers {
@@ -99,6 +104,9 @@ main {
 }
 
 .cardMember {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
     background-color: blue;
@@ -200,6 +208,9 @@ main {
 }
 
 .popupCardMember {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
     background-color: blue;
