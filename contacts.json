@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "firstname": "Luisa",
         "lastname": "Peters",
         "email": "luisa@mail.com",
@@ -7,6 +8,7 @@
         "color": "35"
     },
     {
+        "id": 2,
         "firstname": "Johannes",
         "lastname": "Macher",
         "email": "hannes@mail.com",
@@ -14,6 +16,7 @@
         "color": "161"
     },
     {
+        "id": 3,
         "firstname": "Gerda",
         "lastname": "Sieferts",
         "email": "luisa@mail.com",
@@ -21,6 +24,7 @@
         "color": "286"
     },
     {
+        "id": 3,
         "firstname": "Reinhard",
         "lastname": "Luchs",
         "email": "hannes@mail.com",
@@ -28,6 +32,7 @@
         "color": "327"
     },
     {
+        "id": 4,
         "firstname": "Jack",
         "lastname": "Ulferts",
         "email": "luisa@mail.com",
@@ -35,6 +40,7 @@
         "color": "221"
     },
     {
+        "id": 5,
         "firstname": "Gina",
         "lastname": "Glühwers",
         "email": "hannes@mail.com",
@@ -42,6 +48,7 @@
         "color": "207"
     },
     {
+        "id": 6,
         "firstname": "Sabrina",
         "lastname": "Muster",
         "email": "sabrina@mail.com",
