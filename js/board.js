@@ -110,12 +110,13 @@ function memberTemplate(task) {
 function memberHtmlTemplate(members, indexLoop) {
 
     const member = members[indexLoop];
-    let initials = contacts[member].firstname.substring(0, 1) + contacts[member].lastname.substring(0, 1);
+    const contact = contacts.find(({ id }) => id === member);
+    let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
     let translate = indexLoop * -20;
     let zIndex = 100 + 10 * indexLoop;
     return `
         <p class="cardMember" style="z-index: ${zIndex};
-        transform: translateX(${translate}px); background: hsl(${contacts[member].color}, 100%, 40%)">${initials}</p>`;
+        transform: translateX(${translate}px); background: hsl(${contact.color}, 100%, 40%)">${initials}</p>`;
 }
 
 function renderPopup(taskID) {
