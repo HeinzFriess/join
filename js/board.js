@@ -8,17 +8,23 @@ const doneElement = document.getElementById('done');
 let tasks = [];
 let contacts = [];
 
-async function init() {
-    tasks = await loadTasks();
-    contacts = await loadContacts();
+async function initBoard() {
+    await downloadFromServer();
+    await loadTasks();
+    await loadContacts();
     renderTasks();
 }
+
+
+
 async function loadTasks() {
-    return await fetch('/tasks.json').then(resp => resp.json());
+    //return await fetch('/tasks.json').then(resp => resp.json());
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
 }
 
 async function loadContacts() {
-    return await fetch('/contacts.json').then(resp => resp.json());
+    //return await fetch('/contacts.json').then(resp => resp.json());
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
 }
 
 function renderTasks() {
@@ -51,33 +57,33 @@ function hideDetail() {
 function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        if (element.status == status && element.maintask) {
-            content.innerHTML += categoryCardTemplate(element);
+        const task = tasks[i];
+        if (task.status == status && task.maintask) {
+            content.innerHTML += categoryCardTemplate(task);
         };
     }
 }
 
-function categoryCardTemplate(element) {
+function categoryCardTemplate(task) {
     return `
-    <div class="categoryCard" onclick="showDetail(${element.id})">
-        <div class="categoryName" style="background-color: ${getColorcodeForCategory(element.category)}">${element.category}</div>
-        <span class="cardHeadline">${element.title}</span>
-        <p class="cardContent">${element.description}</p>
-        <div id="progressDiv">${progressTemplate(element)}</div>
-        <div id="cardMembers">${memberTemplate(element)}</div>
+    <div class="categoryCard" onclick="showDetail(${task.id})">
+        <div class="categoryName" style="background-color: ${getColorcodeForCategory(task.category)}">${task.category}</div>
+        <span class="cardHeadline">${task.title}</span>
+        <p class="cardContent">${task.description}</p>
+        <div id="progressDiv">${progressTemplate(task)}</div>
+        <div id="cardMembers">${memberTemplate(task)}</div>
     </div>
     `;
 }
 
-function progressTemplate(element) {
-    const subtasks = element.subtasks;
+function progressTemplate(task) {
+    const subtasks = task.subtasks;
     let finishedSubtasks = 0;
     for (let i = 0; i < subtasks.length; i++) {
-        const element = subtasks[i];
+        const subtask = subtasks[i];
         for (let j = 0; j < tasks.length; j++) {
             const task = tasks[j];
-            if (task.status == 'Done' && task.id == element) finishedSubtasks++;
+            if (task.status == 'Done' && task.id == subtask) finishedSubtasks++;
         }
     }
     if (subtasks.length > 0) {
@@ -98,7 +104,6 @@ function memberTemplate(task) {
         html += `
         <p class="cardMember" style="z-index: 120; transform: translateX(-40px); background: hsl(218, 100%, 64%)">+${members.length - 2}</p>`;
     }
-
     return html;
 }
 
@@ -115,22 +120,9 @@ function memberHtmlTemplate(members, indexLoop) {
 
 function renderPopup(taskID) {
     const content = document.getElementById('popupCategory');
-    const task = tasks.find(({ id }) => id === taskID)
+    const task = tasks.find(({ id }) => id === taskID);
     content.innerHTML = `
-        <div class="popupCategoryNameDiv">
-            <p class="popupCategoryName" style="background-color: ${getColorcodeForCategory(task.category)}">${task.category}</p>
-            <img src="./assets/icons/add.svg" style="transform: rotate(45deg);" onclick="hideDetail()">
-        </div>
-            <span class="popupCardHeadline">${task.title}</span>
-            <p class="popupCardContent">${task.description}</p>
-        <div id="popupDuedate" class="popupTopics displayFlexGap8">
-            <span class="popupSpan">Due date:</span>
-            <p>${task.dueDate}</p>
-        </div>
-        <div id="popupPriority" class="popupTopics displayFlexGap8">
-            <span class="popupSpan">Priority:</span>
-            <p class="popupPriorityIcon">${task.priority}<img src="./assets/icons/${task.priority.toLowerCase()}.svg" alt=""></p>
-        </div>
+        ${taskTemplate(task)}
         <div id="popupCardMembers" class="popupTopics">
             <span class="popupSpan">Assigned To:</span>
                 ${memberTemplatePopup(task)}
@@ -138,17 +130,36 @@ function renderPopup(taskID) {
     `
 }
 
+function taskTemplate(task) {
+    return `
+    <div class="popupCategoryNameDiv">
+        <p class="popupCategoryName" style="background-color: ${getColorcodeForCategory(task.category)}">${task.category}</p>
+        <img src="./assets/icons/add.svg" style="transform: rotate(45deg);" onclick="hideDetail()">
+    </div>
+        <span class="popupCardHeadline">${task.title}</span>
+        <p class="popupCardContent">${task.description}</p>
+    <div id="popupDuedate" class="popupTopics displayFlexGap8">
+        <span class="popupSpan">Due date:</span>
+        <p>${task.dueDate}</p>
+    </div>
+    <div id="popupPriority" class="popupTopics displayFlexGap8">
+        <span class="popupSpan">Priority:</span>
+        <p class="popupPriorityIcon">${task.priority}<img src="./assets/icons/${task.priority.toLowerCase()}.svg" alt=""></p>
+    </div>
+    `;
+}
+
 function memberTemplatePopup(task) {
     const members = task.assigned;
     let html = '';
-
     for (let i = 0; i < members.length; i++) {
         const member = members[i];
-        let initials = contacts[member].firstname.substring(0, 1) + contacts[member].lastname.substring(0, 1);
+        const contact = contacts.find(({ id }) => id === member)
+        let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
         html += `
             <div class="popupCardMemberDiv">
                 <p class="popupCardMember" style="background: hsl(${contacts[member].color}, 100%, 40%)">${initials}</p>
-                <span>${contacts[member].firstname} ${contacts[member].lastname}</span>
+                <span>${contact.firstname} ${contact.lastname}</span>
             </div>`;
     }
 
@@ -185,4 +196,6 @@ function getColorcodeForCategory(category) {
 
 }
 
-init();
+
+
+
