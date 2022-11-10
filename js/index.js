@@ -9,7 +9,7 @@ async function logIn() {
     let password = document.getElementById('inputPassword').value;
     users = await loadUsers();
     let user = users.find( u => u.email == email && u.password == password);
-    window.location.href = 'index.html';
+    window.location.href = 'summary.html';
 }
 
 function animateStart(){
