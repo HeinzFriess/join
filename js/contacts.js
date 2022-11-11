@@ -10,13 +10,15 @@ const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createEditContact = document.getElementById('modal-confirm');
 
-let contacts = [];
+//let contacts = [];
 let lastnameCharacters = new Set(['A', 'B', 'D']);
 
 
 async function init() {
     addAllEventListeners();
-    contacts = await loadContacts();
+    await downloadFromServer();
+    await loadContacts();
+    //contacts = await loadContacts();
     renderContacts();
 }
 
@@ -30,9 +32,9 @@ function addAllEventListeners() {
 }
 
 
-async function loadContacts() {
-    return await fetch('/contacts.json').then(resp => resp.json());
-}
+// async function loadContacts() {
+//     return await fetch('/contacts.json').then(resp => resp.json());
+// }
 
 function renderContacts() {
     contactsContainer.innerHTML = '';
@@ -41,6 +43,7 @@ function renderContacts() {
         contactsContainer.innerHTML += contactCardTemp(contact, index);
     })
 }
+
 
 function renderSeperators() {
     contactsContainer.innerHTML = '';

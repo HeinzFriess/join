@@ -5,8 +5,6 @@ const inProgressElement = document.getElementById('inProgress');
 const awaitingFeedbackElement = document.getElementById('awaitingFeedback');
 const doneElement = document.getElementById('done');
 
-let tasks = [];
-let contacts = [];
 
 async function initBoard() {
     await downloadFromServer();
@@ -15,17 +13,6 @@ async function initBoard() {
     renderTasks();
 }
 
-
-
-async function loadTasks() {
-    //return await fetch('/tasks.json').then(resp => resp.json());
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
-}
-
-async function loadContacts() {
-    //return await fetch('/contacts.json').then(resp => resp.json());
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
-}
 
 function renderTasks() {
     render('To do', toDoElement);

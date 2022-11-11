@@ -8,6 +8,7 @@
 
     <title>Join</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
     <style>
         body {
@@ -132,26 +133,28 @@
         }
     </style>
     <script>
+        let user = [];
 
+        async function init() {
+            await downloadFromServer();
+            await loadContacts();
+        }
         async function signUp() {
-            let users = await loadUsers();
+            createUser();
+            //contacts.push(user);
+            //storeContacts();
+            //window.location.href = 'summary.html';
+        }
+
+        function createUser() {
             let name = document.getElementById('inputName').value;
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            users.push({ 'name': name, 'email': email, 'password': password });
-            storeUsers(users);
-            window.location.href = 'LogIn.html';
+            let id = getNewContactID();
+            user = ({ 'name': name, 'email': email, 'password': password, 'id': id });
         }
 
-        async function loadUsers() {    //ToDo von miniBackend Laden
-            users = await JSON.parse(localStorage.getItem('users')) || [];
-            return users;
-        }
-
-        function storeUsers(users) {  //ToDo auf miniBackend Speichern
-            let usersAsString = JSON.stringify(users);
-            localStorage.setItem('users', usersAsString);
-        }
+        init();
     </script>
 </head>
 
@@ -161,7 +164,7 @@
         <div id="card">
             <div id="cardHead">
                 <div class="cardHeadIcon">
-                    <img src="assets/img/backIcon.png" onclick="location.href = 'logIn.html'"alt="">
+                    <img src="assets/img/backIcon.png" onclick="location.href = 'index.html'" alt="">
                 </div>
                 <h1>Sign up</h4>
             </div>
