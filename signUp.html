@@ -141,9 +141,9 @@
         }
         async function signUp() {
             createUser();
-            //contacts.push(user);
-            //storeContacts();
-            //window.location.href = 'summary.html';
+            await contacts.push(user);
+            //await storeContacts();
+            window.location.href = 'index.html';
         }
 
         function createUser() {
@@ -151,7 +151,9 @@
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
             let id = getNewContactID();
-            user = ({ 'name': name, 'email': email, 'password': password, 'id': id });
+            let firstname = name.split(' ')[0];
+            let lastname = name.split(' ')[1];
+            user = ({ 'firstname': firstname, 'lastname': lastname, 'email': email, 'password': password, 'id': id });
         }
 
         init();

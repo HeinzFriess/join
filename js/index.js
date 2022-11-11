@@ -1,7 +1,5 @@
 
 
-// let users = JSON.parse(localStorage.getItem('users')); ToDO delete when running
-
 async function init(){
     await downloadFromServer();
     await loadTasks();
@@ -14,7 +12,7 @@ async function logIn() {
     // users = await loadUsers();
     let contact = contacts.find( c => c.email == email && c.password == password);
     if (contact) {
-        window.location.href = `summary.html?userID=${contact.ID}`;
+        window.location.href = `summary.html?userID=${contact.id}`;
     }
     else{
         console.log('user not in contacts')
