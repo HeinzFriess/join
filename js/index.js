@@ -1,15 +1,25 @@
-async function loadUsers(){
-    users = await JSON.parse(localStorage.getItem('users')) || [];
-    return users;
+
+
+// let users = JSON.parse(localStorage.getItem('users')); ToDO delete when running
+
+async function init(){
+    await downloadFromServer();
+    await loadTasks();
+    await loadContacts();
 }
 
-let users = JSON.parse(localStorage.getItem('users'));
 async function logIn() {
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('inputPassword').value;
-    users = await loadUsers();
-    let user = users.find( u => u.email == email && u.password == password);
-    window.location.href = 'summary.html';
+    // users = await loadUsers();
+    let contact = contacts.find( c => c.email == email && c.password == password);
+    if (contact) {
+        window.location.href = `summary.html?userID=${contact.ID}`;
+    }
+    else{
+        console.log('user not in contacts')
+    }
+    
 }
 
 function animateStart(){
@@ -25,3 +35,5 @@ function animateStart(){
     },850);
     
 }
+
+init();

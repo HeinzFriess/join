@@ -33,7 +33,7 @@
         "priority" : "Medium",
         "dueDate" : "01.01.2023",
         "subtasks" : [],
-        "assigned" : [1,2,0,6,4]
+        "assigned" : [1,2,3,6,4]
     },
     {
         "id" : 4,
@@ -45,7 +45,7 @@
         "priority" : "Medium",
         "dueDate" : "01.01.2023",
         "subtasks" : [6,2,1],
-        "assigned" : [0]
+        "assigned" : [1]
     },
     {
         "id" : 5,

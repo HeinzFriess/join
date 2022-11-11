@@ -1,6 +1,9 @@
 'use strict';
 
 
+let tasks = [];
+let contacts = [];
+
 async function init() {
     await includeHTML();
     logoutModalEventListener();
@@ -32,6 +35,34 @@ function logoutModalEventListener() {
         document.getElementById('logout-modal').classList.toggle('d-none');
     });
 }
+
+async function loadTasks() {
+    //return await fetch('/tasks.json').then(resp => resp.json());
+    tasks = JSON.parse(backend.getItem('tasks')) || [];
+}
+
+async function loadContacts() {
+    //return await fetch('/contacts.json').then(resp => resp.json());
+    contacts = JSON.parse(backend.getItem('contacts')) || [];
+}
+
+function storeTasks(){
+    backend.setItem('tasks', JSON.stringify(tasks));
+}
+
+function storeContacts(){
+    backend.setItem('contacts', JSON.stringify(contacts));
+}
+
+function getNewContactID(){
+    let value = 0;
+    for (let i = 0; i < contacts.length; i++) {
+        const contact = contacts[i];
+        if(contact.id > value) value = contact.id +1;
+    }
+    return value;
+}
+
 
 
 init();
