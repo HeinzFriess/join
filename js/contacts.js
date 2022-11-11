@@ -4,8 +4,8 @@ const contactsContainer = document.getElementById('contacts-container');
 const modalBackground = document.getElementById('modal-background');
 const modalContent = document.getElementById('modal-content');
 const closeModalBtn = document.getElementById('close-modal');
-const addContact = document.getElementById('add-contact');
-const editContact = document.getElementById('edit-contact');
+const addContactBtn = document.getElementById('add-contact');
+const editContactBtn = document.getElementById('edit-contact');
 const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createEditContact = document.getElementById('modal-confirm');
@@ -24,8 +24,8 @@ async function init() {
 function addAllEventListeners() {
     modalBackground.addEventListener('click', hideModal);
     closeModalBtn.addEventListener('click', hideModal);
-    addContact.addEventListener('click', () => showModal('add'));
-    editContact.addEventListener('click', () => showModal('edit'));
+    addContactBtn.addEventListener('click', () => showModal('add'));
+    editContactBtn.addEventListener('click', () => showModal('edit'));
     cancelContact.addEventListener('click', hideModal);
 }
 
@@ -50,7 +50,7 @@ function renderSeperators() {
     })
 }
 
-function showContact(index) {
+function showDetailedContact(index) {
     const nameEl = document.getElementById('contact-detail-name');
     const mailEl = document.getElementById('contact-detail-mail');
     const phoneEl = document.getElementById('contact-detail-phone');
@@ -63,6 +63,11 @@ function showContact(index) {
     phoneEl.innerHTML = contact.phone;
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
+}
+
+function addContact(contact) {
+    contacts.push(contact);
+    renderContacts();
 }
 
 
@@ -96,7 +101,7 @@ function hideModal() {
 
 function contactCardTemp(contact, index) {
     return `
-        <div class="contact" onclick="showContact(${index})">
+        <div class="contact" onclick="showDetailedContact(${index})">
             <div style="background: hsl(${contact.color}, 100%, 40%);">
                 <span>FL</span>
             </div>
