@@ -4,6 +4,7 @@
         "firstname": "Luisa",
         "lastname": "Peters",
         "email": "luisa@mail.com",
+        "password": "123test",
         "phone": "023412132897",
         "color": "35"
     },
@@ -12,6 +13,7 @@
         "firstname": "Johannes",
         "lastname": "Macher",
         "email": "hannes@mail.com",
+        "password": "123test",
         "phone": "6345080934",
         "color": "161"
     },
@@ -20,6 +22,7 @@
         "firstname": "Gerda",
         "lastname": "Sieferts",
         "email": "luisa@mail.com",
+        "password": "123test",
         "phone": "023412132897",
         "color": "286"
     },
@@ -28,6 +31,7 @@
         "firstname": "Reinhard",
         "lastname": "Luchs",
         "email": "hannes@mail.com",
+        "password": "123test",
         "phone": "6345080934",
         "color": "327"
     },
@@ -36,6 +40,7 @@
         "firstname": "Jack",
         "lastname": "Ulferts",
         "email": "luisa@mail.com",
+        "password": "123test",
         "phone": "023412132897",
         "color": "221"
     },
@@ -44,6 +49,7 @@
         "firstname": "Gina",
         "lastname": "Glühwers",
         "email": "hannes@mail.com",
+        "password": "123test",
         "phone": "6345080934",
         "color": "207"
     },
@@ -52,6 +58,7 @@
         "firstname": "Sabrina",
         "lastname": "Muster",
         "email": "sabrina@mail.com",
+        "password": "123test",
         "phone": "023412132897",
         "color": "11"
     }
