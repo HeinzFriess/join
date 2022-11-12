@@ -79,15 +79,15 @@
                     <div class="modal-body">
                         <img src="./assets/img/contact.svg" draggable="false">
                         <div class="contact-data">
-                            <input type="text" name="" id="" placeholder="Lastname, Firstname">
-                            <input type="text" name="" id="" placeholder="E-Mail">
-                            <input type="text" name="" id="" placeholder="Phone">
+                            <input type="text" id="contact-name" placeholder="Lastname, Firstname">
+                            <input type="email" id="contact-email" placeholder="E-Mail">
+                            <input type="text" id="contact-phone" placeholder="Phone">
                         </div>
                         <div>
                             <button class="btn-secondary" id="modal-cancel">Cancel
                                 <img src="">
                             </button>
-                            <button class="btn-primary" id="modal-confirm">Create Contact
+                            <button class="btn-primary" id="modal-confirm" onclick="addContact()">Create Contact
                                 <img src="">
                             </button>
                         </div>
