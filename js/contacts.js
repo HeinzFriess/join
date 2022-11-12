@@ -10,7 +10,6 @@ const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createEditContact = document.getElementById('modal-confirm');
 
-//let contacts = [];
 let lastnameCharacters = new Set(['A', 'B', 'D']);
 
 
@@ -18,7 +17,6 @@ async function init() {
     addAllEventListeners();
     await downloadFromServer();
     await loadContacts();
-    //contacts = await loadContacts();
     renderContacts();
 }
 
@@ -31,10 +29,6 @@ function addAllEventListeners() {
     cancelContact.addEventListener('click', hideModal);
 }
 
-
-// async function loadContacts() {
-//     return await fetch('/contacts.json').then(resp => resp.json());
-// }
 
 function renderContacts() {
     contactsContainer.innerHTML = '';
@@ -61,16 +55,37 @@ function showDetailedContact(index) {
     let contact = contacts[index];
 
     nameEl.innerHTML = `${contact.firstname} ${contact.lastname}`;
-    mailEl.innerHTML = contact.email;
+    mailEl.innerHTML = contact.email ?? '';
     mailEl.href = `mailto:${contact.email}`;
-    phoneEl.innerHTML = contact.phone;
+    phoneEl.innerHTML = contact.phone ?? '';
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
 }
 
-function addContact(contact) {
-    contacts.push(contact);
+function addContact() {
+    const contactName = document.getElementById('contact-name');
+    const contactEmail = document.getElementById('contact-email');
+    const contactPhone = document.getElementById('contact-phone');
+
+    const [lastname, firstname] = contactName.value.split(',');
+
+    contacts.push({
+        "id": contacts.length + 1,
+        "firstname": firstname.trim(),
+        "lastname": lastname.trim(),
+        "email": contactEmail.value,
+        "password": '',
+        "phone": contactPhone.value,
+        "color": Math.floor(Math.random() * 355)
+    });
+
+    contactName.value = '';
+    contactEmail.value = '';
+    contactPhone.value = '';
+
     renderContacts();
+    storeContacts();
+    hideModal();
 }
 
 
@@ -106,7 +121,7 @@ function contactCardTemp(contact, index) {
     return `
         <div class="contact" onclick="showDetailedContact(${index})">
             <div style="background: hsl(${contact.color}, 100%, 40%);">
-                <span>FL</span>
+                <span>${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}</span>
             </div>
             <div>
                 <span>${contact.lastname}, ${contact.firstname}</span>
