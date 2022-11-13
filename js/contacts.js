@@ -10,49 +10,57 @@ const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createEditContact = document.getElementById('modal-confirm');
 
-let lastnameCharacters = new Set(['A', 'B', 'D']);
+let lastnameCharacters = [];
 
 
 async function init() {
-    addAllEventListeners();
     await downloadFromServer();
     await loadContacts();
-    renderContacts();
+    renderContactList();
+    addAllEventListeners();
 }
 
 
 function addAllEventListeners() {
     modalBackground.addEventListener('click', hideModal);
     closeModalBtn.addEventListener('click', hideModal);
-    addContactBtn.addEventListener('click', () => showModal('add'));
-    editContactBtn.addEventListener('click', () => showModal('edit'));
+    addContactBtn.addEventListener('click', () => showModal('add', null));
     cancelContact.addEventListener('click', hideModal);
 }
 
 
-function renderContacts() {
-    contactsContainer.innerHTML = '';
+function renderContactList() {
+    getAllLastnameCharacters()
 
-    contacts.forEach((contact, index) => {
-        contactsContainer.innerHTML += contactCardTemp(contact, index);
-    })
+    contactsContainer.innerHTML = '';
+    lastnameCharacters.forEach(char => {
+        contactsContainer.innerHTML += contactSeparatorTemp(char);
+        contacts.forEach((contact, index) => {
+            if(contact.lastname.startsWith(char)) {
+                contactsContainer.innerHTML += contactCardTemp(contact, index);
+            }
+        })
+    });
 }
 
 
-function renderSeperators() {
-    contactsContainer.innerHTML = '';
+function getAllLastnameCharacters() {
+    const allCharacters = [];
 
-    lastnameCharacters.forEach(character => {
-        contactsContainer.innerHTML += contactSeparatorTemp(character);
+    contacts.forEach(contact => {
+        const firstCharacter = contact.lastname.charAt(0).toUpperCase();
+        allCharacters.push(firstCharacter);
+        lastnameCharacters = new Set(allCharacters.sort());
     })
 }
+
 
 function showDetailedContact(index) {
     const nameEl = document.getElementById('contact-detail-name');
     const mailEl = document.getElementById('contact-detail-mail');
     const phoneEl = document.getElementById('contact-detail-phone');
     const contactColor = document.getElementById('contact-color');
-    let contact = contacts[index];
+    const contact = contacts[index];
 
     nameEl.innerHTML = `${contact.firstname} ${contact.lastname}`;
     mailEl.innerHTML = contact.email ?? '';
@@ -60,6 +68,7 @@ function showDetailedContact(index) {
     phoneEl.innerHTML = contact.phone ?? '';
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
+    editContactBtn.onclick = () => showModal('edit', index);
 }
 
 function addContact() {
@@ -79,11 +88,37 @@ function addContact() {
         "color": Math.floor(Math.random() * 355)
     });
 
+    contacts = contacts.sort((contactA, contactB) => contactA.lastname.localeCompare(contactB.lastname))
+
     contactName.value = '';
     contactEmail.value = '';
     contactPhone.value = '';
 
-    renderContacts();
+    renderContactList();
+    storeContacts();
+    hideModal();
+}
+
+function editContact(index) {
+    const contactName = document.getElementById('contact-name');
+    const contactEmail = document.getElementById('contact-email');
+    const contactPhone = document.getElementById('contact-phone');
+    const contact = contacts[index];
+
+    const [lastname, firstname] = contactName.value.split(',');
+
+    contacts[index] = {
+        "id": contact.id,
+        "firstname": firstname.trim(),
+        "lastname": lastname.trim(),
+        "email": contactEmail.value,
+        "password": contact.password ?? '',
+        "phone": contactPhone.value,
+        "color": contact.color
+    }
+
+    renderContactList();
+    showDetailedContact(index);
     storeContacts();
     hideModal();
 }
@@ -93,13 +128,17 @@ function addContact() {
  * Shows the modal for the add contact/edit contact form.
  * @param {String} type 
  */
-function showModal(type) {
+function showModal(type, index) {
     modalBackground.classList.remove('d-none');
     modalBackground.classList.add('modal-background-blur');
     modalContent.classList.remove('d-none');
     modalContent.classList.add('modal-slide-in');
+    document.getElementById('contact-name').value = `${contacts[index].lastname}, ${contacts[index].firstname}`;
+    document.getElementById('contact-email').value = contacts[index].email;
+    document.getElementById('contact-phone').value = contacts[index].phone;
     modalLabel.innerHTML = type === 'add' ? 'Add Contact' : 'Edit Contact'
     createEditContact.innerHTML = type == 'add' ? 'Create Contact' : 'Save'
+    createEditContact.onclick = type == 'add' ? addContact : () => editContact(index);
 }
 
 
@@ -110,6 +149,10 @@ function hideModal() {
     modalBackground.classList.add('d-none');
     modalContent.classList.add('d-none');
     modalContent.classList.remove('modal-slide-in');
+    // Clear input values
+    document.getElementById('contact-name').value = '';
+    document.getElementById('contact-email').value = '';
+    document.getElementById('contact-phone').value = '';
 }
 
 
