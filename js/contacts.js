@@ -80,7 +80,7 @@ function addContact() {
     contacts.push({
         "id": Date.now().toString(36),
         "firstname": firstname.trim(),
-        "lastname": lastname.toString().trim(),
+        "lastname": lastname.join(' ').trim(),
         "email": contactEmail.value,
         "password": '',
         "phone": contactPhone.value,
@@ -107,7 +107,7 @@ function updateContact(id) {
     const [firstname, ...lastname] = contactName.value.split(' ');
 
     contact.firstname = firstname.trim();
-    contact.lastname = lastname.toString().trim();
+    contact.lastname = lastname.join(' ').trim();
     contact.email = contactEmail.value;
     contact.phone = contactPhone.value;
 
