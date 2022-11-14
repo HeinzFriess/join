@@ -133,7 +133,7 @@
 .heading {
     display: flex;
     align-items: flex-end;
-    gap: 60px;
+    gap: 30px;
     margin-top: 24px;
     margin-bottom: 24px;
     font-size: var(--font-h5);
@@ -141,6 +141,14 @@
 }
 
 .edit-contact {
+    font-size: var(--font-body);
+    font-weight: 400;
+    color: var(--primary);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.delete-contact {
     font-size: var(--font-body);
     font-weight: 400;
     color: var(--primary);
