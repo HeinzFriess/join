@@ -7,9 +7,10 @@ const modalContent = document.getElementById('modal-content');
 const closeModalBtn = document.getElementById('close-modal');
 const addContactBtn = document.getElementById('add-contact');
 const editContactBtn = document.getElementById('edit-contact');
+const deleteContactBtn = document.getElementById('delete-contact');
 const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
-const createupdateContact = document.getElementById('modal-confirm');
+const createUpdateContact = document.getElementById('modal-confirm');
 
 let lastnameCharacters = [];
 
@@ -34,7 +35,7 @@ function addAllEventListeners() {
  * Renders the complete contact list including contact seperators.
  */
 function renderContactList() {
-    getAllLastnameCharacters()
+    getAllLastnameCharacters();
 
     contactsContainer.innerHTML = '';
     lastnameCharacters.forEach(char => {
@@ -43,7 +44,7 @@ function renderContactList() {
             if(contact.lastname.toUpperCase().startsWith(char)) {
                 contactsContainer.innerHTML += contactCardTemp(contact.id);
             }
-        })
+        });
     });
 }
 
@@ -54,11 +55,15 @@ function renderContactList() {
 function getAllLastnameCharacters() {
     const allCharacters = [];
 
-    contacts.forEach(contact => {
-        const firstCharacter = contact.lastname.charAt(0).toUpperCase();
-        allCharacters.push(firstCharacter);
-        lastnameCharacters = new Set(allCharacters.sort());
-    })
+    if(contacts.length > 0) {
+        contacts.forEach(contact => {
+            const firstCharacter = contact.lastname.charAt(0).toUpperCase();
+            allCharacters.push(firstCharacter);
+            lastnameCharacters = new Set(allCharacters.sort());
+        });
+    } else {
+        lastnameCharacters = new Set();
+    }
 }
 
 
@@ -70,12 +75,12 @@ function addContact() {
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
 
-    const [lastname, firstname] = contactName.value.split(',');
+    const [firstname, ...lastname] = contactName.value.split(' ');
 
     contacts.push({
-        "id": Date.now().toString(),
+        "id": Date.now().toString(36),
         "firstname": firstname.trim(),
-        "lastname": lastname.trim(),
+        "lastname": lastname.toString().trim(),
         "email": contactEmail.value,
         "password": '',
         "phone": contactPhone.value,
@@ -90,27 +95,42 @@ function addContact() {
 
 
 /**
- * Updates a contact from the contact list with the given data from the modal. 
+ * Updates the contact from the contact list with the given data from the modal. 
  * @param {String} id Unique id of the contact
  */
 function updateContact(id) {
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
+    const contact = contacts.find(contact => contact.id === id);
 
-    const [lastname, firstname] = contactName.value.split(',');
+    const [firstname, ...lastname] = contactName.value.split(' ');
 
-    contacts.find(contact => {
-        contact.firstname = firstname.trim();
-        contact.lastname = lastname.trim();
-        contact.email = contactEmail.value;
-        contact.phone = contactPhone.value;
-    });
+    contact.firstname = firstname.trim();
+    contact.lastname = lastname.toString().trim();
+    contact.email = contactEmail.value;
+    contact.phone = contactPhone.value;
 
     renderContactList();
     showDetailedContact(id);
     storeContacts();
     hideModal();
+}
+
+
+/**
+ * Deletes the contact from the contact list. 
+ * @param {String} id Unique id of the contact
+ */
+function deleteContact(id) {
+    const contact = contacts.find(contact => contact.id === id);
+    const index = contacts.indexOf(contact);
+    contacts.splice(index, 1);
+
+    contactDetails.classList.add('d-none');
+
+    renderContactList();
+    storeContacts();
 }
 
 
@@ -132,7 +152,9 @@ function showDetailedContact(id) {
     phoneEl.innerHTML = contact.phone ?? '';
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
+    contactColor.children[0].innerHTML = `${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}`;
     editContactBtn.onclick = () => showModal('edit', id);
+    deleteContactBtn.onclick = () => deleteContact(id);
 }
 
 
@@ -156,8 +178,8 @@ function showModal(type, id) {
     modalContent.classList.add('modal-slide-in');
 
     modalLabel.innerHTML = type === 'add' ? 'Add Contact' : 'Edit Contact';
-    createupdateContact.innerHTML = type == 'add' ? 'Create Contact' : 'Save';
-    createupdateContact.onclick = type == 'add' ? addContact : () => updateContact(id);
+    createUpdateContact.innerHTML = type == 'add' ? 'Create Contact' : 'Save';
+    createUpdateContact.onclick = type == 'add' ? addContact : () => updateContact(id);
 
     if(type === 'edit') prefillInputFields(id);
 }
@@ -192,7 +214,7 @@ function clearInputFields() {
 function prefillInputFields(id) {
     const contact = contacts.find(contact => contact.id === id);
 
-    document.getElementById('contact-name').value = `${contact.lastname}, ${contact.firstname}`;
+    document.getElementById('contact-name').value = `${contact.firstname} ${contact.lastname}`;
     document.getElementById('contact-email').value = contact.email;
     document.getElementById('contact-phone').value = contact.phone;
 }
@@ -210,7 +232,7 @@ function prefillInputFields(id) {
 function contactCardTemp(id) {
     const contact = contacts.find(contact => contact.id === id);
     return `
-        <div class="contact" onclick="showDetailedContact(${id})">
+        <div class="contact" onclick="showDetailedContact('${id}')">
             <div style="background: hsl(${contact.color}, 100%, 40%);">
                 <span>${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}</span>
             </div>
