@@ -8,6 +8,7 @@ const closeModalBtn = document.getElementById('close-modal');
 const addContactBtn = document.getElementById('add-contact');
 const editContactBtn = document.getElementById('edit-contact');
 const deleteContactBtn = document.getElementById('delete-contact');
+const hideContactBtn = document.getElementById('hide-contact');
 const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createUpdateContact = document.getElementById('modal-confirm');
@@ -28,6 +29,7 @@ function addAllEventListeners() {
     closeModalBtn.addEventListener('click', hideModal);
     addContactBtn.addEventListener('click', () => showModal('add', ''));
     cancelContact.addEventListener('click', hideModal);
+    hideContactBtn.addEventListener('click', hideContact);
 }
 
 
@@ -194,6 +196,11 @@ function hideModal() {
     modalContent.classList.remove('modal-slide-in');
     
     clearInputFields();
+}
+
+
+function hideContact() {
+    contactDetails.classList.add('d-none');
 }
 
 
