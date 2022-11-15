@@ -146,7 +146,7 @@ function memberTemplatePopup(task) {
         let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
         html += `
             <div class="popupCardMemberDiv">
-                <p class="popupCardMember" style="background: hsl(${contacts[member].color}, 100%, 40%)">${initials}</p>
+                <p class="popupCardMember" style="background: hsl(${contact.color}, 100%, 40%)">${initials}</p>
                 <span>${contact.firstname} ${contact.lastname}</span>
             </div>`;
     }

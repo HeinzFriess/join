@@ -281,3 +281,32 @@ progress{
 
     }
 }
+
+#slideIn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(90, 90, 90, 0.2);
+    z-index: 500;
+}
+
+#slideInCategory{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: white;
+    padding: 32px;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+}
+.addTask p{
+    font-size: 48px;
+    font-weight: bold;
+}
+
