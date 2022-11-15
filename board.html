@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
+    <link rel="stylesheet" href="./css/task.css">
     <script src="./js/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
     <script defer src="./js/board.js"></script>
@@ -24,7 +25,7 @@
         <nav template-html="./assets/templates/navigation.html"></nav>
 
         <main>
-            <div class="board">
+            <div class="board d-none">
                 <div class="headline">
                     <div class="noColum">
                         <div class="searchDiv">
@@ -77,6 +78,76 @@
             <div id="boardPopup" class="d-none">
                 <div id="popupCategory">
                     
+                </div>
+
+            </div>
+            <div id="slideIn" class="">
+                <div id="slideInCategory">
+                    <div class="headline">
+                        <div class="noColum">
+                            <div class="addTask">
+                                <p>Add Task</p>
+                            </div>
+                            <Button class="btn-primary">Create task <img src="./assets/icons/checkButton.svg" alt=""></Button>
+                        </div>
+                    </div>
+                    <div class="new-task">
+                        <form action="">
+                            <input type="text" name="title" id="title" placeholder="Enter a title">
+                            <div name="assignee" id="assignee">
+                                <span>Select contacts to assign</span>
+                                <div>
+                                    <div class="assignee-background d-none" id="assignee-background"></div>
+                                    <div class="assignee-container d-none" id="assignee-container">
+                                        <label for="test-1">Test-1
+                                            <input type="checkbox" name="test-1" id="test-1">
+                                        </label>
+                                        <label for="test-2">Test-2
+                                            <input type="checkbox" name="test-2" id="test-2">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="date">Due date</label>
+                                <input type="date" name="date" id="date">
+                            </div>
+                            <div>
+                                <label for="category">Category</label>
+                                <select name="category" id="category">
+                                    <option value="" disabled="" selected="" hidden="">Select task category</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="backoffice">Backoffice</option>
+                                    <option value="legal">Legal</option>
+                                </select>
+                            </div>
+                            <div id="priority">
+                                <input type="radio" name="priority" id="urgent">
+                                <label for="urgent">
+                                    <span class="checkmark">Urgent</span>
+                                    <i class="icon icon-urgent"></i>
+                                </label>
+                                <input type="radio" name="priority" id="medium">
+                                <label for="medium">
+                                    <span class="checkmark">Medium</span>
+                                    <i class="icon icon-medium"></i>
+                                </label>
+                                <input type="radio" name="priority" id="low">
+                                <label for="low">
+                                    <span class="checkmark">Low</span>
+                                    <i class="icon icon-low"></i>
+                                </label>
+        
+                            </div>
+                            <div>
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" cols="1" rows="3" placeholder="Enter a description" style="resize: none;"></textarea>
+                            </div>
+                            <div>
+        
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>
