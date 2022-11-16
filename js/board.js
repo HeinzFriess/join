@@ -4,7 +4,8 @@ const toDoElement = document.getElementById('toDo');
 const inProgressElement = document.getElementById('inProgress');
 const awaitingFeedbackElement = document.getElementById('awaitingFeedback');
 const doneElement = document.getElementById('done');
-
+const priorities = ["Urgent", "Medium", "Low"];
+let statusCall = '';
 
 async function initBoard() {
     await downloadFromServer();
@@ -53,7 +54,7 @@ function render(status, content) {
 
 function categoryCardTemplate(task) {
     return `
-    <div class="categoryCard" onclick="showDetail(${task.id})">
+    <div class="categoryCard" onclick="showDetail('${task.id}')">
         <div class="categoryName" style="background-color: ${getColorcodeForCategory(task.category)}">${task.category}</div>
         <span class="cardHeadline">${task.title}</span>
         <p class="cardContent">${task.description}</p>
@@ -98,22 +99,28 @@ function memberHtmlTemplate(members, indexLoop) {
 
     const member = members[indexLoop];
     const contact = contacts.find(({ id }) => id === member);
-    let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
-    let translate = indexLoop * -20;
-    let zIndex = 100 + 10 * indexLoop;
-    return `
+    if (contact) {
+        let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
+        let translate = indexLoop * -20;
+        let zIndex = 100 + 10 * indexLoop;
+        return `
         <p class="cardMember" style="z-index: ${zIndex};
         transform: translateX(${translate}px); background: hsl(${contact.color}, 100%, 40%)">${initials}</p>`;
+    }
+    else return '';
 }
 
 function renderPopup(taskID) {
     const content = document.getElementById('popupCategory');
-    const task = tasks.find(({ id }) => id === taskID);
+    const task = tasks.find(({ id }) => id == taskID);
     content.innerHTML = `
         ${taskTemplate(task)}
         <div id="popupCardMembers" class="popupTopics">
             <span class="popupSpan">Assigned To:</span>
                 ${memberTemplatePopup(task)}
+        </div>
+        <div class="close">
+            <img src="./assets/icons/edit_button.svg" onclick="editTask('${taskID}')" style="cursor: pointer;">
         </div>
     `
 }
@@ -139,17 +146,24 @@ function taskTemplate(task) {
 
 function memberTemplatePopup(task) {
     const members = task.assigned;
+
     let html = '';
     for (let i = 0; i < members.length; i++) {
         const member = members[i];
         const contact = contacts.find(({ id }) => id === member)
-        let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
+        if (contact) {
+            let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
         html += `
             <div class="popupCardMemberDiv">
                 <p class="popupCardMember" style="background: hsl(${contact.color}, 100%, 40%)">${initials}</p>
                 <span>${contact.firstname} ${contact.lastname}</span>
             </div>`;
+        }
+        else return '';
+        
     }
+
+
 
 
 
@@ -182,6 +196,73 @@ function getColorcodeForCategory(category) {
     }
 
 
+}
+
+function createTask() {
+    let title = document.getElementById('title').value;
+    let dueDate = document.getElementById('date').value;
+    let category = document.getElementById('category').value;
+    let description = document.getElementById('description').value;
+
+    let newTask = {
+        "assigned": [],
+        "category": category,
+        "description": description,
+        "dueDate": dueDate,
+        "id": Date.now().toString(36),
+        "maintask": true,
+        "priority": getPriority(),
+        "status": statusCall,
+        "subtasks": [],
+        "title": title
+    };
+
+    console.log(newTask);
+    tasks.push(newTask);
+    closeSlide(); //tbd show message Button
+    storeTasks();
+    renderTasks();
+}
+
+function getPriority() {
+    let priority;
+    for (let i = 0; i < priorities.length; i++) {
+        const element = document.getElementById(priorities[i].toLowerCase());
+        if (element.checked) priority = element.value;
+    }
+    return priority;
+
+}
+
+function showSlide(status) {
+    statusCall = status;
+    document.getElementById('slideIn').classList.remove('d-none');
+}
+
+function closeSlide() {
+    document.getElementById('slideIn').classList.add('d-none');
+}
+
+function editTask(taskID){
+    const task = tasks.find(({ id }) => id == taskID);
+    document.getElementById('editPopUp').classList.remove('d-none');
+    document.getElementById('boardPopup').classList.add('d-none');
+    renderPopupEdit(task)
+
+}
+
+function deleteTask(taskID){
+    const task = tasks.find(({ id }) => id == taskID);
+
+}
+
+function renderPopupEdit(task){
+    const content = document.getElementById('popupCategory');
+    
+}
+
+function closeEdit(){
+    document.getElementById('editPopUp').classList.add('d-none');
 }
 
 
