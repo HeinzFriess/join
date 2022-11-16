@@ -310,3 +310,34 @@ progress{
     font-weight: bold;
 }
 
+.close{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.editPopUp{
+    position: absolute;
+    min-height: 400px;
+    max-height: 800px;
+    min-width: 200px;
+    max-width: 623px;
+    background-color: white;
+    padding: 32px;
+    border-radius: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 400px;
+}
+
+#editPopUp{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(90, 90, 90, 0.2);
+    z-index: 800;
+    
+}
