@@ -7,8 +7,14 @@ const addTaskBtn = document.getElementById('add-task');
 
 
 assigneeMenu.addEventListener('click', toggleDropdown);
-addTaskBtn.addEventListener('click', addTask);
+addTaskBtn.addEventListener('click', (event) => addTask(event, true));
 
+
+async function init() {
+    await downloadFromServer();
+    await loadTasks();
+    await loadContacts();
+}
 
 /**
  * Toggles the custom dropdown menu
@@ -19,23 +25,43 @@ function toggleDropdown() {
 }
 
 
-function addTask() {
-    tasks.push({
-        "id" : 1,
-        "maintask" : true,
-        "status" : "To do",
-        "category" : "Design",
-        "title" : "Webdesite redesign",
-        "description" : "Modify the content of the main website...",
-        "priority" : "Low",
-        "dueDate" : "01.01.2023",
-        "subtasks" : [],
-        "assigned" : [1,2,3]
-    });
+function addTask(event, isMain) {
+    event.preventDefault();
 
-    storeTasks();
+    const title = document.getElementById('title');
+    const assigned = [];
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
+    const date = document.getElementById('date');
+    const category = document.getElementById('category');
+    const priority = document.querySelector('input[name="priority"]:checked');
+    const description = document.getElementById('description');
+
+    tasks.push({
+        "id" : Date.now().toString(36),
+        "status" : "To do",
+        "maintask" : isMain,
+        "title" : title.value,
+        "assigned" : assigned,
+        "dueDate" : date.value,
+        "category" : category.value,
+        "priority" : priority.value,
+        "description" : description.value,
+        "subtasks" : []
+    })
+
+    // storeTasks();
+    emptyForm();
 }
 
 
-loadTasks()
+function emptyForm() {
+    document.getElementById('title').value = '';
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assignee.checked = false);
+    document.getElementById('date').value = '';
+    document.getElementById('category').value = '';
+    document.querySelector('input[name="priority"]:checked').checked = false;
+    document.getElementById('description').value = '';
+}
 
+
+init();
