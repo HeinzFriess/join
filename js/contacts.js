@@ -19,6 +19,7 @@ let lastnameCharacters = [];
 async function init() {
     await downloadFromServer();
     await loadContacts();
+    await loadTasks();
     renderContactList();
     addAllEventListeners();
 }
