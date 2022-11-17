@@ -49,7 +49,7 @@ function addTask(event, isMain) {
         "subtasks" : []
     })
 
-    // storeTasks();
+    storeTasks();
     emptyForm();
 }
 
