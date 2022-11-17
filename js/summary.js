@@ -8,8 +8,9 @@ async function init() {
     await downloadFromServer();
     await loadTasks();
     await loadContacts();
-    renderHeadline();
-    renderUrgent()
+    renderHeadline(); 
+    renderUrgent();
+    renderStatistics();
 }
 
 function renderHeadline() {
@@ -59,9 +60,12 @@ function getMostUrgendTask(){
 }
 
 function getSecFromDate(dateString) { //dateString DD.MM.YYY
+    if(dateString){
     let myDate = dateString.split(".");
     let timeStamp = new Date(myDate[2], myDate[1]-1, myDate[0]).getTime();
     return timeStamp;
+    }
+    else return 'No';
 }
 
 function countTasks(status) {
@@ -70,6 +74,14 @@ function countTasks(status) {
         if (element.status == status) value++;
     });
     return value;
+}
+
+function renderStatistics(){
+    document.getElementById('tasksTodo').innerHTML = countTasks('To do');
+    document.getElementById('tasksBoard').innerHTML = tasks.length;
+    document.getElementById('tasksProgress').innerHTML = countTasks('In progress');
+    document.getElementById('tasksAwaiting').innerHTML = countTasks('Await feedback');
+    document.getElementById('tasksdone').innerHTML = countTasks('Done');
 }
 
 init();

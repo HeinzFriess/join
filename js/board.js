@@ -120,7 +120,7 @@ function renderPopup(taskID) {
                 ${memberTemplatePopup(task)}
         </div>
         <div class="close">
-            <img src="./assets/icons/edit_button.svg" onclick="editTask('${taskID}')" style="cursor: pointer;">
+            <img src="./assets/icons/edit_button.svg" onclick="showEditTask('${taskID}')" style="cursor: pointer;">
         </div>
     `
 }
@@ -146,27 +146,20 @@ function taskTemplate(task) {
 
 function memberTemplatePopup(task) {
     const members = task.assigned;
-
     let html = '';
     for (let i = 0; i < members.length; i++) {
         const member = members[i];
         const contact = contacts.find(({ id }) => id === member)
         if (contact) {
             let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
-        html += `
+            html += `
             <div class="popupCardMemberDiv">
                 <p class="popupCardMember" style="background: hsl(${contact.color}, 100%, 40%)">${initials}</p>
                 <span>${contact.firstname} ${contact.lastname}</span>
             </div>`;
         }
         else return '';
-        
     }
-
-
-
-
-
     return html;
 }
 
@@ -175,26 +168,21 @@ function getColorcodeForCategory(category) {
         case 'Design':
             return '#FF7A00';
             break;
-
         case 'Sales':
             return '#FC71FF';
             break;
-
         case 'Backoffice':
             return '#1FD7C1';
             break;
-
         case 'Media':
             return '#FFC701';
             break;
-
         case 'Marketing':
             return '#0038FF';
             break;
         default:
             break;
     }
-
 
 }
 
@@ -243,27 +231,48 @@ function closeSlide() {
     document.getElementById('slideIn').classList.add('d-none');
 }
 
-function editTask(taskID){
+function showEditTask(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     document.getElementById('editPopUp').classList.remove('d-none');
     document.getElementById('boardPopup').classList.add('d-none');
-    renderPopupEdit(task)
+    renderPopupEdit(task);
+    document.getElementById('saveButton').innerHTML = `
+        <Button class="btn-primary" onclick="saveChanges('${taskID}')">Save changes<img src="./assets/icons/checkButton.svg" alt="">
+        </Button>
+    `
 
 }
 
-function deleteTask(taskID){
+function deleteTask(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
+    const indexOfTask = tasks.indexOf(task);
+    console.log(indexOfTask);
+    tasks.splice(indexOfTask, 1);
 
 }
 
-function renderPopupEdit(task){
-    const content = document.getElementById('popupCategory');
-    
+function renderPopupEdit(task) {
+    document.getElementById('edittitle').value = task.title;
+    document.getElementById('editdescription').value = task.description;
+    document.getElementById('editdate').value = task.dueDate;
+
 }
 
-function closeEdit(){
+function closeEdit() {
     document.getElementById('editPopUp').classList.add('d-none');
 }
+
+function saveChanges(taskID) {
+    const task = tasks.find(({ id }) => id == taskID);
+    const indexOfTask = tasks.indexOf(task);
+    task.title = document.getElementById('edittitle').value;
+    task.description = document.getElementById('editdescription').value;
+    task.dueDate = document.getElementById('editdate').value;
+    tasks.splice(indexOfTask, 1, task);
+    console.log(tasks[indexOfTask]);
+    //storeTasks();
+}
+
 
 
 
