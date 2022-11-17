@@ -96,7 +96,8 @@
                                 <p>Add Task</p>
                             </div>
                             <Button class="btn-primary" onclick="createTask()">Create task <img
-                                    src="./assets/icons/checkButton.svg" alt=""></Button>
+                                    src="./assets/icons/checkButton.svg" alt="">
+                            </Button>
                         </div>
                     </div>
                     <div class="new-task">
@@ -166,16 +167,16 @@
                         <img onclick="closeEdit()" style="cursor: pointer;" src="./assets/icons/close_blue.svg" alt="">
                     </div>
                     <div class="new-task">
-                        <form action="">
-                            <input type="text" name="title" id="title" placeholder="Enter a title">
+                        <form onsubmit="">
+                            <input type="text" name="title" id="edittitle" placeholder="Enter a title">
                             <div>
                                 <label for="description">Description</label>
-                                <textarea name="description" id="description" cols="1" rows="3"
+                                <textarea name="description" id="editdescription" cols="1" rows="3"
                                     placeholder="Enter a description" style="resize: none;"></textarea>
                             </div>
                             <div>
                                 <label for="date">Due date</label>
-                                <input type="date" name="date" id="date">
+                                <input type="date" name="date" id="editdate">
                             </div>
                             <div id="priority">
                                 <input type="radio" name="priority" id="urgent">
@@ -196,9 +197,10 @@
 
                             </div>
 
-                            <div>
+                            <div id="saveButton">
 
                             </div>
+                            
                         </form>
                     </div>
                 </div>
