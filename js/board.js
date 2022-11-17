@@ -262,7 +262,7 @@ function closeEdit() {
     document.getElementById('editPopUp').classList.add('d-none');
 }
 
-async function saveChanges(taskID) {
+function saveChanges(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     const indexOfTask = tasks.indexOf(task);
     task.title = document.getElementById('edittitle').value;
@@ -270,7 +270,7 @@ async function saveChanges(taskID) {
     task.dueDate = document.getElementById('editdate').value;
     tasks.splice(indexOfTask, 1, task);
     console.log(tasks[indexOfTask]);
-    //await storeTasks();
+    //storeTasks();
 }
 
 
