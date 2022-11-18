@@ -30,6 +30,18 @@ main {
     color: var(--primary);
 }
 
+.preview-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.preview-images img {
+    justify-self: center;
+    width: 90%;
+}
+
 
 @media screen and (max-width: 700px) {
     .help {
