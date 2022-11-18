@@ -273,7 +273,9 @@ function saveChanges(taskID) {
     task.dueDate = document.getElementById('editdate').value;
     tasks.splice(indexOfTask, 1, task);
     console.log(tasks[indexOfTask]);
-    //storeTasks();
+    storeTasks();
+    renderTasks();
+    closeEdit();
 }
 
 

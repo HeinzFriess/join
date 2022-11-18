@@ -346,3 +346,82 @@ progress{
     z-index: 800;
     
 }
+
+
+#editpriority {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#editpriority input[type="radio"] {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+}
+
+#editpriority .icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#editpriority input[type="radio"]:checked + label[for="urgent"] {
+    color: var(--white);
+    background: var(--urgent);
+}
+
+#editpriority input[type="radio"]:checked + label[for="medium"] {
+    color: var(--white);
+    background: var(--medium);
+}
+
+#editpriority input[type="radio"]:checked + label[for="low"] {
+    color: var(--white);
+    background: var(--low);
+}
+
+#editpriority label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: var(--font-h6);
+    box-shadow: var(--shadow-small);
+    cursor: pointer;
+}
+
+#editpriority label:hover {
+    background: var(--primary-light);
+}
+
+#editpriority i[class*="urgent"] {
+    background-image: url(/assets/icons/urgent.svg);
+}
+
+#editpriority i[class*="medium"] {
+    background-image: url(/assets/icons/medium.svg);
+}
+
+#editpriority i[class*="low"] {
+    background-image: url(/assets/icons/low.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="urgent"] i {
+    background-image: url(/assets/icons/urgent_white.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="medium"] i {
+    background-image: url(/assets/icons/medium_white.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="low"] i {
+    background-image: url(/assets/icons/low_white.svg);
+}
