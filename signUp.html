@@ -150,7 +150,7 @@
             let name = document.getElementById('inputName').value;
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            let id = getNewContactID();
+            let id = Date.now().toString(36);
             let firstname = name.split(' ')[0];
             let lastname = name.split(' ')[1];
             user = ({ 'firstname': firstname, 'lastname': lastname, 'email': email, 'password': password, 'id': id });

@@ -42,6 +42,7 @@ main {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 30px;
     color: white;
+    cursor: pointer;
 }
 
 .bigButton hr {
@@ -57,34 +58,25 @@ main {
     justify-content: space-between;
     align-items: center;
     padding: 40px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.squareButton1{
     width: 204px;
     height: 219px;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
-    border-radius: 30px;
 }
 
 .squareButton2 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
     width: 208px;
     height: 191px;
     background: #D2E3FF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
-    border-radius: 30px;
 }
 
 .squareButton3 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
     width: 208px;
     height: 191px;
 }

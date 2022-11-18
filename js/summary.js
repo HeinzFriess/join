@@ -33,7 +33,7 @@ function renderUrgent() {
     else deadline = getMostUrgendTask().dueDate;
 
     content1.innerHTML = `${taskUrgentAmount}`;
-    content2.innerHTML = `${deadline}`;
+    content2.innerHTML = `${convertDateString(deadline)}`;
 }
 
 function calcTasksUrgent() {
@@ -61,8 +61,8 @@ function getMostUrgendTask(){
 
 function getSecFromDate(dateString) { //dateString DD.MM.YYY
     if(dateString){
-    let myDate = dateString.split(".");
-    let timeStamp = new Date(myDate[2], myDate[1]-1, myDate[0]).getTime();
+    let myDate = dateString.split("-");
+    let timeStamp = new Date(myDate[0], myDate[1]-1, myDate[2]).getTime();
     return timeStamp;
     }
     else return 'No';

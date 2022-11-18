@@ -116,6 +116,11 @@ progress{
     border: 2px solid white;
 }
 
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 
 .noColum {

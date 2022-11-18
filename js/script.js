@@ -46,21 +46,30 @@ async function loadContacts() {
     contacts = JSON.parse(backend.getItem('contacts')) || [];
 }
 
-function storeTasks(){
+function storeTasks() {
     backend.setItem('tasks', JSON.stringify(tasks));
 }
 
-function storeContacts(){
+function storeContacts() {
     backend.setItem('contacts', JSON.stringify(contacts));
 }
 
-function getNewContactID(){
+function getNewContactID() {
     let value = 0;
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        if(contact.id > value) value = contact.id +1;
+        if (contact.id > value) value = contact.id + 1;
     }
     return value;
+}
+/**
+ * Function to convert the date Format
+ * @param {yyy-mm-dd} date 
+ * @returns dd.mm.yyy
+ */
+function convertDateString(date) { // yyy-mm-dd
+    const dateArray = date.split('-');
+    return dateArray[2] + '.' + dateArray[1] + '.' + dateArray[0]
 }
 
 

@@ -72,7 +72,7 @@
                             <span>Done</span>
                             <img src="./assets/icons/add.svg" onclick="showSlide('Done')" style="cursor: pointer;">
                         </div>
-                        <div id="done">
+                        <div id="done" name="done">
 
                         </div>
                     </div>
@@ -125,9 +125,10 @@
                                 <label for="category">Category</label>
                                 <select name="category" id="category">
                                     <option value="" disabled="" selected="" hidden="">Select task category</option>
-                                    <option value="sales">Sales</option>
-                                    <option value="backoffice">Backoffice</option>
-                                    <option value="legal">Legal</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Backoffice">Backoffice</option>
+                                    <option value="Legal">Legal</option>
                                 </select>
                             </div>
                             <div id="priority">
@@ -178,19 +179,19 @@
                                 <label for="date">Due date</label>
                                 <input type="date" name="date" id="editdate">
                             </div>
-                            <div id="priority">
-                                <input type="radio" name="priority" id="urgent">
-                                <label for="urgent">
+                            <div id="editpriority">
+                                <input type="radio" name="priority" id="editurgent">
+                                <label for="editurgent">
                                     <span class="checkmark">Urgent</span>
                                     <i class="icon icon-urgent"></i>
                                 </label>
-                                <input type="radio" name="priority" id="medium">
-                                <label for="medium">
+                                <input type="radio" name="priority" id="editmedium">
+                                <label for="editmedium">
                                     <span class="checkmark">Medium</span>
                                     <i class="icon icon-medium"></i>
                                 </label>
-                                <input type="radio" name="priority" id="low">
-                                <label for="low">
+                                <input type="radio" name="priority" id="editlow">
+                                <label for="editlow">
                                     <span class="checkmark">Low</span>
                                     <i class="icon icon-low"></i>
                                 </label>

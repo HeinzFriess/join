@@ -59,7 +59,10 @@ function categoryCardTemplate(task) {
         <span class="cardHeadline">${task.title}</span>
         <p class="cardContent">${task.description}</p>
         <div id="progressDiv">${progressTemplate(task)}</div>
-        <div id="cardMembers">${memberTemplate(task)}</div>
+        <div class="cardFooter">
+            <div id="cardMembers">${memberTemplate(task)}</div>
+            <img src="./assets/icons/${task.priority.toLowerCase()}.svg" class="cardMemberPriorityIcon">
+        </div>
     </div>
     `;
 }
@@ -216,7 +219,7 @@ function getPriority() {
     let priority;
     for (let i = 0; i < priorities.length; i++) {
         const element = document.getElementById(priorities[i].toLowerCase());
-        if (element.checked) priority = element.value;
+        if (element.checked) priority = priorities[i];
     }
     return priority;
 
@@ -273,6 +276,41 @@ function saveChanges(taskID) {
     //storeTasks();
 }
 
+// #editpriority {
+//     display: grid;
+//     grid-template-columns: repeat(3, 1fr);
+//     gap: 10px;
+// }
+
+// #editpriority input[type="radio"] {
+//     opacity: 0;
+//     position: fixed;
+//     width: 0;
+// }
+
+// #editpriority .icon {
+//     display: inline-block;
+//     width: 24px;
+//     height: 24px;
+//     object-fit: cover;
+//     background-repeat: no-repeat;
+//     background-position: center;
+// }
+
+// #editpriority input[type="radio"]:checked + label[for="urgent"] {
+//     color: var(--white);
+//     background: var(--urgent);
+// }
+
+// #editpriority input[type="radio"]:checked + label[for="medium"] {
+//     color: var(--white);
+//     background: var(--medium);
+// }
+
+// #editpriority input[type="radio"]:checked + label[for="low"] {
+//     color: var(--white);
+//     background: var(--low);
+// }
 
 
 
