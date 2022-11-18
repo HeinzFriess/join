@@ -276,41 +276,6 @@ function saveChanges(taskID) {
     //storeTasks();
 }
 
-// #editpriority {
-//     display: grid;
-//     grid-template-columns: repeat(3, 1fr);
-//     gap: 10px;
-// }
-
-// #editpriority input[type="radio"] {
-//     opacity: 0;
-//     position: fixed;
-//     width: 0;
-// }
-
-// #editpriority .icon {
-//     display: inline-block;
-//     width: 24px;
-//     height: 24px;
-//     object-fit: cover;
-//     background-repeat: no-repeat;
-//     background-position: center;
-// }
-
-// #editpriority input[type="radio"]:checked + label[for="urgent"] {
-//     color: var(--white);
-//     background: var(--urgent);
-// }
-
-// #editpriority input[type="radio"]:checked + label[for="medium"] {
-//     color: var(--white);
-//     background: var(--medium);
-// }
-
-// #editpriority input[type="radio"]:checked + label[for="low"] {
-//     color: var(--white);
-//     background: var(--low);
-// }
 
 
 
