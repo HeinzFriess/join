@@ -73,27 +73,38 @@ function getAllLastnameCharacters() {
 /**
  * Adds a contact to the contact list with the given data from the modal. 
  */
-function addContact() {
+function addContact(event) {
+    event.preventDefault();
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
 
-    const [firstname, ...lastname] = contactName.value.trim().split(' ');
-
-    contacts.push({
-        "id": Date.now().toString(36),
-        "firstname": firstname.trim(),
-        "lastname": lastname.join(' ').trim(),
-        "email": contactEmail.value,
-        "password": '',
-        "phone": contactPhone.value,
-        "color": Math.floor(Math.random() * 355)
-    });
-
-    sortContacts();
-    renderContactList();
-    storeContacts();
-    hideModal();
+    if(contactName.checkValidity() && contactEmail.checkValidity()) {
+        console.log('valid')
+        const [firstname, ...lastname] = contactName.value.trim().split(' ');
+    
+        contacts.push({
+            "id": Date.now().toString(36),
+            "firstname": firstname.trim(),
+            "lastname": lastname.join(' ').trim(),
+            "email": contactEmail.value,
+            "password": '',
+            "phone": contactPhone.value,
+            "color": Math.floor(Math.random() * 355)
+        });
+    
+        sortContacts();
+        renderContactList();
+        // storeContacts();
+        hideModal();
+    } else {
+        if (!contactEmail.checkValidity()) {
+            contactEmail.reportValidity();
+        }
+        if (!contactName.checkValidity()) {
+            contactName.reportValidity();
+        }
+    }
 }
 
 
