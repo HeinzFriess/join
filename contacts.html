@@ -9,7 +9,7 @@
     <title>Join</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/navigation.css">      
+    <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/contacts.css">
     <script src="./js/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
@@ -86,15 +86,15 @@
                     <div class="modal-body">
                         <img src="./assets/img/contact.svg" draggable="false">
                         <div class="contact-data">
-                            <input type="text" id="contact-name" placeholder="Firstname Lastname">
-                            <input type="email" id="contact-email" placeholder="E-Mail">
+                            <input type="text" id="contact-name" placeholder="Firstname Lastname" required>
+                            <input type="email" id="contact-email" placeholder="E-Mail" required>
                             <input type="text" id="contact-phone" placeholder="Phone">
                         </div>
                         <div>
                             <button class="btn-secondary" id="modal-cancel">Cancel
                                 <img src="">
                             </button>
-                            <button class="btn-primary" id="modal-confirm">Create Contact
+                            <button type="submit" class="btn-primary" id="modal-confirm">Create Contact
                                 <img src="">
                             </button>
                         </div>
