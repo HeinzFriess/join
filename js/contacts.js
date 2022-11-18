@@ -78,7 +78,7 @@ function addContact() {
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
 
-    const [firstname, ...lastname] = contactName.value.split(' ');
+    const [firstname, ...lastname] = contactName.value.trim().split(' ');
 
     contacts.push({
         "id": Date.now().toString(36),
