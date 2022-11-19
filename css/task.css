@@ -201,6 +201,13 @@ main {
     bottom: 64px;
 }
 
+.clear-task {
+    position: fixed;
+    right: 200px;
+    bottom: 64px;
+    height: 56px;
+}
+
 
 @media screen and (max-width: 700px) {
     main {
@@ -250,6 +257,10 @@ main {
     }
 
     .add-task {
+        position: static;
+    }
+
+    .clear-task {
         position: static;
     }
 }
