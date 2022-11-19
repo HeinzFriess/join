@@ -44,7 +44,7 @@
                             <span>To do</span>
                             <img src="./assets/icons/add.svg" onclick="showSlide('To do')" style="cursor: pointer;">
                         </div>
-                        <div id="toDo">
+                        <div class="statusDiv" id="toDo" ondrop="drop('To do')" ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <img src="./assets/icons/add.svg" onclick="showSlide('In progress')"
                                 style="cursor: pointer;">
                         </div>
-                        <div id="inProgress">
+                        <div class="statusDiv" id="inProgress" ondrop="drop('In progress')" ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <img src="./assets/icons/add.svg" onclick="showSlide('Awaiting feedback')"
                                 style="cursor: pointer;">
                         </div>
-                        <div id="awaitingFeedback">
+                        <div class="statusDiv" id="awaitingFeedback" ondrop="drop('Awaiting feedback')" ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             <span>Done</span>
                             <img src="./assets/icons/add.svg" onclick="showSlide('Done')" style="cursor: pointer;">
                         </div>
-                        <div id="done" name="done">
+                        <div class="statusDiv" id="done" name="done" ondrop="drop('Done')" ondragover="allowDrop(event)">
 
                         </div>
                     </div>
