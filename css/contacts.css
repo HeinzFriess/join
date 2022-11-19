@@ -309,6 +309,10 @@
         width: 100%;
     }
 
+    .contacts-container {
+        box-shadow: none;
+    }
+
     .contacts section:first-child {
         padding: 16px 24px;
     }
