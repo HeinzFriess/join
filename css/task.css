@@ -49,12 +49,30 @@ main {
     outline: none;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(./../assets/icons/calander.svg) no-repeat right -2px center;
+    width: 28px;
+    height: 28px;
+    border-width: thin;
+}
+
 .new-task select[id="category"] {
     font-size: var(--font-h6);
     padding: 12px 21px;
     border: none;
     border-bottom: 1px solid var(--gray-light);
     outline: none;
+    background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.new-task option:hover {
+    color: black;
+    background: var(--primary-light);
 }
 
 .new-task select[id="category"] option::after {
