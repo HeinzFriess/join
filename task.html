@@ -26,9 +26,9 @@
 
         <main>
             <div class="new-task">
-                <form action="">
+                <form>
                     <!-- Title -->
-                    <input type="text" name="title" id="title" placeholder="Enter a title">
+                    <input type="text" name="title" id="title" placeholder="Enter a title" required>
                     <!-- Assignee -->
                     <div name="assignee" id="assignee">
                         <span>Select contacts to assign</span>
@@ -37,15 +37,6 @@
                             <div class="assignee-container d-none" id="assignee-container">
                                 <label for="test-1">Test-1
                                     <input type="checkbox" name="test-1" id="test-1" value="test-1">
-                                </label>
-                                <label for="test-2">Test-2
-                                    <input type="checkbox" name="test-2" id="test-2" value="test-2">
-                                </label>
-                                <label for="test-3">Test-3
-                                    <input type="checkbox" name="test-3" id="test-3" value="test-3">
-                                </label>
-                                <label for="test-4">Test-4
-                                    <input type="checkbox" name="test-4" id="test-4" value="test-4">
                                 </label>
                             </div>
                         </div>
@@ -96,7 +87,10 @@
                     </div>
                     <button class="add-task btn-primary" id="add-task">
                         Add Task
-                        <img src="./assets/icons/new_contact.svg">
+                        <img src="./assets/icons/checkButton.svg">
+                    </button>
+                    <button class="clear-task btn-secondary" id="clear-task">
+                        Clear
                     </button>
                 </form>
             </div>
