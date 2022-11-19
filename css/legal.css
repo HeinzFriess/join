@@ -12,6 +12,12 @@ main {
     margin-bottom: 34px;
 }
 
+.legal h2 {
+    font-size: var(--font-h4);
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
 .legal h3 {
     font-size: var(--font-h3);
     color: var(--primary);
@@ -21,6 +27,10 @@ main {
 .legal p {
     font-size: var(--font-body);
     text-align: justify;
+    margin-bottom: 35px;
+}
+
+.legal ul {
     margin-bottom: 35px;
 }
 
