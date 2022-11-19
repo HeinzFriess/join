@@ -1,5 +1,6 @@
 main {
     width: 100%;
+
 }
 
 .board {
@@ -176,7 +177,7 @@ progress{
     margin-right: auto;
     left: 0;
     right: 0;
-    top: 400px;
+    bottom: 50px;
 }
 
 .popupCategoryName {
@@ -309,6 +310,7 @@ progress{
     border-top-left-radius: 32px;
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
+    overflow: scroll;
 }
 .addTask p{
     font-size: 48px;
@@ -333,7 +335,7 @@ progress{
     margin-right: auto;
     left: 0;
     right: 0;
-    top: 400px;
+    bottom: 50px;
 }
 
 #editPopUp{

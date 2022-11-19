@@ -1,6 +1,8 @@
 main {
     width: 100%;
+    overflow-y: scroll;
 }
+
 
 .summary{
     overflow-y: scroll;
@@ -11,7 +13,7 @@ main {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     flex-direction: column;
 }
 
