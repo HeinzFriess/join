@@ -80,7 +80,6 @@ function addContact(event) {
     const contactPhone = document.getElementById('contact-phone');
 
     if(contactName.checkValidity() && contactEmail.checkValidity()) {
-        console.log('valid')
         const [firstname, ...lastname] = contactName.value.trim().split(' ');
     
         contacts.push({
@@ -95,7 +94,7 @@ function addContact(event) {
     
         sortContacts();
         renderContactList();
-        // storeContacts();
+        storeContacts();
         hideModal();
     } else {
         if (!contactEmail.checkValidity()) {
