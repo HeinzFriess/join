@@ -50,12 +50,14 @@
     z-index: 2;
 }
 
-.header-modal > div {
+.header-modal > a {
     padding: 8px 16px;
     border-radius: 10px;
+    text-decoration: none;
+    color: black;
 }
 
-.header-modal > div:hover {
+.header-modal > a:hover {
     background: var(--primary-light);
 }
 
