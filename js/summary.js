@@ -80,7 +80,7 @@ function renderStatistics(){
     document.getElementById('tasksTodo').innerHTML = countTasks('To do');
     document.getElementById('tasksBoard').innerHTML = tasks.length;
     document.getElementById('tasksProgress').innerHTML = countTasks('In progress');
-    document.getElementById('tasksAwaiting').innerHTML = countTasks('Await feedback');
+    document.getElementById('tasksAwaiting').innerHTML = countTasks('Awaiting feedback');
     document.getElementById('tasksdone').innerHTML = countTasks('Done');
 }
 
