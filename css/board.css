@@ -50,6 +50,10 @@ main {
     font-size: 23px;
 }
 
+.statusDiv{
+    min-height: 50px;
+}
+
 .categoryCard {
     display: flex;
     flex-direction: column;
@@ -58,6 +62,7 @@ main {
     padding: 30px;
     margin-bottom: 30px;
     cursor: pointer;
+    background-color: white;
 }
 
 .categoryName {

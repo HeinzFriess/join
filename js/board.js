@@ -6,6 +6,7 @@ const awaitingFeedbackElement = document.getElementById('awaitingFeedback');
 const doneElement = document.getElementById('done');
 const priorities = ["Urgent", "Medium", "Low"];
 let statusCall = '';
+let draggedElement;
 
 async function initBoard() {
     await downloadFromServer();
@@ -18,7 +19,7 @@ async function initBoard() {
 function renderTasks() {
     render('To do', toDoElement);
     render('In progress', inProgressElement);
-    render('Await feedback', awaitingFeedbackElement);
+    render('Awaiting feedback', awaitingFeedbackElement);
     render('Done', doneElement);
 }
 
@@ -54,7 +55,7 @@ function render(status, content) {
 
 function categoryCardTemplate(task) {
     return `
-    <div class="categoryCard" onclick="showDetail('${task.id}')">
+    <div draggable="true" class="categoryCard" ondragstart="startDragging('${task.id}')" onclick="showDetail('${task.id}')">
         <div class="categoryName" style="background-color: ${getColorcodeForCategory(task.category)}">${task.category}</div>
         <span class="cardHeadline">${task.title}</span>
         <p class="cardContent">${task.description}</p>
@@ -276,6 +277,23 @@ function saveChanges(taskID) {
     storeTasks();
     renderTasks();
     closeEdit();
+}
+
+function startDragging(taskID){
+    draggedElement = taskID;
+
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drop(status){
+    const task = tasks.find(({ id }) => id == draggedElement);
+    const indexOfTask = tasks.indexOf(task);
+    task.status = status;
+    tasks.splice(indexOfTask, 1, task);
+    renderTasks();
 }
 
 
