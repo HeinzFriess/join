@@ -4,20 +4,35 @@ const assigneeMenu = document.getElementById('assignee');
 const assigneeBackground = document.getElementById('assignee-background');
 const assigneeContainer = document.getElementById('assignee-container');
 const addTaskBtn = document.getElementById('add-task');
+const clearBtn = document.getElementById('clear-task');
 
 
 assigneeMenu.addEventListener('click', toggleDropdown);
 addTaskBtn.addEventListener('click', (event) => addTask(event, true));
+clearBtn.addEventListener('click', emptyForm);
 
 
+/**
+ * Initial function that gets executed after the document is loaded.
+ */
 async function init() {
     await downloadFromServer();
     await loadTasks();
     await loadContacts();
+    renderAssignees();
 }
 
+
+function renderAssignees() {
+    assigneeContainer.innerHTML = '';
+    contacts.forEach(contact => {
+        assigneeContainer.innerHTML += assigneeTemp(contact);
+    })
+}
+
+
 /**
- * Toggles the custom dropdown menu
+ * Toggles the custom dropdown menu for the assignees.
  */
 function toggleDropdown() {
     assigneeBackground.classList.toggle('d-none');
@@ -44,16 +59,19 @@ function addTask(event, isMain) {
         "assigned" : assigned,
         "dueDate" : date.value,
         "category" : category.value,
-        "priority" : priority.value,
+        "priority" : priority != null ? 'priority.value' : 'low',
         "description" : description.value,
         "subtasks" : []
     })
 
-    storeTasks();
+    // storeTasks();
     emptyForm();
 }
 
 
+/**
+ * Clears all the input fields for creating a new task.
+ */
 function emptyForm() {
     document.getElementById('title').value = '';
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assignee.checked = false);
@@ -61,6 +79,20 @@ function emptyForm() {
     document.getElementById('category').value = '';
     document.querySelector('input[name="priority"]:checked').checked = false;
     document.getElementById('description').value = '';
+}
+
+
+/**
+ * HTML template for rendering the assignee.
+ * @param {Object} contact Conact that should be rendered
+ * @returns HTML assignee template
+ */
+function assigneeTemp(contact) {
+    return `
+        <label for="${contact.id}">${contact.firstname} ${contact.lastname}
+            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
+            <span class="checkmark"></span>
+        </label>`;
 }
 
 
