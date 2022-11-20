@@ -47,6 +47,7 @@ main {
     border: none;
     border-bottom: 1px solid var(--gray-light);
     outline: none;
+    cursor: pointer;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -68,6 +69,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
     -webkit-appearance: none;
     appearance: none;
+    cursor: pointer;
 }
 
 .new-task select[id="category"] option {
@@ -96,6 +98,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
     border-bottom: 1px solid var(--gray-light);
     outline: none;
+    cursor: pointer;
     background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
 }
 
