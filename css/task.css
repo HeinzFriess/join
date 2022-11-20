@@ -155,6 +155,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: url(./../assets/icons/checked.svg) no-repeat;
 }
 
+#assignee-check {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    opacity: 0;
+    cursor: pointer;
+}
+
 
 /* Custom radio buttons for priority selection */
 #priority {
