@@ -54,7 +54,6 @@ function toggleDropdown() {
 
 function addTask(event, isMain) {
     event.preventDefault();
-
     const title = document.getElementById('title');
     const assigned = [];
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
@@ -63,21 +62,48 @@ function addTask(event, isMain) {
     const priority = document.querySelector('input[name="priority"]:checked');
     const description = document.getElementById('description');
 
+    if (title.checkValidity() && date.checkValidity() && category.checkValidity() && assigned.length > 0) {
+        newTask(
+            isMain, title.value, assigned, date.value, date.value, priority != null ? priority.value : 'low', description.value
+        );
+
+        storeTasks();
+        emptyForm();
+    } else {
+        category.reportValidity();
+        date.reportValidity();
+        if (assigned.length === 0) {
+            document.getElementById('assignee-check').reportValidity();
+        }
+        title.reportValidity();
+
+    }
+}
+
+
+/**
+ * Creates a new Task and pushes the task to the tasks array.
+ * @param {Boolean} isMain Is main taks
+ * @param {String} title Titel of the task
+ * @param {Array} assigned Array of assignee id's
+ * @param {String} date Date of task creation
+ * @param {String} category Task category
+ * @param {String} priority Task priority
+ * @param {Strin} description Task description
+ */
+function newTask(isMain, title, assigned, date, category, priority, description) {
     tasks.push({
         "id" : Date.now().toString(36),
         "status" : "To do",
         "maintask" : isMain,
-        "title" : title.value,
+        "title" : title,
         "assigned" : assigned,
-        "dueDate" : date.value,
-        "category" : category.value,
-        "priority" : priority != null ? 'priority.value' : 'low',
-        "description" : description.value,
+        "dueDate" : date,
+        "category" : category,
+        "priority" : priority,
+        "description" : description,
         "subtasks" : []
-    })
-
-    // storeTasks();
-    emptyForm();
+    });
 }
 
 
@@ -89,8 +115,12 @@ function emptyForm() {
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assignee.checked = false);
     document.getElementById('date').value = '';
     document.getElementById('category').value = '';
-    document.querySelector('input[name="priority"]:checked').checked = false;
     document.getElementById('description').value = '';
+
+    const priority = document.querySelector('input[name="priority"]:checked');
+    if (priority) {
+        priority.checked = false;
+    }
 }
 
 
