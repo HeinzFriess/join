@@ -70,9 +70,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     appearance: none;
 }
 
-.new-task option:hover {
-    color: black;
-    background: var(--primary-light);
+.new-task select[id="category"] option {
+    box-shadow: 0 0 10px 100px var(--primary-light) inset;
 }
 
 .new-task select[id="category"] option::after {
@@ -81,9 +80,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: black;
 }
 
-/* .new-task input[type="date"] {
-
-} */
 
 .new-task textarea {
     font-size: var(--font-h6);
@@ -100,6 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
     border-bottom: 1px solid var(--gray-light);
     outline: none;
+    background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
 }
 
 .assignee-background {
@@ -123,6 +120,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .assignee-container > label {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 6px 20px;
@@ -130,7 +128,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .assignee-container > label:hover {
-    background: var(--primary-light);
+    color: var(--white);
+    background: var(--primary);
+
+}
+
+.assignee-container input {
+    appearance: none;
+}
+
+.assignee-container .checkmark {
+    position: absolute;
+    top: 25%;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+    background: url(./../assets/icons/unchecked.svg) no-repeat;
+
+}
+
+.assignee-container input:checked ~ .checkmark {
+    background: url(./../assets/icons/checked.svg) no-repeat;
 }
 
 
