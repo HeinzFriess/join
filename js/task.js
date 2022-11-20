@@ -1,16 +1,5 @@
 "use strict";
 
-const assigneeMenu = document.getElementById('assignee');
-const assigneeBackground = document.getElementById('assignee-background');
-const assigneeContainer = document.getElementById('assignee-container');
-const addTaskBtn = document.getElementById('add-task');
-const clearBtn = document.getElementById('clear-task');
-
-
-assigneeMenu.addEventListener('click', toggleDropdown);
-addTaskBtn.addEventListener('click', (event) => addTask(event, true));
-clearBtn.addEventListener('click', emptyForm);
-
 
 /**
  * Initial function that gets executed after the document is loaded.
@@ -20,10 +9,30 @@ async function init() {
     await loadTasks();
     await loadContacts();
     renderAssignees();
+    addAllEventListeners();
 }
 
 
+/**
+ * Adds event listeners to all the listed elments.
+ */
+function addAllEventListeners() {
+    const assigneeMenu = document.getElementById('assignee');
+    const addTaskBtn = document.getElementById('add-task');
+    const clearBtn = document.getElementById('clear-task');
+
+    assigneeMenu.addEventListener('click', toggleDropdown);
+    addTaskBtn.addEventListener('click', (event) => addTask(event, true));
+    clearBtn.addEventListener('click', emptyForm);
+}
+
+
+/**
+ * Renders the assignees (all available contacts) into the dropdown selection.
+ */
 function renderAssignees() {
+    const assigneeContainer = document.getElementById('assignee-container');
+
     assigneeContainer.innerHTML = '';
     contacts.forEach(contact => {
         assigneeContainer.innerHTML += assigneeTemp(contact);
@@ -35,6 +44,9 @@ function renderAssignees() {
  * Toggles the custom dropdown menu for the assignees.
  */
 function toggleDropdown() {
+    const assigneeBackground = document.getElementById('assignee-background');
+    const assigneeContainer = document.getElementById('assignee-container');
+
     assigneeBackground.classList.toggle('d-none');
     assigneeContainer.classList.toggle('d-none');
 }
