@@ -16,6 +16,9 @@ const createUpdateContact = document.getElementById('modal-confirm');
 let lastnameCharacters = [];
 
 
+/**
+ * Initial function that gets executed after the document is loaded.
+ */
 async function init() {
     await downloadFromServer();
     await loadContacts();
@@ -25,6 +28,9 @@ async function init() {
 }
 
 
+/**
+ * Adds event listeners to all the listed elments.
+ */
 function addAllEventListeners() {
     modalBackground.addEventListener('click', hideModal);
     closeModalBtn.addEventListener('click', hideModal);
@@ -82,27 +88,48 @@ function addContact(event) {
     if(contactName.checkValidity() && contactEmail.checkValidity()) {
         const [firstname, ...lastname] = contactName.value.trim().split(' ');
     
-        contacts.push({
-            "id": Date.now().toString(36),
-            "firstname": firstname.trim(),
-            "lastname": lastname.join(' ').trim(),
-            "email": contactEmail.value,
-            "password": '',
-            "phone": contactPhone.value,
-            "color": Math.floor(Math.random() * 355)
-        });
-    
+        newContact(firstname, lastname, contactEmail, contactPhone)
         sortContacts();
         renderContactList();
         storeContacts();
         hideModal();
     } else {
-        if (!contactEmail.checkValidity()) {
-            contactEmail.reportValidity();
-        }
-        if (!contactName.checkValidity()) {
-            contactName.reportValidity();
-        }
+        reportEmptyInputs(contactName, contactEmail);
+    }
+}
+
+
+/**
+ * Creates a new contact.
+ * @param {String} firstname Contact firstname
+ * @param {String} lastname Contact lastnam
+ * @param {String} contactEmail Contact email
+ * @param {String} contactPhone contact phone
+ */
+function newContact(firstname, lastname, contactEmail, contactPhone) {
+    contacts.push({
+        "id": Date.now().toString(36),
+        "firstname": firstname.trim(),
+        "lastname": lastname.join(' ').trim(),
+        "email": contactEmail.value,
+        "password": '',
+        "phone": contactPhone.value,
+        "color": Math.floor(Math.random() * 355)
+    });
+}
+
+
+/**
+ * Report validity if inputs are empty.
+ * @param {Object} contactName HTML name input
+ * @param {Object} contactEmail HTML email input
+ */
+ function reportEmptyInputs(contactName, contactEmail) {
+    if (!contactEmail.checkValidity()) {
+        contactEmail.reportValidity();
+    }
+    if (!contactName.checkValidity()) {
+        contactName.reportValidity();
     }
 }
 
@@ -116,7 +143,6 @@ function updateContact(id) {
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
     const contact = contacts.find(contact => contact.id === id);
-
     const [firstname, ...lastname] = contactName.value.split(' ');
 
     contact.firstname = firstname.trim();
