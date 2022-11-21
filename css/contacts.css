@@ -310,6 +310,7 @@
 .modal-add-task {
     position: fixed;
     top: 0;
+    left: auto;
     right: 0;
     bottom: 0;
     width: 520px;
@@ -426,6 +427,24 @@
     .modal-body-contacts {
         gap: 20px;
         padding: 20px 28px 20px 28px;
+    }
+
+    .modal-add-task {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .modal-header-task {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal-body-task {
+        padding: 0;
+    }
+
+    .new-task {
+        margin-bottom: 32px !important;
     }
 
     .contact-data {
