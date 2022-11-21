@@ -3,11 +3,14 @@
 const contactsContainer = document.getElementById('contacts-container');
 const contactDetails = document.getElementById('contact-details');
 const modalBackground = document.getElementById('modal-background');
-const modalContent = document.getElementById('modal-content');
-const closeModalBtn = document.getElementById('close-modal');
+const modalAddContact = document.getElementById('modal-add-contact');
+const modalAddTask = document.getElementById('modal-add-task');
+const closeModalContactsBtn = document.getElementById('close-modal-contacts');
+const closeModalTaskBtn = document.getElementById('close-modal-task');
 const addContactBtn = document.getElementById('add-contact');
 const editContactBtn = document.getElementById('edit-contact');
 const deleteContactBtn = document.getElementById('delete-contact');
+const addTaskContactBtn = document.getElementById('add-task-contact');
 const hideContactBtn = document.getElementById('hide-contact');
 const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
@@ -24,19 +27,21 @@ async function init() {
     await loadContacts();
     await loadTasks();
     renderContactList();
-    addAllEventListeners();
+    addAllEventListenersContacts();
 }
 
 
 /**
  * Adds event listeners to all the listed elments.
  */
-function addAllEventListeners() {
-    modalBackground.addEventListener('click', hideModal);
-    closeModalBtn.addEventListener('click', hideModal);
-    addContactBtn.addEventListener('click', () => showModal('add', ''));
-    cancelContact.addEventListener('click', hideModal);
+function addAllEventListenersContacts() {
+    modalBackground.addEventListener('click', hideModals);
+    closeModalContactsBtn.addEventListener('click', hideModals);
+    addContactBtn.addEventListener('click', () => showModalAddContacts('add', ''));
+    cancelContact.addEventListener('click', hideModals);
     hideContactBtn.addEventListener('click', hideContact);
+    addTaskContactBtn.addEventListener('click', showModalAddTask);
+    closeModalTaskBtn.addEventListener('click', hideModals);
 }
 
 
@@ -92,7 +97,7 @@ function addContact(event) {
         sortContacts();
         renderContactList();
         storeContacts();
-        hideModal();
+        hideModals();
     } else {
         reportEmptyInputs(contactName, contactEmail);
     }
@@ -153,7 +158,7 @@ function updateContact(id) {
     renderContactList();
     showDetailedContact(id);
     storeContacts();
-    hideModal();
+    hideModals();
 }
 
 
@@ -192,7 +197,7 @@ function showDetailedContact(id) {
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
     contactColor.children[0].innerHTML = `${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}`;
-    editContactBtn.onclick = () => showModal('edit', id);
+    editContactBtn.onclick = () => showModalAddContacts('edit', id);
     deleteContactBtn.onclick = () => deleteContact(id);
 }
 
@@ -210,11 +215,11 @@ function sortContacts() {
  * @param {String} type Specifies the type of operation (add/edit)
  * @param {String} id Unique id of the contact
  */
-function showModal(type, id) {
+function showModalAddContacts(type, id) {
     modalBackground.classList.remove('d-none');
     modalBackground.classList.add('modal-background-blur');
-    modalContent.classList.remove('d-none');
-    modalContent.classList.add('modal-slide-in');
+    modalAddContact.classList.remove('d-none');
+    modalAddContact.classList.add('modal-slide-in-left');
 
     modalLabel.innerHTML = type === 'add' ? 'Add Contact' : 'Edit Contact';
     createUpdateContact.innerHTML = type == 'add' ? 'Create Contact' : 'Save';
@@ -227,15 +232,28 @@ function showModal(type, id) {
 /**
  * Hides the modal for the add contact/edit contact form.
  */
-function hideModal() {
+function hideModals() {
     modalBackground.classList.add('d-none');
-    modalContent.classList.add('d-none');
-    modalContent.classList.remove('modal-slide-in');
+    modalAddContact.classList.add('d-none');
+    modalAddContact.classList.remove('modal-slide-in-left');
+    modalAddTask.classList.add('d-none');
+    modalAddTask.classList.remove('modal-slide-in-right');
     
     clearInputFields();
 }
 
 
+function showModalAddTask() {
+    modalBackground.classList.remove('d-none');
+    modalBackground.classList.add('modal-background-blur');
+    modalAddTask.classList.remove('d-none');
+    modalAddTask.classList.add('modal-slide-in-right');
+}
+
+
+/**
+ * Hides the contact details in mobile view.
+ */
 function hideContact() {
     contactDetails.classList.add('d-none');
 }
