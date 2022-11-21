@@ -9,14 +9,14 @@ async function init() {
     await loadTasks();
     await loadContacts();
     renderAssignees();
-    addAllEventListeners();
+    addAllEventListenersTask();
 }
 
 
 /**
  * Adds event listeners to all the listed elments.
  */
-function addAllEventListeners() {
+function addAllEventListenersTask() {
     const assigneeMenu = document.getElementById('assignee');
     const addTaskBtn = document.getElementById('add-task');
     const clearBtn = document.getElementById('clear-task');
