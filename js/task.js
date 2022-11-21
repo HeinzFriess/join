@@ -52,6 +52,12 @@ function toggleDropdown() {
 }
 
 
+/**
+ * Validates the creation of a new task and creates a new task if conditions are met. Otherwise it will inform
+ * the user about the missing information.
+ * @param {event} event Event listener event
+ * @param {Boolean} isMain Indicator if created event is a main event
+ */
 function addTask(event, isMain) {
     event.preventDefault();
     const title = document.getElementById('title');
@@ -63,20 +69,9 @@ function addTask(event, isMain) {
     const description = document.getElementById('description');
 
     if (title.checkValidity() && date.checkValidity() && category.checkValidity() && assigned.length > 0) {
-        newTask(
-            isMain, title.value, assigned, date.value, date.value, priority != null ? priority.value : 'low', description.value
-        );
-
-        storeTasks();
-        emptyForm();
+        createNewTask(isMain, title.value, assigned, date.value, date.value, priority != null ? priority.value : 'low', description.value);
     } else {
-        category.reportValidity();
-        date.reportValidity();
-        if (assigned.length === 0) {
-            document.getElementById('assignee-check').reportValidity();
-        }
-        title.reportValidity();
-
+        reportEmptyInputs(title, assigned, date, category);
     }
 }
 
@@ -104,6 +99,44 @@ function newTask(isMain, title, assigned, date, category, priority, description)
         "description" : description,
         "subtasks" : []
     });
+}
+
+
+/**
+ * Creates a new task, saves all tasks and redirect to the board page.
+ * @param {Boolean} isMain Is main taks
+ * @param {String} title Titel of the task
+ * @param {Array} assigned Array of assignee id's
+ * @param {String} date Date of task creation
+ * @param {String} category Task category
+ * @param {String} priority Task priority
+ * @param {Strin} description Task description
+ */
+async function createNewTask(isMain, title, assigned, date, category, priority, description) {
+    newTask(
+        isMain, title, assigned, date, category, priority, description
+    );
+
+    await storeTasks();
+    emptyForm();
+    window.location.pathname = '/board.html';
+}
+
+
+/**
+ * Report validity if inputs are empty.
+ * @param {String} title Task title
+ * @param {Array} assigned Array with contact id'S
+ * @param {String} date Task due date
+ * @param {String} category Task category
+ */
+function reportEmptyInputs(title, assigned, date, category) {
+    category.reportValidity();
+        date.reportValidity();
+        if (assigned.length === 0) {
+            document.getElementById('assignee-check').reportValidity();
+        }
+        title.reportValidity();
 }
 
 
