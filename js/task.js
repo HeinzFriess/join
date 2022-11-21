@@ -69,7 +69,7 @@ function addTask(event, isMain) {
     const description = document.getElementById('description');
 
     if (title.checkValidity() && date.checkValidity() && category.checkValidity() && assigned.length > 0) {
-        createNewTask(isMain, title.value, assigned, date.value, date.value, priority != null ? priority.value : 'low', description.value);
+        createNewTask(isMain, title.value, assigned, date.value, category.value, priority != null ? priority.value : 'low', description.value);
     } else {
         reportEmptyInputs(title, assigned, date, category);
     }
