@@ -12,9 +12,11 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/contacts.css">
+    <link rel="stylesheet" href="./css/task.css">
     <script src="./js/mini_backend.js"></script>
     <script defer src="./js/script.js"></script>
     <script defer src="./js/contacts.js"></script>
+    <script defer src="./js/task.js"></script>
 
 </head>
 
@@ -42,7 +44,7 @@
                     </div>
                     <div>
                         <span id="contact-detail-name"></span>
-                        <div class="add-task">
+                        <div class="add-task-contact" id="add-task-contact">
                             <img src="./assets/icons/add.svg">
                             <span>Add Task</span>
                         </div>
@@ -78,13 +80,13 @@
             <!-- Modal -->
             <section class="modal">
                 <div class="modal-background d-none" id="modal-background"></div>
-                <div class="modal-content d-none" id="modal-content">
-                    <div class="modal-header">
+                <div class="modal-add-contact d-none" id="modal-add-contact">
+                    <div class="modal-header-contacts">
                         <img src="./assets/img/logo_white.svg" draggable="false">
                         <span id="modal-label">Add Contact</span>
-                        <img src="./assets/icons/close.svg" id="close-modal" draggable="false">
+                        <img src="./assets/icons/close.svg" id="close-modal-contacts" draggable="false">
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body-contacts">
                         <img src="./assets/img/contact.svg" draggable="false">
                         <div class="contact-data">
                             <input type="text" id="contact-name" placeholder="Firstname Lastname" required>
@@ -98,6 +100,87 @@
                             <button type="submit" class="btn-primary" id="modal-confirm">Create Contact
                                 <img src="">
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-add-task d-none" id="modal-add-task">
+                    <div class="modal-header-task">
+                        <img src="./assets/icons/close_blue.svg" id="close-modal-task" draggable="false">
+                        <span class="modal-title-task">Add Task</span>
+                        <div>
+                            <button class="clear-task-modal btn-secondary" id="clear-task">
+                                Clear
+                            </button>
+                            <button class="add-task-modal-btn btn-primary" id="add-task">
+                                Add Task
+                                <img src="./assets/icons/checkButton.svg">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body-task">
+                        <div class="new-task">
+                            <form>
+                                <!-- Title -->
+                                <input type="text" name="title" id="title" placeholder="Enter a title" required>
+                                <!-- Assignee -->
+                                <div name="assignee" id="assignee">
+                                    <input type="checkbox" id="assignee-check" required>
+                                    <span>Select contacts to assign</span>
+                                    <div>
+                                        <div class="assignee-background d-none" id="assignee-background"></div>
+                                        <div class="assignee-container d-none" id="assignee-container">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Due Date -->
+                                <div>
+                                    <label for="date">Due date</label>
+                                    <input type="date" name="date" id="date" required>
+                                </div>
+                                <!-- Category -->
+                                <div>
+                                    <label for="category">Category</label>
+                                    <select name="category" id="category" required>
+                                        <option value="" disabled selected hidden>Select task category</option>
+                                        <option value="Accounting and Finance">Accounting and Finance</option>
+                                        <option value="Research and Development">Research and Development</option>
+                                        <option value="Management">Management</option>
+                                        <option value="IT and EDP">IT and EDP</option>
+                                        <option value="Customer Service">Customer Service</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Human Resource">Human Resource</option>
+                                        <option value="Production">Production</option>
+                                        <option value="Sales">Sales</option>
+                                        <option value="Legal">Legal</option>
+                                        <option value="Backoffice">Backoffice</option>
+                                    </select>
+                                </div>
+                                <!-- Priority -->
+                                <div id="priority">
+                                    <input type="radio" name="priority" id="urgent" value="urgent" required>
+                                    <label for="urgent">
+                                        <span class="checkmark">Urgent</span>
+                                        <i class="icon icon-urgent"></i>
+                                    </label>
+                                    <input type="radio" name="priority" id="medium" value="medium" required>
+                                    <label for="medium">
+                                        <span class="checkmark">Medium</span>
+                                        <i class="icon icon-medium"></i>
+                                    </label>
+                                    <input type="radio" name="priority" id="low" value="low" required>
+                                    <label for="low">
+                                        <span class="checkmark">Low</span>
+                                        <i class="icon icon-low"></i>
+                                    </label>
+            
+                                </div>
+                                <!-- Desctiption -->
+                                <div>
+                                    <label for="description">Description</label>
+                                    <textarea name="description" id="description" cols="1" rows="3" placeholder="Enter a description"
+                                        style="resize: none;"></textarea>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
