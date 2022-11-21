@@ -85,7 +85,7 @@ function logoutModalEventListener() {
  * Loads the tasks from the backend. If no tasks are available an empty array is created.
  */
 async function loadTasks() {
-    tasks = JSON.parse(backend.getItem('tasks')) || [];
+    tasks = await JSON.parse(backend.getItem('tasks')) || [];
 }
 
 
@@ -93,23 +93,23 @@ async function loadTasks() {
  * Loads the contacts from the backend. If no contacts are available an empty array is created.
  */
 async function loadContacts() {
-    contacts = JSON.parse(backend.getItem('contacts')) || [];
+    contacts = await JSON.parse(backend.getItem('contacts')) || [];
 }
 
 
 /**
  * Stores the tasks in the backend.
  */
-function storeTasks() {
-    backend.setItem('tasks', JSON.stringify(tasks));
+async function storeTasks() {
+    await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
 
 /**
  * Stores the contacts in the backend.
  */
-function storeContacts() {
-    backend.setItem('contacts', JSON.stringify(contacts));
+async function storeContacts() {
+    await backend.setItem('contacts', JSON.stringify(contacts));
 }
 
 
