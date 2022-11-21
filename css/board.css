@@ -167,6 +167,7 @@ progress{
     width: 100%;
     background-color: rgba(90, 90, 90, 0.2);
     z-index: 500;
+    backdrop-filter: blur(4px);
 }
 
 #popupCategory {
@@ -301,6 +302,7 @@ progress{
     width: 100%;
     background-color: rgba(90, 90, 90, 0.2);
     z-index: 500;
+    backdrop-filter: blur(4px);
 }
 
 #slideInCategory{
@@ -351,6 +353,7 @@ progress{
     width: 100%;
     background-color: rgba(90, 90, 90, 0.2);
     z-index: 800;
+    backdrop-filter: blur(4px);
     
 }
 
@@ -376,17 +379,41 @@ progress{
     background-position: center;
 }
 
-#editpriority input[type="radio"]:checked + label[for="urgent"] {
+#editpriority i[class*="urgent"] {
+    background-image: url(/assets/icons/urgent.svg);
+}
+
+#editpriority i[class*="medium"] {
+    background-image: url(/assets/icons/medium.svg);
+}
+
+#editpriority i[class*="low"] {
+    background-image: url(/assets/icons/low.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="editurgent"] i {
+    background-image: url(/assets/icons/urgent_white.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="editmedium"] i {
+    background-image: url(/assets/icons/medium_white.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="editlow"] i {
+    background-image: url(/assets/icons/low_white.svg);
+}
+
+#editpriority input[type="radio"]:checked + label[for="editurgent"] {
     color: var(--white);
     background: var(--urgent);
 }
 
-#editpriority input[type="radio"]:checked + label[for="medium"] {
+#editpriority input[type="radio"]:checked + label[for="editmedium"] {
     color: var(--white);
     background: var(--medium);
 }
 
-#editpriority input[type="radio"]:checked + label[for="low"] {
+#editpriority input[type="radio"]:checked + label[for="editlow"] {
     color: var(--white);
     background: var(--low);
 }
@@ -409,26 +436,31 @@ progress{
     background: var(--primary-light);
 }
 
-#editpriority i[class*="urgent"] {
-    background-image: url(/assets/icons/urgent.svg);
+
+
+
+.editMenu{
+    display: flex !important;
+    justify-content: space-between;
+    flex-direction: row !important;
 }
 
-#editpriority i[class*="medium"] {
-    background-image: url(/assets/icons/medium.svg);
+.new-task [for="editcategory"],
+.new-task [for="edittitle"] {
+    font-size: var(--font-h6);
+    font-weight: 700;
+    color: var(--font);
+    margin-bottom: 8px;
 }
 
-#editpriority i[class*="low"] {
-    background-image: url(/assets/icons/low.svg);
-}
-
-#editpriority input[type="radio"]:checked + label[for="urgent"] i {
-    background-image: url(/assets/icons/urgent_white.svg);
-}
-
-#editpriority input[type="radio"]:checked + label[for="medium"] i {
-    background-image: url(/assets/icons/medium_white.svg);
-}
-
-#editpriority input[type="radio"]:checked + label[for="low"] i {
-    background-image: url(/assets/icons/low_white.svg);
+.new-task select[id="editcategory"] {
+    font-size: var(--font-h6);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+    background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
 }
