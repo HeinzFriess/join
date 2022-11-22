@@ -15,6 +15,7 @@ main {
     width: 100%;
     height: fit-content;
     flex-direction: column;
+    padding-top: 160px;
 }
 
 #headline p {
@@ -27,7 +28,8 @@ main {
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 35px;
-    padding-top: 35px;
+    padding-top: 18px;
+    padding-bottom: 18px;
     max-width: 925px;
 }
 
