@@ -98,6 +98,7 @@ function addContact(event) {
         renderContactList();
         storeContacts();
         hideModals();
+        notify();
     } else {
         reportEmptyInputs(contactName, contactEmail);
     }
@@ -159,6 +160,7 @@ function updateContact(id) {
     showDetailedContact(id);
     storeContacts();
     hideModals();
+    notify('Succesfully saved!');
 }
 
 
@@ -175,6 +177,7 @@ function deleteContact(id) {
 
     renderContactList();
     storeContacts();
+    notify('Succesfully deleted!');
 }
 
 
