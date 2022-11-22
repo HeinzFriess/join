@@ -1,31 +1,12 @@
 body {
     background-color: var(--primary);
-    transition: background-color 1s ease-in-out;
 }
 
 #startView {
-    position: absolute;
-    top: calc(50% - 200px);
-    left: calc(50% - 150px);
-}
-
-.startView {
-    animation: moveLeftUp 1000ms ease-in-out;
-}
-
-@keyframes moveLeftUp {
-    from {
-        top: calc(50% - 200px);
-        scale: 1;
-        left: clac(50% - 150px);
-    }
-
-    to{
-        top: -65px;
-        scale: 0.5;
-        left: -55px;
-
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 #mainView {
@@ -54,12 +35,26 @@ body {
     position: absolute;
     top: calc(50% - 150px);
     left: calc(50% - 250px);
+    background-color: white;
+}
+
+#cardHead {
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
 }
 
 #cardHead h1{
     text-decoration-line: underline;
     text-decoration-color: var(--primary);
     text-underline-offset: 24px;
+}
+
+.cardHeadIcon {
+    position: absolute;
+    left: 25px;
+    cursor: pointer;
 }
 
 #cardInput {

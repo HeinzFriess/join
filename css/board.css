@@ -51,7 +51,8 @@ main {
 }
 
 .statusDiv{
-    min-height: 50px;
+    height: 100%;
+    padding-top: 5px;
 }
 
 .categoryCard {
@@ -251,12 +252,14 @@ progress{
 }
 
 .popupPriorityIcon {
-    background-color: lightgray;
+    background-color: rgba(211, 211, 211, 0.507);
     border-radius: 6px;
     padding-top: 2px;
     padding-bottom: 2px;
     padding-left: 12px;
     padding-right: 12px;
+    display: flex;
+    gap: 10px;
 }
 
 .displayFlexGap8 {
@@ -270,11 +273,11 @@ progress{
 
 @keyframes moveUp {
     from {
-        top: 1800px;
+        bottom: -1200px;
     }
 
     to {
-        top: 400px;
+        bottom: 50px;
 
     }
 }
@@ -285,11 +288,41 @@ progress{
 
 @keyframes moveDown {
     from {
-        top: 400px;
+        bottom: 50px;
     }
 
     to {
-        top: 1800px;
+        bottom: -1200px;
+
+    }
+}
+
+.slideInMotion{
+    animation: moveleft 250ms ease-in-out;
+}
+
+@keyframes moveleft {
+    from {
+        right: -800px;
+    }
+
+    to {
+        right: 0px;
+
+    }
+}
+
+.slideOutMotion {
+    animation: moveright 250ms ease-in-out;
+}
+
+@keyframes moveright {
+    from {
+        right: 0px;
+    }
+
+    to {
+        right: -800px;
 
     }
 }
@@ -325,8 +358,8 @@ progress{
 }
 
 .close{
-    display: flex;
-    justify-content: flex-end;
+    float: right;
+    padding: 16px;
 }
 
 .editPopUp{
@@ -336,7 +369,6 @@ progress{
     min-width: 200px;
     max-width: 623px;
     background-color: white;
-    padding: 32px;
     border-radius: 32px;
     margin-left: auto;
     margin-right: auto;
@@ -462,5 +494,86 @@ progress{
     background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
     -webkit-appearance: none;
     appearance: none;
+    cursor: pointer;
+}
+
+/* Custom checkbox dropdown */
+#editassignee {
+    position: relative;
+    font-size: var(--font-h6);
+    padding: 12px 21px;
+    border: none;
+    border-bottom: 1px solid var(--gray-light);
+    outline: none;
+    cursor: pointer;
+    background: url(./../assets/icons/arrwo_down.svg) no-repeat right 24px center;
+}
+
+#editassignee-check {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.editassignee-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: default;
+}
+
+.editassignee-container {
+    position: absolute;
+    top: 51px;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-light);
+    box-shadow: var(--shadow-medium);
+    overflow-x: auto;
+}
+
+.editassignee-container > label {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+
+.editassignee-container > label:hover {
+    color: var(--white);
+    background: var(--primary);
+
+}
+
+.editassignee-container input {
+    appearance: none;
+}
+
+.editassignee-container .checkmark {
+    position: absolute;
+    top: 25%;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+    background: url(./../assets/icons/unchecked.svg) no-repeat;
+
+}
+
+.editassignee-container input:checked ~ .checkmark {
+    background: url(./../assets/icons/checked.svg) no-repeat;
+}
+
+#editassignee-check {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    opacity: 0;
     cursor: pointer;
 }

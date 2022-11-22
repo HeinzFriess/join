@@ -13,6 +13,7 @@ async function initBoard() {
     await loadTasks();
     await loadContacts();
     renderAssignees();
+    //renderAssignees('edit');
     renderTasks();
     addAllEventListeners();
 }
@@ -22,21 +23,22 @@ async function initBoard() {
  */
 function addAllEventListeners() {
     const assigneeMenu = document.getElementById('assignee');
-
-    assigneeMenu.addEventListener('click', toggleDropdown);
+    ///const editassigneeMenu = document.getElementById('editassignee');
+    assigneeMenu.addEventListener('click', function () {toggleDropdown()});
+    //editassigneeMenu.addEventListener('click', function () {toggleDropdown('edit')});
 }
 
 /**
  * Toggles the custom dropdown menu for the assignees.
  */
-function toggleDropdown() {
-    const assigneeBackground = document.getElementById('assignee-background');
-    const assigneeContainer = document.getElementById('assignee-container');
+function toggleDropdown(prefix) {
+    if(!prefix) prefix ='';
+    const assigneeBackground = document.getElementById(prefix + 'assignee-background');
+    const assigneeContainer = document.getElementById(prefix + 'assignee-container');
 
     assigneeBackground.classList.toggle('d-none');
     assigneeContainer.classList.toggle('d-none');
 }
-
 
 function renderTasks() {
     render('To do', toDoElement);
@@ -142,7 +144,7 @@ function renderPopup(taskID) {
     content.innerHTML = `
         ${taskTemplate(task)}
         <div id="popupCardMembers" class="popupTopics">
-            <span class="popupSpan">Assigned To:</span>
+            <span class="popupSpan">Assigned To: </span>
                 ${memberTemplatePopup(task)}
         </div>
         <div class="close">
@@ -160,12 +162,12 @@ function taskTemplate(task) {
         <span class="popupCardHeadline">${task.title}</span>
         <p class="popupCardContent">${task.description}</p>
     <div id="popupDuedate" class="popupTopics displayFlexGap8">
-        <span class="popupSpan">Due date:</span>
+        <span class="popupSpan">Due date: </span>
         <p>${task.dueDate}</p>
     </div>
     <div id="popupPriority" class="popupTopics displayFlexGap8">
-        <span class="popupSpan">Priority:</span>
-        <p class="popupPriorityIcon">${task.priority}<img src="./assets/icons/${task.priority.toLowerCase()}.svg" alt=""></p>
+        <span class="popupSpan">Priority: </span>
+        <p class="popupPriorityIcon">${task.priority} <img src="./assets/icons/${task.priority.toLowerCase()}.svg" alt=""></p>
     </div>
     `;
 }
@@ -203,7 +205,7 @@ function createTask() {
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
 
     let newTask = {
-        "assigned": [],
+        "assigned": assigned,
         "category": category,
         "description": description,
         "dueDate": dueDate,
@@ -214,8 +216,6 @@ function createTask() {
         "subtasks": [],
         "title": title
     };
-
-    console.log(newTask);
     tasks.push(newTask);
     closeSlide(); //tbd show message Button
     storeTasks();
@@ -237,10 +237,18 @@ function getPriority(searchString) {
 function showSlide(status) {
     statusCall = status;
     document.getElementById('slideIn').classList.remove('d-none');
+    document.getElementById('slideInCategory').classList.add('slideInMotion');
 }
 
 function closeSlide() {
-    document.getElementById('slideIn').classList.add('d-none');
+    document.getElementById('slideInCategory').classList.remove('slideInMotion');
+    document.getElementById('slideInCategory').classList.add('slideOutMotion');
+    setTimeout(function () {
+        document.getElementById('slideIn').classList.add('d-none');
+        document.getElementById('slideInCategory').classList.remove('slideOutMotion');
+    }, 230);
+    
+    
 }
 
 function showEditTask(taskID) {
@@ -289,6 +297,9 @@ function closeEdit() {
 function saveChanges(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     const indexOfTask = tasks.indexOf(task);
+    const assigned = [];
+    document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
+    task.assigned = assigned;
     task.title = document.getElementById('edittitle').value;
     task.category = document.getElementById('editcategory').value;
     task.description = document.getElementById('editdescription').value;
@@ -314,6 +325,7 @@ function drop(status) {
     const indexOfTask = tasks.indexOf(task);
     task.status = status;
     tasks.splice(indexOfTask, 1, task);
+    storeTasks();
     renderTasks();
 }
 
@@ -321,12 +333,13 @@ function drop(status) {
 /**
  * Renders the assignees (all available contacts) into the dropdown selection.
  */
-function renderAssignees() {
-    const assigneeContainer = document.getElementById('assignee-container');
+function renderAssignees(prefix) {
+    if(!prefix) prefix ='';
+    const assigneeContainer = document.getElementById(prefix + 'assignee-container');
 
     assigneeContainer.innerHTML = '';
     contacts.forEach(contact => {
-        assigneeContainer.innerHTML += assigneeTemp(contact);
+        assigneeContainer.innerHTML += assigneeTemp(contact, prefix);
     })
 }
 
@@ -336,10 +349,10 @@ function renderAssignees() {
  * @param {Object} contact Conact that should be rendered
  * @returns HTML assignee template
  */
-function assigneeTemp(contact) {
+function assigneeTemp(contact, prefix) {
     return `
         <label for="${contact.id}">${contact.firstname} ${contact.lastname}
-            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
+            <input type="checkbox" name="${contact.id}" id="${prefix}${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
 }

@@ -16,7 +16,7 @@ async function init() {
 function renderHeadline() {
     let element = document.getElementById('headline');
     const contact = contacts.find(c => c.id == userID);
-    if (userID > 0) {
+    if (contact) {
         element.innerHTML = `
     <p>Good Morning, ${contact.firstname} ${contact.lastname}</p>`;
     }
