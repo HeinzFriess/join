@@ -13,21 +13,6 @@ body {
     animation: moveLeftUp 1000ms ease-in-out;
 }
 
-@keyframes moveLeftUp {
-    from {
-        top: calc(50% - 200px);
-        scale: 1;
-        left: clac(50% - 150px);
-    }
-
-    to{
-        top: -65px;
-        scale: 0.5;
-        left: -55px;
-
-    }
-}
-
 #mainView {
     display: flex;
     justify-content: center;
@@ -47,13 +32,15 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    gap: 30px;
     border: 1px solid lightgray;
     border-radius: 16px;
-    height: 300px;
     width: 500px;
+    padding: 24px;
     position: absolute;
-    top: calc(50% - 150px);
-    left: calc(50% - 250px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #cardHead h1{
@@ -72,9 +59,14 @@ body {
     padding-right: 4px;
 }
 
+#cardInput img {
+    width: 18px;
+    height: 18px;
+}
+
 #cardCheckBox {
     display: flex;
-    justify-content: space-between;
+    gap: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 4px;
@@ -135,9 +127,77 @@ body {
 .flexBoxSpaceBetween {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .headRight {
-    width: 20%;
+    width: 280px;
     margin: 24px;
+    font-size: var(--font-h5);
+}
+
+input[type='text'] {
+    width: 100%;
+    font-size: var(--font-body);
+    outline: none;
+}
+
+.fade-in {
+    animation: fade-in 1s ease-in-out;
+}
+
+@keyframes moveLeftUp {
+    from {
+        top: calc(50% - 200px);
+        scale: 1;
+        left: calc(50% - 150px);
+    }
+
+    to{
+        top: -65px;
+        scale: 0.5;
+        left: -55px;
+
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    #card {
+        width: 90%;
+    }
+
+    #card form {
+        width: 90%;
+    }
+
+    #cardButtons {
+        flex-direction: column;
+        justify-content: center;
+        gap: 21px;
+    }
+
+    #logInMain {
+        height: 75px;
+    }
+
+    .headRight {
+        font-size: var(--font-h6);
+        position: fixed;
+        left: 50%;
+        bottom: 32px;
+        transform: translate(-50%, 0);
+        width: 240px;
+        margin: 0;
+    }
 }
