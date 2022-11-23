@@ -14,6 +14,7 @@ async function initBoard() {
     await loadTasks();
     await loadContacts();
     renderTasks();
+    addAllEventListenersTask();
 }
 
 /**
@@ -23,6 +24,15 @@ function addAllEventListeners() {
     const assigneeMenu = document.getElementById('assignee');
     assigneeMenu.addEventListener('click', toggleDropdown);
 }
+
+/**
+ * Adds event listeners to all the listed elments.
+ */
+function addAllEventListenersTask() {
+    const addTaskBtn = document.getElementById('createTask');
+    addTaskBtn.addEventListener('click', (event) => createTask(event, true));
+}
+
 
 /**
  * Toggles the custom dropdown menu for the assignees.
@@ -66,7 +76,7 @@ function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i];
-        if (task.status == status && task.maintask && (task.title.toLowerCase().includes(searchString) || task.description.toLowerCase().includes(searchString) )) {
+        if (task.status == status && task.maintask && (task.title.toLowerCase().includes(searchString) || task.description.toLowerCase().includes(searchString))) {
             content.innerHTML += categoryCardTemplate(task);
         };
     }
@@ -191,30 +201,56 @@ function getColorcodeForCategory(category) {
 
 }
 
-function createTask() {
-    let title = document.getElementById('title').value;
-    let dueDate = document.getElementById('date').value;
-    let category = document.getElementById('category').value;
-    let description = document.getElementById('description').value;
+function createTask(event, isMain) {
+    event.preventDefault();
+    const title = document.getElementById('title');
+    const dueDate = document.getElementById('date');
+    const category = document.getElementById('category');
+    const description = document.getElementById('description').value;
     const assigned = [];
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
 
-    let newTask = {
-        "assigned": assigned,
-        "category": category,
-        "description": description,
-        "dueDate": dueDate,
-        "id": Date.now().toString(36),
-        "maintask": true,
-        "priority": getPriority(),
-        "status": statusCall,
-        "subtasks": [],
-        "title": title
-    };
-    tasks.push(newTask);
-    closeSlide(); //tbd show message Button
-    storeTasks();
-    renderTasks();
+    if (title.checkValidity() && dueDate.checkValidity() && category.checkValidity() && assigned.length > 0) {
+        let newTask = {
+            "assigned": assigned,
+            "category": category.value,
+            "description": description,
+            "dueDate": dueDate.value,
+            "id": Date.now().toString(36),
+            "maintask": isMain,
+            "priority": getPriority() ? getPriority() : 'low',
+            "status": statusCall,
+            "subtasks": [],
+            "title": title.value
+        };
+        tasks.push(newTask);
+        closeSlide(); //tbd show message Button
+        storeTasks();
+        renderTasks();
+    }
+    else {
+        reportEmptyInputs(title, assigned, dueDate, category);
+        console.log('check not ok');
+    }
+
+
+    
+}
+
+/**
+ * Report validity if inputs are empty.
+ * @param {String} title Task title
+ * @param {Array} assigned Array with contact id'S
+ * @param {String} date Task due date
+ * @param {String} category Task category
+ */
+function reportEmptyInputs(title, assigned, date, category) {
+    category.reportValidity();
+    date.reportValidity();
+    if (assigned.length === 0) {
+        document.getElementById('assignee-check').reportValidity();
+    }
+    title.reportValidity();
 }
 
 function getPriority() {
@@ -366,7 +402,7 @@ function renderTaskNew() {
 function renderTaskEdit(taskID) {
     let element = document.getElementById('taskEdit');
     element.innerHTML = `
-    <form action=""><form onsubmit="return false">
+    <form onsubmit="return false">
         <div>
             <label for="title">Title</label>
             <input type="text" name="title" id="title" placeholder="Enter a title">
@@ -397,6 +433,7 @@ function renderTaskEdit(taskID) {
 function templateAssignee() {
     return `
     <div name="assignee" id="assignee">
+        <input type="checkbox" id="assignee-check" required>
         <span>Select contacts to assign</span>
         <div>
             <div class="assignee-background d-none" id="assignee-background">
@@ -471,7 +508,7 @@ function templateDescription() {
     `;
 }
 
-function filterTasks(){
+function filterTasks() {
     searchString = document.getElementById('searchInput').value.toLowerCase();
     renderTasks();
 }
