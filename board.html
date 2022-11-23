@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/task.css">
     <script src="./js/mini_backend.js"></script>
-    <script defer src="./js/notification.js"></script>
     <script defer src="./js/script.js"></script>
     <script defer src="./js/board.js"></script>
 
@@ -31,7 +30,7 @@
                 <div class="headline">
                     <div class="noColum">
                         <div class="searchDiv">
-                            <input type="text" placeholder="Find Task" class="search">
+                            <input type="text" placeholder="Filter Task" class="search" id="searchInput" onchange="filterTasks()">
                             <hr>
                             <img src="./assets/icons/search.svg" alt="">
                         </div>
@@ -102,66 +101,7 @@
                             </Button>
                         </div>
                     </div>
-                    <div class="new-task">
-                        <form action="">
-                            <input type="text" name="title" id="title" placeholder="Enter a title">
-                            <div name="assignee" id="assignee">
-                                <span>Select contacts to assign</span>
-                                <div>
-                                    <div class="assignee-background d-none" id="assignee-background"
-                                    ></div>
-                                    <div class="assignee-container d-none" id="assignee-container">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="date">Due date</label>
-                                <input type="date" name="date" id="date">
-                            </div>
-                            <div>
-                                <label for="category">Category</label>
-                                <select name="category" id="category">
-                                    <option value="" disabled selected hidden>Select task category</option>
-                                    <option value="Accounting and Finance">Accounting and Finance</option>
-                                    <option value="Research and Development">Research and Development</option>
-                                    <option value="Management">Management</option>
-                                    <option value="IT and EDP">IT and EDP</option>
-                                    <option value="Customer Service">Customer Service</option>
-                                    <option value="Marketing">Marketing</option>
-                                    <option value="Human Resource">Human Resource</option>
-                                    <option value="Production">Production</option>
-                                    <option value="Sales">Sales</option>
-                                    <option value="Legal">Legal</option>
-                                    <option value="Backoffice">Backoffice</option>
-                                </select>
-                            </div>
-                            <div id="priority">
-                                <input type="radio" name="priority" id="urgent">
-                                <label for="urgent">
-                                    <span class="checkmark">Urgent</span>
-                                    <i class="icon icon-urgent"></i>
-                                </label>
-                                <input type="radio" name="priority" id="medium">
-                                <label for="medium">
-                                    <span class="checkmark">Medium</span>
-                                    <i class="icon icon-medium"></i>
-                                </label>
-                                <input type="radio" name="priority" id="low">
-                                <label for="low">
-                                    <span class="checkmark">Low</span>
-                                    <i class="icon icon-low"></i>
-                                </label>
-
-                            </div>
-                            <div>
-                                <label for="description">Description</label>
-                                <textarea name="description" id="description" cols="1" rows="3"
-                                    placeholder="Enter a description" style="resize: none;"></textarea>
-                            </div>
-                            <div>
-
-                            </div>
-                        </form>
+                    <div class="new-task" id="newTask">
                     </div>
                 </div>
 
@@ -171,71 +111,7 @@
                     <div class="close">
                         <img onclick="closeEdit()" style="cursor: pointer;" src="./assets/icons/close_blue.svg" alt="">
                     </div>
-                    <div class="new-task">
-                        <form onsubmit="return false">
-                            <div>
-                                <label for="edittitle">Title</label>
-                            <input type="text" name="title" id="edittitle" placeholder="Enter a title">
-                            </div>
-                            <!-- <div name="assignee" id="editassignee">
-                                <span>Select contacts to assign</span>
-                                <div>
-                                    <div class="editassignee-background d-none" id="editassignee-background"
-                                    ></div>
-                                    <div class="editassignee-container d-none" id="editassignee-container">
-                                    </div>
-                                </div>
-                            </div> -->
-                            <div>
-                                <label for="editcategory">Category</label>
-                                <select name="category" id="editcategory">
-                                    <option value="" disabled selected hidden>Select task category</option>
-                                    <option value="Accounting and Finance">Accounting and Finance</option>
-                                    <option value="Research and Development">Research and Development</option>
-                                    <option value="Management">Management</option>
-                                    <option value="IT and EDP">IT and EDP</option>
-                                    <option value="Customer Service">Customer Service</option>
-                                    <option value="Marketing">Marketing</option>
-                                    <option value="Human Resource">Human Resource</option>
-                                    <option value="Production">Production</option>
-                                    <option value="Sales">Sales</option>
-                                    <option value="Legal">Legal</option>
-                                    <option value="Backoffice">Backoffice</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="description">Description</label>
-                                <textarea name="description" id="editdescription" cols="1" rows="3"
-                                    placeholder="Enter a description" style="resize: none;"></textarea>
-                            </div>
-                            <div>
-                                <label for="date">Due date</label>
-                                <input type="date" name="date" id="editdate">
-                            </div>
-                            <div id="editpriority">
-                                <input type="radio" name="priority" id="editurgent">
-                                <label for="editurgent">
-                                    <span class="checkmark">Urgent</span>
-                                    <i class="icon icon-urgent"></i>
-                                </label>
-                                <input type="radio" name="priority" id="editmedium">
-                                <label for="editmedium">
-                                    <span class="checkmark">Medium</span>
-                                    <i class="icon icon-medium"></i>
-                                </label>
-                                <input type="radio" name="priority" id="editlow">
-                                <label for="editlow">
-                                    <span class="checkmark">Low</span>
-                                    <i class="icon icon-low"></i>
-                                </label>
-                            </div>
-                            <div class="editMenu">
-                                <div id="deleteButton">
-                                </div>
-                                <div id="saveButton">
-                                </div>
-                            </div>
-                        </form>
+                    <div class="new-task" id="taskEdit">
                     </div>
                 </div>
             </div>

@@ -7,15 +7,13 @@ const doneElement = document.getElementById('done');
 const priorities = ["Urgent", "Medium", "Low"];
 let statusCall = '';
 let draggedElement;
+let searchString = '';
 
 async function initBoard() {
     await downloadFromServer();
     await loadTasks();
     await loadContacts();
-    renderAssignees();
-    //renderAssignees('edit');
     renderTasks();
-    addAllEventListeners();
 }
 
 /**
@@ -23,18 +21,15 @@ async function initBoard() {
  */
 function addAllEventListeners() {
     const assigneeMenu = document.getElementById('assignee');
-    ///const editassigneeMenu = document.getElementById('editassignee');
-    assigneeMenu.addEventListener('click', function () {toggleDropdown()});
-    //editassigneeMenu.addEventListener('click', function () {toggleDropdown('edit')});
+    assigneeMenu.addEventListener('click', toggleDropdown);
 }
 
 /**
  * Toggles the custom dropdown menu for the assignees.
  */
-function toggleDropdown(prefix) {
-    if(!prefix) prefix ='';
-    const assigneeBackground = document.getElementById(prefix + 'assignee-background');
-    const assigneeContainer = document.getElementById(prefix + 'assignee-container');
+function toggleDropdown() {
+    const assigneeBackground = document.getElementById('assignee-background');
+    const assigneeContainer = document.getElementById('assignee-container');
 
     assigneeBackground.classList.toggle('d-none');
     assigneeContainer.classList.toggle('d-none');
@@ -71,7 +66,7 @@ function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i];
-        if (task.status == status && task.maintask) {
+        if (task.status == status && task.maintask && (task.title.toLowerCase().includes(searchString) || task.description.toLowerCase().includes(searchString) )) {
             content.innerHTML += categoryCardTemplate(task);
         };
     }
@@ -192,7 +187,7 @@ function memberTemplatePopup(task) {
 }
 
 function getColorcodeForCategory(category) {
-    return (category.charCodeAt(2) * category.charCodeAt(0)  * category.charCodeAt(0) ) / 3
+    return (category.charCodeAt(2) * category.charCodeAt(0) * category.charCodeAt(0)) / 3
 
 }
 
@@ -222,12 +217,10 @@ function createTask() {
     renderTasks();
 }
 
-function getPriority(searchString) {
+function getPriority() {
     let priority;
-    let thesearchString = ''
-    if (searchString) thesearchString = searchString;
     for (let i = 0; i < priorities.length; i++) {
-        const element = document.getElementById(thesearchString + priorities[i].toLowerCase());
+        const element = document.getElementById(priorities[i].toLowerCase());
         if (element.checked) priority = priorities[i];
     }
     return priority;
@@ -236,6 +229,9 @@ function getPriority(searchString) {
 
 function showSlide(status) {
     statusCall = status;
+    renderTaskNew();
+    renderAssignees();
+    addAllEventListeners();
     document.getElementById('slideIn').classList.remove('d-none');
     document.getElementById('slideInCategory').classList.add('slideInMotion');
 }
@@ -247,24 +243,15 @@ function closeSlide() {
         document.getElementById('slideIn').classList.add('d-none');
         document.getElementById('slideInCategory').classList.remove('slideOutMotion');
     }, 230);
-    
-    
+    document.getElementById('newTask').innerHTML = '';
+
+
 }
 
 function showEditTask(taskID) {
-    const task = tasks.find(({ id }) => id == taskID);
+    renderTaskEdit(taskID);
     document.getElementById('editPopUp').classList.remove('d-none');
     document.getElementById('boardPopup').classList.add('d-none');
-    renderPopupEdit(task);
-    document.getElementById('deleteButton').innerHTML = `
-        <Button class="btn-primary" onclick="deleteTask('${taskID}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt="">
-        </Button>
-    `
-    document.getElementById('saveButton').innerHTML = `
-        <Button class="btn-primary" onclick="saveChanges('${taskID}')">Ok <img src="./assets/icons/checkButton.svg" alt="">
-        </Button>
-    `
-
 }
 
 function deleteTask(taskID) {
@@ -278,20 +265,26 @@ function deleteTask(taskID) {
 }
 
 function renderPopupEdit(task) {
-    document.getElementById('edittitle').value = task.title;
-    document.getElementById('editcategory').value = task.category;
-    document.getElementById('editdescription').value = task.description;
-    document.getElementById('editdate').value = task.dueDate;
+    document.getElementById('title').value = task.title;
+    document.getElementById('category').value = task.category;
+    document.getElementById('description').value = task.description;
+    document.getElementById('date').value = task.dueDate;
     for (let i = 0; i < priorities.length; i++) {
         const priority = priorities[i].toLowerCase();
-        const element = document.getElementById('edit' + priority);
-        element.id == 'edit' + task.priority.toLowerCase() ? element.checked = true : false;
+        const element = document.getElementById(priority);
+        element.id == task.priority.toLowerCase() ? element.checked = true : false;
+    }
+    for (let i = 0; i < task.assigned.length; i++) {
+        const assign = task.assigned[i];
+        document.getElementById(assign).checked = true;
     }
 
 }
 
 function closeEdit() {
     document.getElementById('editPopUp').classList.add('d-none');
+    document.getElementById('taskEdit').innerHTML = '';
+
 }
 
 function saveChanges(taskID) {
@@ -300,10 +293,10 @@ function saveChanges(taskID) {
     const assigned = [];
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
     task.assigned = assigned;
-    task.title = document.getElementById('edittitle').value;
-    task.category = document.getElementById('editcategory').value;
-    task.description = document.getElementById('editdescription').value;
-    task.dueDate = document.getElementById('editdate').value;
+    task.title = document.getElementById('title').value;
+    task.category = document.getElementById('category').value;
+    task.description = document.getElementById('description').value;
+    task.dueDate = document.getElementById('date').value;
     task.priority = getPriority('edit');
     tasks.splice(indexOfTask, 1, task);
     storeTasks();
@@ -333,13 +326,11 @@ function drop(status) {
 /**
  * Renders the assignees (all available contacts) into the dropdown selection.
  */
-function renderAssignees(prefix) {
-    if(!prefix) prefix ='';
-    const assigneeContainer = document.getElementById(prefix + 'assignee-container');
-
+function renderAssignees() {
+    const assigneeContainer = document.getElementById('assignee-container');
     assigneeContainer.innerHTML = '';
     contacts.forEach(contact => {
-        assigneeContainer.innerHTML += assigneeTemp(contact, prefix);
+        assigneeContainer.innerHTML += assigneeTemp(contact);
     })
 }
 
@@ -349,12 +340,138 @@ function renderAssignees(prefix) {
  * @param {Object} contact Conact that should be rendered
  * @returns HTML assignee template
  */
-function assigneeTemp(contact, prefix) {
+function assigneeTemp(contact) {
     return `
         <label for="${contact.id}">${contact.firstname} ${contact.lastname}
-            <input type="checkbox" name="${contact.id}" id="${prefix}${contact.id}" value="${contact.id}">
+            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
 }
 
+function renderTaskNew() {
+    let element = document.getElementById('newTask');
+    element.innerHTML = `
+    <form action="">
+        <input type="text" name="title" id="title" placeholder="Enter a title">
+        ${templateAssignee()}
+        ${templateDueDate()}
+        ${templateCategory()}
+        ${templatePriority()}
+        ${templateDescription()}
+    `;
+    element.innerHTML += `</form>`;
 
+}
+
+function renderTaskEdit(taskID) {
+    let element = document.getElementById('taskEdit');
+    element.innerHTML = `
+    <form action=""><form onsubmit="return false">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" placeholder="Enter a title">
+        </div>
+        ${templateAssignee()}
+        ${templateDueDate()}
+        ${templateCategory()}
+        ${templatePriority()}
+        ${templateDescription()}
+    `;
+    element.innerHTML += `
+        <div class="editMenu">
+            <div id="deleteButton">
+                <Button class="btn-primary" onclick="deleteTask('${taskID}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt=""></Button>
+            </div>
+            <div id="saveButton">
+                <Button class="btn-primary" onclick="saveChanges('${taskID}')">Ok <img src="./assets/icons/checkButton.svg" alt=""></Button>
+            </div>
+        </div>
+    </form>
+    `;
+    const task = tasks.find(({ id }) => id == taskID);
+    renderAssignees();
+    renderPopupEdit(task);
+    addAllEventListeners();
+}
+
+function templateAssignee() {
+    return `
+    <div name="assignee" id="assignee">
+        <span>Select contacts to assign</span>
+        <div>
+            <div class="assignee-background d-none" id="assignee-background">
+            </div>
+            <div class="assignee-container d-none" id="assignee-container">
+            </div>
+        </div>
+    </div>
+    `;
+}
+
+function templateDueDate() {
+    return `
+    <div>
+        <label for="date">Due date</label>
+        <input type="date" name="date" id="date">
+    </div>
+    `;
+}
+
+function templateCategory() {
+    return `
+    <div>
+        <label for="category">Category</label>
+        <select name="category" id="category">
+            <option value="" disabled selected hidden>Select task category</option>
+            <option value="Accounting and Finance">Accounting and Finance</option>
+            <option value="Research and Development">Research and Development</option>
+            <option value="Management">Management</option>
+            <option value="IT and EDP">IT and EDP</option>
+            <option value="Customer Service">Customer Service</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Human Resource">Human Resource</option>
+            <option value="Production">Production</option>
+            <option value="Sales">Sales</option>
+            <option value="Legal">Legal</option>
+            <option value="Backoffice">Backoffice</option>
+        </select>
+    </div>
+    `;
+}
+
+function templatePriority() {
+    return `
+    <div id="priority">
+        <input type="radio" name="priority" id="urgent">
+        <label for="urgent">
+            <span class="checkmark">Urgent</span>
+            <i class="icon icon-urgent"></i>
+        </label>
+        <input type="radio" name="priority" id="medium">
+        <label for="medium">
+            <span class="checkmark">Medium</span>
+            <i class="icon icon-medium"></i>
+        </label>
+        <input type="radio" name="priority" id="low">
+        <label for="low">
+            <span class="checkmark">Low</span>
+            <i class="icon icon-low"></i>
+        </label>
+    </div>
+    `;
+}
+
+function templateDescription() {
+    return `
+    <div>
+        <label for="description">Description</label>
+        <textarea name="description" id="description" cols="1" rows="3"
+            placeholder="Enter a description" style="resize: none;"></textarea>
+    </div>
+    `;
+}
+
+function filterTasks(){
+    searchString = document.getElementById('searchInput').value.toLowerCase();
+    renderTasks();
+}
