@@ -21,7 +21,7 @@
         <!--ToDo class über Script steuern-->
         <div class="flexBoxSpaceBetween headRight">
             Not a Join user?
-            <button onclick="location.href='signUp.html'" class="btn btnBlue">Sign up</button>
+            <button onclick="location.href='signUp.html'" class="btn-primary">Sign up</button>
         </div>
 
     </div>
@@ -30,7 +30,7 @@
     </div>
     <div id="mainView" class="d-none">
         <img id="logInMain" src="assets/img/logo_blue.svg" alt="">
-        <div id="card">
+        <div class="fade-in" id="card">
             <div id="cardHead">
                 <h1>Log in</h4>
             </div>
@@ -44,14 +44,14 @@
                     <img src="assets/img/lockIcon.png" alt="">
                 </div>
                 <div id="cardCheckBox" class="d-none">
-                    <input type="checkbox">
-                    <label class="container">Remember me
+                    <input type="checkbox" id="remember-me">
+                    <label class="container" for="remember-me">Remember me
                     </label>
                     <a class="d-none" href="#">Forgot my Password</a>
                 </div>
                 <div id="cardButtons">
-                    <button class="btn btnBlue">Log in</button>
-                    <button class="btn btnWhite" onclick="location.href = 'summary.html?userID=0'">Guest log in</button>
+                    <button class="btn-primary">Log in</button>
+                    <button class="btn-secondary" onclick="location.href = 'summary.html?userID=0'">Guest log in</button>
                 </div>
             </form>
 
