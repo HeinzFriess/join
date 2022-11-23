@@ -93,11 +93,12 @@ function addContact(event) {
     if(contactName.checkValidity() && contactEmail.checkValidity()) {
         const [firstname, ...lastname] = contactName.value.trim().split(' ');
     
-        newContact(firstname, lastname, contactEmail, contactPhone)
+        const id = newContact(firstname, lastname, contactEmail, contactPhone);
         sortContacts();
         renderContactList();
         storeContacts();
         hideModals();
+        showDetailedContact(id);
         notify();
     } else {
         reportEmptyInputs(contactName, contactEmail);
@@ -109,12 +110,14 @@ function addContact(event) {
  * Creates a new contact.
  * @param {String} firstname Contact firstname
  * @param {String} lastname Contact lastnam
- * @param {String} contactEmail Contact email
- * @param {String} contactPhone contact phone
+ * @param {HTMLElement} contactEmail Contact email
+ * @param {HTMLElement} contactPhone contact phone
  */
 function newContact(firstname, lastname, contactEmail, contactPhone) {
+    const id = Date.now().toString(36);
+
     contacts.push({
-        "id": Date.now().toString(36),
+        "id": id,
         "firstname": firstname.trim(),
         "lastname": lastname.join(' ').trim(),
         "email": contactEmail.value,
@@ -122,6 +125,8 @@ function newContact(firstname, lastname, contactEmail, contactPhone) {
         "phone": contactPhone.value,
         "color": Math.floor(Math.random() * 355)
     });
+
+    return id;
 }
 
 
@@ -160,6 +165,7 @@ function updateContact(id) {
     showDetailedContact(id);
     storeContacts();
     hideModals();
+    showDetailedContact(id);
     notify('Succesfully saved!');
 }
 
