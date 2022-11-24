@@ -104,3 +104,85 @@ main {
     font-weight: bold;
     padding-bottom: 8px;
 }
+
+@media screen and (max-width: 700px) {
+    .summary {
+        padding-top: 16px;
+    }
+
+    #headline p {
+        padding-bottom: 0px;
+    }
+
+    .line {
+        padding: 16px;
+        width: 100%;
+        gap: 24px;
+    }
+
+    .line ~ .line {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .bigButton {
+        width: 100%;
+        height: 150px;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .squareButton1 {
+        width: 100%;
+        height: 100%;
+        padding: 18px;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .squareButton1 img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .squareButton2 {
+        width: 100%;
+        height: 150px;
+        padding: 24px;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .squareButton3 {
+        padding: 0;
+        justify-content: center;
+        width: 100%;
+        height: fit-content;
+        gap: 8px;
+    }
+
+    .squareButton3 img {
+        width: 76px;
+        height: 76px;
+    }
+
+    .squareButton3 p {
+        display: block;
+    }
+
+    .category {
+        font-size: var(--font-h6);
+    }
+
+    #deadlineDate {
+        font-size: var(--font-h5);
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .squareButton3 img {
+        width: 50px;
+        height: 50px;
+    }
+}
