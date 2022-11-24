@@ -1,6 +1,4 @@
-
-const urlParameter = new URLSearchParams(window.location.search);
-userID = urlParameter.get('userID');
+userID = localStorage.getItem('userJoin');
 const heuteInSec = Date.now();
 const secTillUrgent = 604800000; // 7Days
 

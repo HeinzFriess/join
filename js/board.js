@@ -17,7 +17,7 @@ async function initBoard() {
     await loadTasks();
     await loadContacts();
     renderTasks();
-    addAllEventListenersTask();
+    //addAllEventListenersTask();
 }
 
 /**
@@ -35,7 +35,6 @@ function addAllEventListenersTask() {
     const addTaskBtn = document.getElementById('createTask');
     addTaskBtn.addEventListener('click', (event) => createTask(event, true));
 }
-
 
 /**
  * Toggles the custom dropdown menu for the assignees.
@@ -71,18 +70,13 @@ function getColorcodeForCategory(category) {
 /**
  * collects the inputfields of the new task window and stores it to the backend
  */
-function createTask() {
-    let required = true;
-    if (required) {
-        tasks.push(getTaskJson());
-        closeSlide();
-        storeTasks();
-        renderTasks();
-        notify('Der Task wurde angelegt');
-    }
-    else { // tbd Info an User Felder füllen 
-        console.log('check not ok');
-    }
+function createNewTask() {
+    tasks.push(getTaskJson());
+    closeSlide();
+    storeTasks();
+    renderTasks();
+    notify('Der Task wurde angelegt');
+    
 }
 
 /**
@@ -130,7 +124,7 @@ function deleteTask(taskID) {
     storeTasks();
     renderTasks();
     closeEdit();
-    notify(`Der Task '${task.title}' wurde gelöscht`);
+    notify(`Der Task wurde gelöscht`);
 
 }
 
@@ -193,8 +187,11 @@ function renderAssignees() {
 function renderTaskNew() {
     let element = document.getElementById('newTask');
     element.innerHTML = `
-    <form action="">
-        <input type="text" name="title" id="title" placeholder="Enter a title">
+    <form onsubmit="createNewTask(); return false;">
+        <Button class="btn-primary" id="createTask">Create task <img
+            src="./assets/icons/checkButton.svg" alt="">
+        </Button>
+        <input required type="text" name="title" id="title" placeholder="Enter a title">
         ${templateAssignee()}
         ${templateDueDate()}
         ${templateCategory()}
@@ -221,7 +218,7 @@ function renderTaskEdit(taskID) {
         ${templateCategory()}
         ${templatePriority()}
         ${templateDescription()}
-        ${templateEditMenu()}
+        ${templateEditMenu(taskID)}
     `;
     const task = tasks.find(({ id }) => id == taskID);
     renderAssignees();

@@ -141,10 +141,10 @@ function memberTemplate(task) {
     return `
         <div class="editMenu">
             <div id="deleteButton">
-                <Button class="btn-primary" onclick="deleteTask('${taskID}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt=""></Button>
+                <Button type="button" class="btn-primary" onclick="deleteTask('${taskID}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt=""></Button>
             </div>
             <div id="saveButton">
-                <Button class="btn-primary" onclick="saveChanges('${taskID}')">Ok <img src="./assets/icons/checkButton.svg" alt=""></Button>
+                <Button type="button" class="btn-primary" onclick="saveChanges('${taskID}')">Ok <img src="./assets/icons/checkButton.svg" alt=""></Button>
             </div>
         </div>
     </form>
@@ -158,7 +158,7 @@ function memberTemplate(task) {
 function templateAssignee() {
     return `
     <div name="assignee" id="assignee">
-        <input type="checkbox" id="assignee-check" required>
+        <input type="checkbox" id="assignee-check">
         <span>Select contacts to assign</span>
         <div>
             <div class="assignee-background d-none" id="assignee-background">

@@ -5,8 +5,6 @@ main {
 
 .board {
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -127,8 +125,6 @@ progress{
     display: flex;
     justify-content: space-between;
 }
-
-
 
 .noColum {
     display: flex;
@@ -397,4 +393,63 @@ progress{
     justify-content: space-between;
     flex-direction: row !important;
     padding-top: 32px;
+}
+@media (max-width: 700px){
+    .board{
+        width: auto;
+        padding: 32px;
+    }
+
+    .noColum{
+        flex-direction: column;
+    }
+
+    .searchDiv{
+        width: 220px;
+    }
+
+    .search{
+        width: 160px;
+    }
+
+    .noColum button{
+        display: none !important;
+    }
+
+    .headline{
+        height: auto;
+        padding-bottom: 16px;
+    }
+    .categories{
+        overflow-y: visible;
+    }
+
+    .category{
+        width: 90%;
+        padding-right: 16px;
+        max-width: 280px;
+    }
+
+    .categoryHead{
+        padding-bottom: 16px;
+        max-width: 280px;
+    }
+
+    #slideInCategory{
+        position: relative;
+    }
+
+}
+
+@media (max-width: 550px){
+    .category{
+        width: 90%;
+        padding-right: 16px;
+        max-width: 320px;
+    }
+
+    .categoryHead{
+        padding-bottom: 16px;
+        max-width: 320px;
+    }
 }

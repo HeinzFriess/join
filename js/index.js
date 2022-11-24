@@ -9,29 +9,45 @@ async function init(){
 async function logIn() {
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('inputPassword').value;
-    // users = await loadUsers();
     let contact = contacts.find( c => c.email == email && c.password == password);
     if (contact) {
-        window.location.href = `summary.html?userID=${contact.id}`;
+        window.location.href = `summary.html`;
+        localStorage.setItem('userJoin',contact.id);
     }
     else{
         console.log('user not in contacts')
+        wrongCredentials();
     }
     
 }
 
 function animateStart(){
-    const LOGO = document.getElementById('startView'); 
-    const HEAD = document.getElementById('headMenu'); 
-    const MAIN = document.getElementById('mainView');
+    const logo = document.getElementById('startView'); 
+    const head = document.getElementById('headMenu'); 
+    const main = document.getElementById('mainView');
     document.getElementById('startView').classList.add('startView');
     document.body.style.backgroundColor = "white";
     setTimeout(function() {
-        LOGO.classList.remove('d-none');
-        HEAD.classList.remove('d-none');
-        MAIN.classList.remove('d-none');
+        logo.classList.remove('d-none');
+        head.classList.remove('d-none');
+        main.classList.remove('d-none');
     },850);
     
+}
+
+function wrongCredentials(){
+    document.getElementById('card').innerHTML = `
+    <div id="cardHead" style="text-align: center">
+        <h2 style="color: var(--primary)">wrong Credentials</h2>
+        
+        <h4 style="color: var(--primary-light)">please sign Up first</h4>
+    </div>
+    
+    
+    `;
+    setTimeout(function() {
+        window.location.href = 'index.html';
+    },2500);
 }
 
 init();
