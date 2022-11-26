@@ -1,0 +1,186 @@
+.showPopup {
+    animation: moveUp 250ms ease-in-out;
+}
+
+@keyframes moveUp {
+    from {
+        bottom: -1200px;
+    }
+
+    to {
+        bottom: 50px;
+    }
+}
+
+.hidePopup {
+    animation: moveDown 250ms ease-in-out;
+}
+
+@keyframes moveDown {
+    from {
+        bottom: 50px;
+    }
+
+    to {
+        bottom: -1200px;
+    }
+}
+
+#boardPopup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(90, 90, 90, 0.2);
+    z-index: 500;
+    backdrop-filter: blur(4px);
+}
+
+#popupCategory {
+    position: absolute;
+    min-height: 400px;
+    max-height: 800px;
+    min-width: 200px;
+    max-width: 623px;
+    background-color: white;
+    padding: 32px;
+    border-radius: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+}
+
+.popupCategoryName {
+    font-size: 16px;
+    width: fit-content;
+    border-radius: 6px;
+    background-color: blue;
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 18px;
+}
+
+.popupCardHeadline {
+    font-size: 64px;
+    font-weight: bold;
+    padding-bottom: 18px;
+}
+
+.popupCardContent {
+    font-size: 16px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.popupSpan {
+    font-weight: bold;
+}
+
+.popupTopics {
+    padding-bottom: 18px;
+}
+
+.popupCardMember {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    color: white !important;
+    border-radius: 100%;
+    padding: 6px;
+
+}
+
+.popupCardMembers p {
+    display: flex;
+
+}
+
+.popupCardMemberDiv {
+    display: Flex;
+    align-items: center;
+    padding-top: 18px;
+    gap: 8px;
+}
+
+.popupCategoryNameDiv {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.popupPriorityIcon {
+    background-color: rgba(211, 211, 211, 0.507);
+    border-radius: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.editPopUp {
+    position: absolute;
+    min-height: 400px;
+    max-height: 800px;
+    min-width: 200px;
+    max-width: 623px;
+    background-color: white;
+    border-radius: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+}
+
+#editPopUp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(90, 90, 90, 0.2);
+    z-index: 800;
+    backdrop-filter: blur(4px);
+
+}
+
+.slideInMotion {
+    animation: moveleft 250ms ease-in-out;
+}
+
+@keyframes moveleft {
+    from {
+        right: -800px;
+    }
+
+    to {
+        right: 0px;
+
+    }
+}
+
+.slideOutMotion {
+    animation: moveright 250ms ease-in-out;
+}
+
+@keyframes moveright {
+    from {
+        right: 0px;
+    }
+
+    to {
+        right: -800px;
+
+    }
+}

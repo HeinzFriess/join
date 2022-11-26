@@ -188,8 +188,10 @@ function renderTaskNew() {
     let element = document.getElementById('newTask');
     element.innerHTML = `
     <form onsubmit="createNewTask(); return false;">
-        <Button class="btn-primary" id="createTask">Create task <img
-            src="./assets/icons/checkButton.svg" alt="">
+        <Button class="btn-primary create_Task_Button" id="createTask">
+            <span class="createShort">Create</span>
+            <span class="createLong">Create task </span>
+            <img src="./assets/icons/checkButton.svg" alt="">
         </Button>
         <input required type="text" name="title" id="title" placeholder="Enter a title">
         ${templateAssignee()}

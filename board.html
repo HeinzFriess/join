@@ -9,17 +9,18 @@
     <title>Join</title>
     <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/boardPopup.css">
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/task.css">
     <script src="./js/mini_backend.js"></script>
     <script defer src="./js/notification.js"></script>
-    <script defer src="./js/script.js"></script>    
+    <script defer src="./js/script.js"></script>
     <script defer src="./js/boardRenderHTML.js"></script>
     <script defer src="./js/boardForms.js"></script>
     <script defer src="./js/board.js"></script>
-    
+
 
 </head>
 
@@ -34,7 +35,8 @@
                 <div class="headline">
                     <div class="noColum">
                         <div class="searchDiv">
-                            <input type="text" placeholder="Filter Task" class="search" id="searchInput" onchange="filterTasks()">
+                            <input type="text" placeholder="Filter Task" class="search" id="searchInput"
+                                onchange="filterTasks()">
                             <hr>
                             <img src="./assets/icons/search.svg" alt="">
                         </div>
@@ -58,7 +60,8 @@
                             <img src="./assets/icons/add.svg" onclick="showSlide('In progress')"
                                 style="cursor: pointer;">
                         </div>
-                        <div class="statusDiv" id="inProgress" ondrop="drop('In progress')" ondragover="allowDrop(event)">
+                        <div class="statusDiv" id="inProgress" ondrop="drop('In progress')"
+                            ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -68,7 +71,8 @@
                             <img src="./assets/icons/add.svg" onclick="showSlide('Awaiting feedback')"
                                 style="cursor: pointer;">
                         </div>
-                        <div class="statusDiv" id="awaitingFeedback" ondrop="drop('Awaiting feedback')" ondragover="allowDrop(event)">
+                        <div class="statusDiv" id="awaitingFeedback" ondrop="drop('Awaiting feedback')"
+                            ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -77,7 +81,8 @@
                             <span>Done</span>
                             <img src="./assets/icons/add.svg" onclick="showSlide('Done')" style="cursor: pointer;">
                         </div>
-                        <div class="statusDiv" id="done" name="done" ondrop="drop('Done')" ondragover="allowDrop(event)">
+                        <div class="statusDiv" id="done" name="done" ondrop="drop('Done')"
+                            ondragover="allowDrop(event)">
 
                         </div>
                     </div>
@@ -90,22 +95,18 @@
 
             </div>
             <div id="slideIn" class="d-none">
+                <div class="mobileHead">
+                    <img src="./assets/img/logo_blue.svg" style="width: 32px; height: 32px;">
+                </div>
                 <div id="slideInCategory">
                     <div class="headline">
-                        <div class="close">
-                            <img onclick="closeSlide()" style="cursor: pointer;" src="./assets/icons/close_blue.svg"
-                                alt="">
-                        </div>
-                        <div class="noColum">
-                            <div class="addTask">
-                                <p>Add Task</p>
-                            </div>
-                            <!-- <Button class="btn-primary" id="createTask">Create task <img
-                                    src="./assets/icons/checkButton.svg" alt="">
-                            </Button> -->
+                        <img class="close" onclick="closeSlide()" style="cursor: pointer;"
+                            src="./assets/icons/close_blue.svg" alt="">
+                        <div class="addTask">
+                            <p>Add Task</p>
                         </div>
                     </div>
-                    <div class="new-task" id="newTask">
+                    <div class="new-task" id="newTask" style="width: 446px ; margin: 60px 0px;">
                     </div>
                 </div>
 
@@ -113,7 +114,7 @@
             <div id="editPopUp" class="d-none">
                 <div class="editPopUp">
                     <div class="close">
-                        <img onclick="closeEdit()" style="cursor: pointer;" src="./assets/icons/close_blue.svg" alt="">
+                        <img onclick="closeEdit()" style="cursor: pointer; padding: 32px;" src="./assets/icons/close_blue.svg" alt="">
                     </div>
                     <div class="new-task" id="taskEdit">
                     </div>

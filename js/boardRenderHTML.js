@@ -178,7 +178,7 @@ function templateDueDate() {
     return `
     <div>
         <label for="date">Due date</label>
-        <input type="date" name="date" id="date">
+        <input required type="date" name="date" id="date">
     </div>
     `;
 }
@@ -191,7 +191,7 @@ function templateCategory() {
     return `
     <div>
         <label for="category">Category</label>
-        <select name="category" id="category">
+        <select required name="category" id="category">
             <option value="" disabled selected hidden>Select task category</option>
             <option value="Accounting and Finance">Accounting and Finance</option>
             <option value="Research and Development">Research and Development</option>

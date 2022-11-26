@@ -1,6 +1,5 @@
 main {
     width: 100%;
-
 }
 
 .board {
@@ -48,7 +47,7 @@ main {
     font-size: 23px;
 }
 
-.statusDiv{
+.statusDiv {
     height: 100%;
     padding-top: 5px;
 }
@@ -77,7 +76,6 @@ main {
 }
 
 .categoryCard span {
-    /* font-size: var(--font-h6); */
     font-size: 19px;
     font-weight: bold;
     color: var(--primary);
@@ -99,7 +97,7 @@ main {
     font-size: 13px;
 }
 
-progress{
+progress {
     width: 110px;
 }
 
@@ -159,174 +157,14 @@ progress{
     padding-left: 24px;
 }
 
-#boardPopup {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(90, 90, 90, 0.2);
-    z-index: 500;
-    backdrop-filter: blur(4px);
-}
 
-#popupCategory {
-    position: absolute;
-    min-height: 400px;
-    max-height: 800px;
-    min-width: 200px;
-    max-width: 623px;
-    background-color: white;
-    padding: 32px;
-    border-radius: 32px;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-}
-
-.popupCategoryName {
-    font-size: 16px;
-    width: fit-content;
-    border-radius: 6px;
-    background-color: blue;
-    color: white;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-bottom: 18px;
-}
-
-.popupCardHeadline {
-    font-size: 64px;
-    font-weight: bold;
-    padding-bottom: 18px;
-}
-
-.popupCardContent {
-    font-size: 16px;
-    padding-top: 18px;
-    padding-bottom: 18px;
-}
-
-.popupSpan {
-    font-weight: bold;
-}
-
-.popupTopics {
-    padding-bottom: 18px;
-}
-
-.popupCardMember {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background-color: blue;
-    color: white !important;
-    border-radius: 100%;
-    padding: 6px;
-
-}
-
-.popupCardMembers p {
-    display: flex;
-
-}
-
-.popupCardMemberDiv {
-    display: Flex;
-    align-items: center;
-    padding-top: 18px;
-    gap: 8px;
-}
-
-.popupCategoryNameDiv {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
-
-.popupPriorityIcon {
-    background-color: rgba(211, 211, 211, 0.507);
-    border-radius: 6px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 12px;
-    padding-right: 12px;
-    display: flex;
-    gap: 10px;
-}
 
 .displayFlexGap8 {
     display: flex;
     gap: 8px;
 }
 
-.showPopup {
-    animation: moveUp 250ms ease-in-out;
-}
-
-@keyframes moveUp {
-    from {
-        bottom: -1200px;
-    }
-
-    to {
-        bottom: 50px;
-
-    }
-}
-
-.hidePopup {
-    animation: moveDown 250ms ease-in-out;
-}
-
-@keyframes moveDown {
-    from {
-        bottom: 50px;
-    }
-
-    to {
-        bottom: -1200px;
-
-    }
-}
-
-.slideInMotion{
-    animation: moveleft 250ms ease-in-out;
-}
-
-@keyframes moveleft {
-    from {
-        right: -800px;
-    }
-
-    to {
-        right: 0px;
-
-    }
-}
-
-.slideOutMotion {
-    animation: moveright 250ms ease-in-out;
-}
-
-@keyframes moveright {
-    from {
-        right: 0px;
-    }
-
-    to {
-        right: -800px;
-
-    }
-}
-
-#slideIn{
+#slideIn {
     position: absolute;
     top: 0;
     left: 0;
@@ -337,7 +175,7 @@ progress{
     backdrop-filter: blur(4px);
 }
 
-#slideInCategory{
+#slideInCategory {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -351,105 +189,162 @@ progress{
     border-bottom-right-radius: 32px;
     overflow: scroll;
 }
-.addTask p{
+
+.addTask {
+    padding-top: 60px;
+}
+
+.addTask p {
     font-size: 48px;
     font-weight: bold;
 }
 
-.close{
+.close {
     float: right;
-    padding: 16px;
 }
 
-.editPopUp{
-    position: absolute;
-    min-height: 400px;
-    max-height: 800px;
-    min-width: 200px;
-    max-width: 623px;
-    background-color: white;
-    border-radius: 32px;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-}
-
-#editPopUp{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(90, 90, 90, 0.2);
-    z-index: 800;
-    backdrop-filter: blur(4px);
-    
-}
-
-.editMenu{
+.editMenu {
     display: flex !important;
     justify-content: space-between;
     flex-direction: row !important;
-    padding-top: 32px;
 }
-@media (max-width: 700px){
-    .board{
+
+@media (max-width: 700px) {
+    .board {
         width: auto;
         padding: 32px;
     }
 
-    .noColum{
+    .noColum {
         flex-direction: column;
     }
 
-    .searchDiv{
+    .searchDiv {
         width: 220px;
     }
 
-    .search{
+    .search {
         width: 160px;
     }
 
-    .noColum button{
+    .noColum button {
         display: none !important;
     }
 
-    .headline{
+    .headline {
         height: auto;
         padding-bottom: 16px;
     }
-    .categories{
+
+    .categories {
         overflow-y: visible;
     }
 
-    .category{
+    .category {
         width: 90%;
         padding-right: 16px;
         max-width: 280px;
     }
 
-    .categoryHead{
+    .categoryHead {
         padding-bottom: 16px;
         max-width: 280px;
     }
 
-    #slideInCategory{
-        position: relative;
+    #slideInCategory {
+        position: unset;
+        border-radius: 0;
+        height: 100%;
+    }
+
+    .addTask {
+        padding-top: 0;
+    }
+
+    .create_Task_Button {
+        top: 12px !important;
+        width: auto !important;
+    }
+
+    .createShort {
+        display: inline !important;
+    }
+
+    .createLong {
+        display: none;
+    }
+
+    .mobileHead {
+        display: flex !important;
+        background-color: white;
+        box-shadow: var(--shadow-medium);
+    }
+
+    .header{
+        display: none;
+    }
+
+    #newTask{
+        margin: 0 !important;
+        padding: 0;
+        height: 100%;
+        width: auto;
+    }
+
+    #popupCategory{
+        border-bottom-left-radius: 32px;
+        border-top-left-radius: 32px;
+        border-bottom-right-radius: 32px;
+        border-top-right-radius: 0;
+        height: 85%;
+        padding-top: 64px;
+        max-height: unset;
+    }
+
+    .editPopUp{
+        border-bottom-left-radius: 32px;
+        border-top-left-radius: 32px;
+        border-bottom-right-radius: 32px;
+        border-top-right-radius: 0;
+        height: auto;
+        max-height: unset;
     }
 
 }
 
-@media (max-width: 550px){
-    .category{
+@media (max-width: 550px) {
+    .category {
         width: 90%;
         padding-right: 16px;
         max-width: 320px;
     }
 
-    .categoryHead{
+    .categoryHead {
         padding-bottom: 16px;
         max-width: 320px;
     }
+}
+
+.create_Task_Button {
+    position: absolute;
+    top: 92px;
+    right: 32px;
+    width: 180px;
+}
+
+.newTask {
+    width: 446px;
+    margin: 41px 0px;
+}
+
+.createShort {
+    display: none;
+}
+
+.mobileHead {
+    display: none;
+    height: 80px;
+    align-items: center;
+    padding: 1px 39px;
+
 }
