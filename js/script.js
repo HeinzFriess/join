@@ -75,9 +75,14 @@ function addActiveClass(item) {
  * Adds an event listener to the profile picture to toggle the logout modal.
  */
 function logoutModalEventListener() {
-    document.getElementById('profile-picture').addEventListener('click', () => {
-        document.getElementById('logout-modal').classList.toggle('d-none');
-    });
+    try {
+        document.getElementById('profile-picture').addEventListener('click', () => {
+            document.getElementById('logout-modal').classList.toggle('d-none');
+        });
+    } catch (error) {
+        
+    }
+    
 }
 
 
