@@ -1,5 +1,5 @@
 const urlParameter = new URLSearchParams(window.location.search);
-let newPassword =urlParameter.get('newPassword');
+let newPassword = urlParameter.get('newPassword');
 let mailIsSend = urlParameter.get('mailSend');
 
 async function init(){
