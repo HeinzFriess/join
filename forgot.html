@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/forgot.css">
+    <script defer src="./js/script.js"></script>
+
+    <script>
+        async function  sendMail() {
+            window.location.href = 'index.html';
+        }
+    </script>
+    
+</head>
+
+<body>
+    <div id="mainView">
+        <img id="logInMain" src="assets/img/logo_white.svg" alt="">
+        <div id="card">
+            <div id="cardHead">
+                <div class="cardHeadIcon">
+                    <img src="assets/img/backIcon.png" onclick="location.href = 'index.html'" alt="">
+                </div>
+                <h1>I forgot my password</h4>
+            </div>
+            <hr class="cardHeadHr">
+            <form onsubmit="" action="https://gruppe-364.developerakademie.net/send_mail.php" method="POST" return false;">
+                <h3>Don't worry! We will send you an email with the instructions to reset your password.</h3>
+                <div id="cardInput">
+                    <input type="text" required placeholder="Email" id="inputEmail" name="inputEmail" class="noBorder">
+                    <img src="assets/img/letterIcon.png" alt="">
+                </div>
+                <div id="cardButtons">
+                    <button class="btn-primary">Send me the email</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

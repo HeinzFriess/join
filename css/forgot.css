@@ -31,7 +31,8 @@ body {
     justify-content: space-evenly;
     border: 1px solid lightgray;
     border-radius: 16px;
-    width: 500px;
+    width: 761px;
+    height: 450px;
     padding: 24px;
     gap: 12px;
     position: absolute;
@@ -71,10 +72,11 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     padding-left: 4px;
     padding-right: 4px;
+    width: 70%;
 }
 
 #cardInput img {
@@ -92,13 +94,17 @@ body {
 }
 
 #card form {
-    width: 60%;
+    width: 70%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #cardButtons {
     display: flex;
     justify-content: space-evenly;
-    padding-top: 12px;
+    padding-top: 24px;
     padding-left: 4px;
     padding-right: 4px;
 }

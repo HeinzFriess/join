@@ -33,11 +33,11 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    gap: 30px;
     border: 1px solid lightgray;
     border-radius: 16px;
     width: 500px;
     padding: 24px;
+    gap: 12px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -45,9 +45,16 @@ body {
 }
 
 #cardHead h1{
-    text-decoration-line: underline;
-    text-decoration-color: var(--primary);
-    text-underline-offset: 24px;
+    margin: 0;
+    font-size: var(--font-h1);
+}
+
+.cardHeadHr {
+    width: 150px;
+    height: 4px;
+    background-color: var(--primary);
+    color: var(--primary);
+    border-radius: 2px;
 }
 
 #cardInput {
@@ -75,7 +82,7 @@ body {
 }
 
 #card form {
-    width: 60%;
+    width: 80%;
 }
 
 #cardButtons {
@@ -201,4 +208,9 @@ input[type='text'] {
         width: 240px;
         margin: 0;
     }
+}
+
+.passwordReset{
+    position: absolute;
+    bottom: 140px;
 }

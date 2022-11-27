@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="./js/mini_backend.js"></script>
+    <script defer src="./js/script.js"></script>
+
+    <script>
+        const urlParameter = new URLSearchParams(window.location.search);
+        let userMail = urlParameter.get('user');
+
+        async function init() {
+            await downloadFromServer();
+            await loadContacts();
+        }
+
+        async function changePassword(){
+            let pw1 = document.getElementById('inputPW1').value;
+            let pw2 = document.getElementById('inputPW2').value;
+            if (pw1 === pw2) {
+                const contact = contacts.find(contact => contact.email === userMail);
+                contact.password = pw1;
+                await storeContacts();
+                window.location.href = 'index.html';
+            }
+            else{
+                console.log('passwörter nicht identisch');
+            }
+        }
+        init();
+    </script>
+    
+</head>
+
+<body>
+    <div id="mainView">
+        <img id="logInMain" src="assets/img/logo_white.svg" alt="">
+        <div id="card">
+            <div id="cardHead">
+                <div class="cardHeadIcon">
+                    <img src="assets/img/backIcon.png" onclick="location.href = 'index.html?newPassword=true'" alt="">
+                </div>
+                <h1>Reset your password</h4>
+            </div>
+            <hr class="cardHeadHr">
+            <form onsubmit="changePassword(); return false;">
+                <h3>Change your account password here</h3>
+                <div id="cardInput">
+                    <input type="text" required placeholder="New password" id="inputPW1" class="noBorder">
+                </div>
+                <div id="cardInput">
+                    <input type="text" required placeholder="Confirm password" id="inputPW2" class="noBorder">
+                </div>
+                <div id="cardButtons">
+                    <button class="btn-primary">Continue</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

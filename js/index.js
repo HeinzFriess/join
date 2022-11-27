@@ -1,9 +1,13 @@
-
+const urlParameter = new URLSearchParams(window.location.search);
+let newPassword =urlParameter.get('newPassword');
+let mailIsSend = urlParameter.get('mailSend');
 
 async function init(){
     await downloadFromServer();
     await loadTasks();
     await loadContacts();
+    showMailIsSendInfo();
+    showPasswordResetInfo();
 }
 
 async function logIn() {
@@ -47,6 +51,27 @@ function wrongCredentials(){
     `;
     setTimeout(function() {
         window.location.href = 'index.html';
+    },2500);
+}
+
+function showMailIsSendInfo(){
+    if(mailIsSend){
+        document.getElementById('passwordResetText').innerHTML = 'An E-mail has been sent to you';
+        document.getElementById('passwordResetInfo').classList.remove('d-none');
+    } 
+    setTimeout(function() {
+        document.getElementById('passwordResetInfo').classList.add('d-none');
+    },2500);
+}
+
+function showPasswordResetInfo(){
+    
+    if(newPassword){
+        document.getElementById('passwordResetText').innerHTML = 'You reset your Password';
+        document.getElementById('passwordResetInfo').classList.remove('d-none');
+    } 
+    setTimeout(function() {
+        document.getElementById('passwordResetInfo').classList.add('d-none');
     },2500);
 }
 

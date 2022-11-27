@@ -34,6 +34,7 @@
             <div id="cardHead">
                 <h1>Log in</h1>
             </div>
+            <hr class="cardHeadHr">
             <form onsubmit="logIn(); return false;">
                 <div id="cardInput">
                     <input required type="text" required placeholder="Email" id="inputEmail" class="noBorder">
@@ -43,11 +44,11 @@
                     <input required type="text" required placeholder="Password" id="inputPassword" class="noBorder">
                     <img src="assets/img/lockIcon.png" alt="">
                 </div>
-                <div id="cardCheckBox" class="d-none">
+                <div id="cardCheckBox">
                     <input type="checkbox" id="remember-me">
                     <label class="container" for="remember-me">Remember me
                     </label>
-                    <a class="d-none" href="#">Forgot my Password</a>
+                    <a href="forgot.html">Forgot my Password</a>
                 </div>
                 <div id="cardButtons">
                     <button class="btn-primary">Log in</button>
@@ -55,6 +56,9 @@
                 </div>
             </form>
 
+        </div>
+        <div id="passwordResetInfo" class="passwordReset d-none">
+            <button id="passwordResetText" class="btn-primary"></button>
         </div>
     </div>
 
