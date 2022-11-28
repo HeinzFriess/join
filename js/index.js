@@ -75,4 +75,9 @@ function showPasswordResetInfo(){
     },2500);
 }
 
+function guestLogin(){
+    localStorage.setItem('userJoin', 'guest');
+    location.href = 'summary.html';
+}
+
 init();

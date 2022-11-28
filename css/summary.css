@@ -40,7 +40,7 @@ main {
     align-items: center;
     padding: 28px 48px;
     gap: 35px;
-    width: 682px;
+    max-width: 682px;
     height: 191px;
     background: #4589FF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
@@ -110,8 +110,8 @@ main {
         padding-top: 16px;
     }
 
-    #headline p {
-        padding-bottom: 0px;
+    #headline {
+       display: none;
     }
 
     .line {
@@ -183,5 +183,17 @@ main {
     .squareButton3 img {
         width: 50px;
         height: 50px;
+    }
+}
+
+@media screen and (min-width: 1165px) {
+    .bigButton{
+        width: 682px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .bigButton{
+        padding: 28px 12px;
     }
 }

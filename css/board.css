@@ -203,6 +203,13 @@ progress {
     float: right;
 }
 
+.new-task [for="title"] {
+    font-size: var(--font-h6);
+    font-weight: 700;
+    color: var(--font);
+    margin-bottom: 8px;
+}
+
 .editMenu {
     display: flex !important;
     justify-content: space-between;
