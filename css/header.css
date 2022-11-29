@@ -75,8 +75,9 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 120px;
-    right: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: fit-content;
     max-width: 200px;
     height: fit-content;
