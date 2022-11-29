@@ -55,9 +55,14 @@ function renderContactList() {
     lastnameCharacters.forEach(char => {
         contactsContainer.innerHTML += contactSeparatorTemp(char);
         contacts.forEach((contact) => {
-            if(contact.lastname.toUpperCase().startsWith(char)) {
-                contactsContainer.innerHTML += contactCardTemp(contact.id);
+            try {
+                if(contact.lastname.toUpperCase().startsWith(char)) {
+                    contactsContainer.innerHTML += contactCardTemp(contact.id);
+                }
+            } catch (error) {
+                
             }
+            
         });
     });
 }
@@ -71,9 +76,14 @@ function getAllLastnameCharacters() {
 
     if(contacts.length > 0) {
         contacts.forEach(contact => {
-            const firstCharacter = contact.lastname.charAt(0).toUpperCase();
-            allCharacters.push(firstCharacter);
-            lastnameCharacters = new Set(allCharacters.sort());
+            try {
+                const firstCharacter = contact.lastname.charAt(0).toUpperCase();
+                allCharacters.push(firstCharacter);
+                lastnameCharacters = new Set(allCharacters.sort());
+            } catch (error) {
+                
+            }
+            
         });
     } else {
         lastnameCharacters = new Set();

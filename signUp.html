@@ -35,8 +35,15 @@
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
             let id = Date.now().toString(36);
-            let firstname = name.split(' ')[0];
-            let lastname = name.split(' ')[1];
+            let firstname = ' ';
+            let lastname = ' ';
+            if (name.split < 2) {
+                lastname = name.split(' ')[0];
+            }
+            else{
+                firstname = name.split(' ')[0];
+                lastname = name.split(' ')[1];
+            }
             user = ({ 'firstname': firstname, 'lastname': lastname, 'email': email, 'password': password, 'id': id });
         }
 
