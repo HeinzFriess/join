@@ -77,7 +77,7 @@ body {
 
 /* Custom Button */
 .btn-primary {
-    padding: 12px 10px;
+    padding: 8px 12px;
     font-size: var(--font-h5);
     color: var(--white);
     background: var(--primary);
@@ -93,7 +93,7 @@ body {
 }
 
 .btn-secondary {
-    padding: 12px 10px;
+    padding: 8px 12px;
     font-size: var(--font-h5);
     color: var(--font);
     background: var(--white);

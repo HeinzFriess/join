@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <title>Join</title>
+    <title>Join-Log in</title>
     <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/index.css">
@@ -41,13 +41,15 @@
                     <img src="assets/img/letterIcon.png" alt="">
                 </div>
                 <div id="cardInput">
-                    <input required type="text" required placeholder="Password" id="inputPassword" class="noBorder">
-                    <img src="assets/img/lockIcon.png" alt="">
+                    <input required type="password" required placeholder="Password" id="inputPassword" class="noBorder">
+                    <img id="passwordLock" src="assets/img/lockIcon.png" onclick="togglePW()" alt="">
                 </div>
                 <div id="cardCheckBox">
-                    <input type="checkbox" id="remember-me">
-                    <label class="container" for="remember-me">Remember me
-                    </label>
+                    <div style="display: flex;">
+                        <input type="checkbox" id="remember-me">
+                        <label class="container" for="remember-me">Remember me
+                    </div>
+                     </label>
                     <a href="forgot.html">Forgot my Password</a>
                 </div>
                 <div id="cardButtons">

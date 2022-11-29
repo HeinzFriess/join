@@ -74,6 +74,7 @@ body {
 
 #cardCheckBox {
     display: flex;
+    justify-content: space-between;
     gap: 16px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -144,10 +145,15 @@ body {
     font-size: var(--font-h5);
 }
 
+input[type='password'],
 input[type='text'] {
     width: 100%;
     font-size: var(--font-body);
     outline: none;
+}
+
+#passwordLock{
+    cursor: pointer;
 }
 
 .fade-in {

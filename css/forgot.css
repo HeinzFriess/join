@@ -31,7 +31,8 @@ body {
     justify-content: space-evenly;
     border: 1px solid lightgray;
     border-radius: 16px;
-    width: 761px;
+    min-width: 460px;
+    max-width: 761px;
     height: 450px;
     padding: 24px;
     gap: 12px;
@@ -43,10 +44,8 @@ body {
 }
 
 #cardHead {
-    display: flex;
-    position: relative;
     width: 100%;
-    justify-content: center;
+    text-align: center;
 }
 
 #cardHead h1{
@@ -63,9 +62,8 @@ body {
 }
 
 .cardHeadIcon {
-    position: absolute;
-    left: 25px;
     cursor: pointer;
+    float: left;
 }
 
 #cardInput {
@@ -167,6 +165,8 @@ input[type='text'] {
 @media screen and (max-width: 700px) {
     #card {
         width: 90%;
+        height: auto;
+        min-width: auto;
     }
 
     #card form {
@@ -191,5 +191,9 @@ input[type='text'] {
         transform: translate(-50%, 0);
         width: 240px;
         margin: 0;
+    }
+
+    #cardInput {
+        width: 90%;
     }
 }

@@ -139,5 +139,14 @@ function convertDateString(date) { // yyy-mm-dd
     return dateArray[2] + '.' + dateArray[1] + '.' + dateArray[0]
 }
 
+/**
+ * toggles the Type of the password input field between text/password
+ */
+function togglePW(){
+    let pwLock = document.getElementById('inputPassword');
+    if(pwLock.type == 'text') pwLock.type = 'password';
+    else pwLock.type = 'text';
+}
+
 
 init();
