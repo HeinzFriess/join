@@ -14,9 +14,13 @@ async function init() {
 function renderHeadline() {
     let element = document.getElementById('headline');
     const contact = contacts.find(c => c.id == userID);
+    let firstName = '';
+    let lastName = '';
+    if(contact.firstname) firstName = contact.firstname;
+    if(contact.lastname) lastName = contact.lastname;
     if (contact) {
         element.innerHTML = `
-    <p>Good Morning, ${contact.firstname} ${contact.lastname}</p>`;
+    <p>Good Morning, ${firstName} ${lastName}</p>`;
     }
     else element.innerHTML = `<p style="font-weight: bold;">Good morning</p>`;
 
