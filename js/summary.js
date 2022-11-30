@@ -16,9 +16,9 @@ function renderHeadline() {
     const contact = contacts.find(c => c.id == userID);
     let firstName = '';
     let lastName = '';
-    if(contact.firstname) firstName = contact.firstname;
-    if(contact.lastname) lastName = contact.lastname;
-    if (contact) {
+        if (contact) {
+        if(contact.firstname) firstName = contact.firstname;
+        if(contact.lastname) lastName = contact.lastname;
         element.innerHTML = `
     <p>Good Morning, ${firstName} ${lastName}</p>`;
     }
