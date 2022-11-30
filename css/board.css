@@ -29,6 +29,10 @@ main {
 .category {
     width: 280px;
     padding-right: 30px;
+    height: 755px;
+    overflow-y: scroll;
+    padding: 8px;
+    position: relative;
 }
 
 .categoryHead {
@@ -37,6 +41,8 @@ main {
     padding-bottom: 70px;
     max-width: 240px;
     align-items: center;
+    position: sticky;
+    top: 0;
 }
 
 .categoryHead img {
