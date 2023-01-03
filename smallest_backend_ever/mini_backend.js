@@ -17,21 +17,19 @@ const backend = {
         return saveJSONToServer();
     }
 };
-// window.onload = async function() { todo not needed ???
-//     downloadFromServer();
-// }
+window.onload = async function() {
+    downloadFromServer();
+}
 
 async function downloadFromServer() {
     let result = await loadJSONFromServer();
     jsonFromServer = JSON.parse(result);
-    //console.log('Loaded');//console.log('Loaded', result);
+    console.log('Loaded', result);
 }
 
 function setURL(url) {
     BASE_SERVER_URL = url;
 }
-
-setURL('https://@heinz-friess.developerakademie.net/join/smallest_backend_ever'); //ftp://f014ee01@heinz-friess.developerakademie.net/join/smallest_backend_ever
 
 /**
  * Loads a JSON or JSON Array to the Server

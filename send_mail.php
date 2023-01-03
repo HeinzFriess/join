@@ -17,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $to = $_POST['inputEmail'];
         $subject = "Reset your password";
-        $message = "Click on this link to get to the reset Page https://gruppe-364.developerakademie.net/reset.html?user=".''.$_POST['inputEmail'];
+        $message = "Click on this link to get to the reset Page https://heinz-friess.developerakademie.net/join/reset.html?user=".''.$_POST['inputEmail'];
         $headers = "From:  Join Service Team"; // . $_POST['Email'];
 
         $redirect = './index.html?mailSend=true';

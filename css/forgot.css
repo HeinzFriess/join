@@ -71,10 +71,10 @@ body {
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
     padding-top: 24px;
-    padding-bottom: 24px;
+    padding-bottom: 12px;
     padding-left: 4px;
     padding-right: 4px;
-    width: 70%;
+    width: 90%;
 }
 
 #cardInput img {

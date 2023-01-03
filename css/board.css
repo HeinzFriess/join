@@ -22,17 +22,17 @@ main {
 .categories {
     display: flex;
     flex-wrap: wrap;
-    overflow-y: scroll;
     padding-left: 3px;
+    justify-content: space-evenly;
 }
 
 .category {
     width: 280px;
-    padding-right: 30px;
-    height: 755px;
-    overflow-y: scroll;
     padding: 8px;
     position: relative;
+    height: 600px;
+    background: white;
+    z-index: 3;
 }
 
 .categoryHead {
@@ -58,7 +58,8 @@ main {
 
 .statusDiv {
     height: 100%;
-    padding-top: 5px;
+    padding: 6px;
+    overflow-y: scroll;
 }
 
 .categoryCard {
