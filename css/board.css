@@ -23,11 +23,12 @@ main {
     display: flex;
     flex-wrap: wrap;
     padding-left: 3px;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .category {
     width: 280px;
+    padding-top: 24px;
     padding: 8px;
     position: relative;
     height: 600px;

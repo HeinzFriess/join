@@ -54,10 +54,20 @@ function memberTemplatePopup(task) {
     for (let i = 0; i < task.assigned.length; i++) {
         const contact = contacts.find(({ id }) => id === task.assigned[i])
         if (contact) {
-            let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
+            let lastName = '';
+            let firstLetter = '';
+            let secondLetter = '';
+            if(contact.lastname) lastName = contact.lastname;
+            try {
+                firstLetter = contact.firstname.substring(0, 1);
+                secondLetter = contact.lastname.substring(0, 1);
+            } catch (error) {
+                
+            }
+            let initials = firstLetter + secondLetter;
             html += `<div class="popupCardMemberDiv">
                         <p class="popupCardMember" style="background: hsl(${contact.color}, 100%, 40%)">${initials}</p>
-                        <span>${contact.firstname} ${contact.lastname}</span>
+                        <span>${contact.firstname} ${lastName}</span>
                      </div>`;
         }
         else return '';

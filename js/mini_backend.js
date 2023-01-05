@@ -31,7 +31,7 @@ function setURL(url) {
     BASE_SERVER_URL = url;
 }
 
-setURL('https://@heinz-friess.developerakademie.net/join/smallest_backend_ever'); //ftp://f014ee01@heinz-friess.developerakademie.net/join/smallest_backend_ever
+setURL('https://@heinz-friess.developerakademie.net/join/smallest_backend_ever'); 
 
 /**
  * Loads a JSON or JSON Array to the Server

@@ -99,7 +99,7 @@ function memberTemplate(task) {
 }
 
 /**
- * returns an HTML fragment for each member into the member section of hthe task preview
+ * returns an HTML fragment for each member into the member section of the task preview
  * @param {*} members 
  * @param {*} indexLoop 
  * @returns HTML string
@@ -108,8 +108,16 @@ function memberTemplate(task) {
 
     const member = members[indexLoop];
     const contact = contacts.find(({ id }) => id === member);
+    firstLetter = '';
+    secondLetter = '';
     if (contact) {
-        let initials = contact.firstname.substring(0, 1) + contact.lastname.substring(0, 1);
+        try {
+            firstLetter = contact.firstname.substring(0, 1);
+            secondLetter = contact.lastname.substring(0, 1);
+        } catch (error) {
+            
+        }
+        let initials = firstLetter + secondLetter;
         let translate = indexLoop * -20;
         let zIndex = 100 + 10 * indexLoop;
         return `
@@ -125,8 +133,10 @@ function memberTemplate(task) {
  * @returns HTML assignee template
  */
  function assigneeTemp(contact) {
+    let lastName = '';
+    if(contact.lastname) lastName = contact.lastname;
     return `
-        <label for="${contact.id}">${contact.firstname} ${contact.lastname}
+        <label for="${contact.id}">${contact.firstname} ${lastName}
             <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;

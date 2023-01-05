@@ -22,7 +22,7 @@
             await loadContacts();
         }
 
-        async function changePassword(){
+        async function changePassword() {
             let pw1 = document.getElementById('inputPW1').value;
             let pw2 = document.getElementById('inputPW2').value;
             if (pw1 === pw2) {
@@ -31,13 +31,28 @@
                 await storeContacts();
                 window.location.href = 'index.html';
             }
-            else{
-                console.log('passwörter nicht identisch');
+            else {
+                uneavenPasswords();
             }
+        }
+
+        function uneavenPasswords() {
+            document.getElementById('card').innerHTML = `
+                <div style="text-align: center;">
+                    <h2 style="color: var(--primary)">the Passwords are not the same</h2>
+                    
+                    <h4 style="color: var(--primary-light);">please try again</h4>
+                </div>
+                
+                
+                `;
+            setTimeout(function () {
+                window.location.href = 'reset.html';
+            }, 2500);
         }
         init();
     </script>
-    
+
 </head>
 
 <body>
@@ -54,10 +69,10 @@
             <form onsubmit="changePassword(); return false;">
                 <h3>Change your account password here</h3>
                 <div id="cardInput">
-                    <input type="text" required placeholder="New password" id="inputPW1" class="noBorder">
+                    <input type="password" required placeholder="New password" id="inputPW1" class="noBorder">
                 </div>
                 <div id="cardInput">
-                    <input type="text" required placeholder="Confirm password" id="inputPW2" class="noBorder">
+                    <input type="password" required placeholder="Confirm password" id="inputPW2" class="noBorder">
                 </div>
                 <div id="cardButtons">
                     <button class="btn-primary">Continue</button>

@@ -32,7 +32,7 @@ body {
     border: 1px solid lightgray;
     border-radius: 16px;
     width: 761px;
-    height: 450px;
+    /* max-height: 450px; */
     padding: 24px;
     gap: 12px;
     position: absolute;
@@ -72,11 +72,10 @@ body {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     padding-left: 4px;
     padding-right: 4px;
-    width: 70%;
 }
 
 #cardInput img {
@@ -95,10 +94,10 @@ body {
 
 #card form {
     width: 70%;
-    text-align: center;
+    /* text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
 }
 
 #cardButtons {
@@ -158,7 +157,7 @@ body {
     margin: 24px;
 }
 
-input[type='text'] {
+input {
     width: 100%;
     font-size: var(--font-body);
     outline: none;

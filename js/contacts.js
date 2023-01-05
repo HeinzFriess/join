@@ -16,7 +16,7 @@ const modalLabel = document.getElementById('modal-label');
 const cancelContact = document.getElementById('modal-cancel');
 const createUpdateContact = document.getElementById('modal-confirm');
 
-let lastnameCharacters = [];
+let firstnameCharacters = [];
 
 
 /**
@@ -49,44 +49,39 @@ function addAllEventListenersContacts() {
  * Renders the complete contact list including contact seperators.
  */
 function renderContactList() {
-    getAllLastnameCharacters();
+    getAllFirstnameCharacters();
 
     contactsContainer.innerHTML = '';
-    lastnameCharacters.forEach(char => {
+    firstnameCharacters.forEach(char => {
         contactsContainer.innerHTML += contactSeparatorTemp(char);
         contacts.forEach((contact) => {
-            try {
-                if(contact.lastname.toUpperCase().startsWith(char)) {
-                    contactsContainer.innerHTML += contactCardTemp(contact.id);
-                }
-            } catch (error) {
-                
+            if (contact.firstname.toUpperCase().startsWith(char)) {
+                contactsContainer.innerHTML += contactCardTemp(contact.id);
             }
-            
         });
     });
 }
 
 
 /**
- * Gets the first character of the lastname for each contact in the contacts array.
+ * Gets the first character of the firstname for each contact in the contacts array.
  */
-function getAllLastnameCharacters() {
+function getAllFirstnameCharacters() {
     const allCharacters = [];
 
-    if(contacts.length > 0) {
+    if (contacts.length > 0) {
         contacts.forEach(contact => {
             try {
-                const firstCharacter = contact.lastname.charAt(0).toUpperCase();
-                allCharacters.push(firstCharacter);
-                lastnameCharacters = new Set(allCharacters.sort());
+                if (contact.firstname) {
+                    const lastCharacter = contact.firstname.charAt(0).toUpperCase();
+                    allCharacters.push(lastCharacter);
+                    firstnameCharacters = new Set(allCharacters.sort());
+                }
             } catch (error) {
-                
             }
-            
         });
     } else {
-        lastnameCharacters = new Set();
+        firstnameCharacters = new Set();
     }
 }
 
@@ -100,9 +95,9 @@ function addContact(event) {
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
 
-    if(contactName.checkValidity() && contactEmail.checkValidity()) {
+    if (contactName.checkValidity() && contactEmail.checkValidity()) {
         const [firstname, ...lastname] = contactName.value.trim().split(' ');
-    
+
         const id = newContact(firstname, lastname, contactEmail, contactPhone);
         sortContacts();
         renderContactList();
@@ -145,7 +140,7 @@ function newContact(firstname, lastname, contactEmail, contactPhone) {
  * @param {Object} contactName HTML name input
  * @param {Object} contactEmail HTML email input
  */
- function reportEmptyInputs(contactName, contactEmail) {
+function reportEmptyInputs(contactName, contactEmail) {
     if (!contactEmail.checkValidity()) {
         contactEmail.reportValidity();
     }
@@ -207,15 +202,26 @@ function showDetailedContact(id) {
     const phoneEl = document.getElementById('contact-detail-phone');
     const contactColor = document.getElementById('contact-color');
     const contact = contacts.find(contact => contact.id === id);
-
+    let firstName = '';
+    let lastName = '';
+    let initial1 = '';
+    let initial2 = '';
+    if (contact.firstname) {
+        firstName = contact.firstname
+        initial1 = firstName.charAt(0);
+    };
+    if (contact.lastname) {
+        lastName = contact.lastname;
+        initial2 = lastName.charAt(0);
+    };
     contactDetails.classList.remove('d-none');
-    nameEl.innerHTML = `${contact.firstname} ${contact.lastname}`;
+    nameEl.innerHTML = `${firstName} ${lastName}`;
     mailEl.innerHTML = contact.email ?? '';
     mailEl.href = `mailto:${contact.email}`;
     phoneEl.innerHTML = contact.phone ?? '';
     phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
-    contactColor.children[0].innerHTML = `${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}`;
+    contactColor.children[0].innerHTML = `${initial1}${initial2}`;
     editContactBtn.onclick = () => showModalAddContacts('edit', id);
     deleteContactBtn.onclick = () => deleteContact(id);
 }
@@ -244,7 +250,7 @@ function showModalAddContacts(type, id) {
     createUpdateContact.innerHTML = type == 'add' ? 'Create Contact' : 'Save';
     createUpdateContact.onclick = type == 'add' ? addContact : () => updateContact(id);
 
-    if(type === 'edit') prefillInputFields(id);
+    if (type === 'edit') prefillInputFields(id);
 }
 
 
@@ -257,7 +263,7 @@ function hideModals() {
     modalAddContact.classList.remove('modal-slide-in-left');
     modalAddTask.classList.add('d-none');
     modalAddTask.classList.remove('modal-slide-in-right');
-    
+
     clearInputFields();
 }
 
@@ -312,13 +318,26 @@ function prefillInputFields(id) {
  */
 function contactCardTemp(id) {
     const contact = contacts.find(contact => contact.id === id);
+    let firstName = '';
+    let lastName = '';
+    let initial1 = '';
+    let initial2 = '';
+    if (contact.firstname) {
+        firstName = contact.firstname
+        initial1 = firstName.charAt(0);
+    };
+    if (contact.lastname) {
+        lastName = contact.lastname;
+        //firstName  += ',';
+        initial2 = lastName.charAt(0);
+    };
     return `
         <div class="contact" onclick="showDetailedContact('${id}')">
             <div style="background: hsl(${contact.color}, 100%, 40%);">
-                <span>${contact.firstname.charAt(0)}${contact.lastname.charAt(0)}</span>
+                <span>${initial1}${initial2}</span>
             </div>
             <div>
-                <span>${contact.lastname}, ${contact.firstname}</span>
+                <span>${firstName} ${lastName}</span>
                 <span>${contact.email}</span>
             </div>
         </div>`;

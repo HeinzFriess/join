@@ -19,7 +19,7 @@ async function logIn() {
         localStorage.setItem('userJoin',contact.id);
     }
     else{
-        console.log('user not in contacts')
+        //console.log('user not in contacts')
         wrongCredentials();
     }
     
@@ -41,10 +41,10 @@ function animateStart(){
 
 function wrongCredentials(){
     document.getElementById('card').innerHTML = `
-    <div id="cardHead" style="text-align: center">
+    <div id="cardHead" style="text-align: center;">
         <h2 style="color: var(--primary)">wrong Credentials</h2>
         
-        <h4 style="color: var(--primary-light)">please sign Up first</h4>
+        <h4 style="color: var(--primary-light);">please sign Up first</h4>
     </div>
     
     
