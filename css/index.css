@@ -28,6 +28,10 @@ body {
     height: 122px;
 }
 
+.forgot {
+    color: var(--primary);
+}
+
 #card {
     display: flex;
     flex-direction: column;

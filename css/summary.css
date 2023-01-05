@@ -47,6 +47,8 @@ main {
     border-radius: 30px;
     color: white;
     cursor: pointer;
+    font-size: 19px;
+    font-weight: bold;
 }
 
 .bigButton hr {

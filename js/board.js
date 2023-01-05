@@ -76,6 +76,7 @@ function createNewTask() {
     storeTasks();
     renderTasks();
     notify('Der Task wurde angelegt');
+    subtasks = [];
     
 }
 
@@ -95,7 +96,7 @@ function getTaskJson() {
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": statusCall,
-        "subtasks": [],
+        "subtasks": subtasks,
         "title": document.getElementById('title').value
     };
 }
@@ -199,6 +200,7 @@ function renderTaskNew() {
         ${templateCategory()}
         ${templatePriority()}
         ${templateDescription()}
+        ${templateSubtasks()}
     `;
     element.innerHTML += `</form>`;
 }
@@ -220,11 +222,13 @@ function renderTaskEdit(taskID) {
         ${templateCategory()}
         ${templatePriority()}
         ${templateDescription()}
+        ${templateSubtasks()}
         ${templateEditMenu(taskID)}
     `;
     const task = tasks.find(({ id }) => id == taskID);
     renderAssignees();
     renderPopupEdit(task);
+    renderEditSubtasks(task);
     addAllEventListeners();
 }
 

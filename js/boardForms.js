@@ -2,7 +2,7 @@
  * calls the detail Popup for the task  with the taskID delivered
  * @param {string} taskID 
  */
- function showDetail(taskID) {
+function showDetail(taskID) {
     let backGround = document.getElementById('boardPopup');
     backGround.classList.remove('d-none');
     renderPopup(taskID);
@@ -29,7 +29,7 @@ function hideDetail() {
  * renders the content for the task edit popup
  * @param {string} taskID 
  */
- function renderPopup(taskID) {
+function renderPopup(taskID) {
     const content = document.getElementById('popupCategory');
     const task = tasks.find(({ id }) => id == taskID);
     content.innerHTML = `
@@ -37,6 +37,9 @@ function hideDetail() {
         <div id="popupCardMembers" class="popupTopics">
             <span class="popupSpan">Assigned To: </span>
                 ${memberTemplatePopup(task)}
+        </div>
+        <div class="">
+                ${subtasksTemplatePopup(task)}
         </div>
         <div class="close">
             <img src="./assets/icons/edit_button.svg" onclick="showEditTask('${taskID}')" style="cursor: pointer;">
@@ -57,12 +60,12 @@ function memberTemplatePopup(task) {
             let lastName = '';
             let firstLetter = '';
             let secondLetter = '';
-            if(contact.lastname) lastName = contact.lastname;
+            if (contact.lastname) lastName = contact.lastname;
             try {
                 firstLetter = contact.firstname.substring(0, 1);
                 secondLetter = contact.lastname.substring(0, 1);
             } catch (error) {
-                
+
             }
             let initials = firstLetter + secondLetter;
             html += `<div class="popupCardMemberDiv">
@@ -76,10 +79,30 @@ function memberTemplatePopup(task) {
 }
 
 /**
+ * returns the HTML fragment for subtasks in the detailview of the task
+ * @param {JSON} task 
+ * @returns HTML string
+ */
+function subtasksTemplatePopup(task) {
+    let html = '<span class="popupSpan">Subtasks:</span>';
+    if (task.subtasks.length > 0) {
+        for (let i = 0; i < task.subtasks.length; i++) {
+            subtask = task.subtasks[i];
+            html += `
+                <h4>${subtask.text}</h4>
+            `;
+        }
+        return html;
+    }
+    else return '';
+    
+}
+
+/**
  * shows the NewTask form
  * @param {string} status 
  */
- function showSlide(status) {
+function showSlide(status) {
     statusCall = status;
     renderTaskNew();
     renderAssignees();
@@ -105,7 +128,7 @@ function closeSlide() {
  * shows the EditTask form
  * @param {string} taskID 
  */
- function showEditTask(taskID) {
+function showEditTask(taskID) {
     renderTaskEdit(taskID);
     document.getElementById('editPopUp').classList.remove('d-none');
     document.getElementById('boardPopup').classList.add('d-none');
@@ -115,7 +138,7 @@ function closeSlide() {
  * renders the TaskEdit form and prefills the inputfields
  * @param {JSON} task 
  */
- function renderPopupEdit(task) {
+function renderPopupEdit(task) {
     prefillTaskValues(task);
     for (let i = 0; i < priorities.length; i++) {
         const priority = priorities[i].toLowerCase();

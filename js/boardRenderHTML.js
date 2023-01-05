@@ -1,9 +1,10 @@
+let subtasks = [];
 /**
  * returns the HTML for the tasks, filtered by the global "serachSTring"
  * @param {string} status 
  * @param {domElement} content 
  */
- function render(status, content) {
+function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i];
@@ -18,7 +19,7 @@
  * @param {JSON} task 
  * @returns HTML string
  */
- function categoryCardTemplate(task) {
+function categoryCardTemplate(task) {
     return `
     <div draggable="true" class="categoryCard" ondragstart="startDragging('${task.id}')" onclick="showDetail('${task.id}')">
         <div class="categoryName" style="background: hsl(${getColorcodeForCategory(task.category)}, 100%, 40%)">${task.category}</div>
@@ -38,15 +39,12 @@
  * @param {JSON} task 
  * @returns HTML string
  */
- function progressTemplate(task) {
+function progressTemplate(task) {
     const subtasks = task.subtasks;
     let finishedSubtasks = 0;
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        for (let j = 0; j < tasks.length; j++) {
-            const task = tasks[j];
-            if (task.status == 'Done' && task.id == subtask) finishedSubtasks++;
-        }
+        if (subtask.status == 'Done') finishedSubtasks++;
     }
     if (subtasks.length > 0) {
         return `
@@ -60,7 +58,7 @@
  * @param {JSON} task 
  * @returns HTML string
  */
- function taskTemplate(task) {
+function taskTemplate(task) {
     return `
     <div class="popupCategoryNameDiv">
         <p class="popupCategoryName" style="background: hsl(${getColorcodeForCategory(task.category)}, 100%, 40%)">${task.category}</p>
@@ -104,7 +102,7 @@ function memberTemplate(task) {
  * @param {*} indexLoop 
  * @returns HTML string
  */
- function memberHtmlTemplate(members, indexLoop) {
+function memberHtmlTemplate(members, indexLoop) {
 
     const member = members[indexLoop];
     const contact = contacts.find(({ id }) => id === member);
@@ -115,7 +113,7 @@ function memberTemplate(task) {
             firstLetter = contact.firstname.substring(0, 1);
             secondLetter = contact.lastname.substring(0, 1);
         } catch (error) {
-            
+
         }
         let initials = firstLetter + secondLetter;
         let translate = indexLoop * -20;
@@ -132,9 +130,9 @@ function memberTemplate(task) {
  * @param {Object} contact Conact that should be rendered
  * @returns HTML assignee template
  */
- function assigneeTemp(contact) {
+function assigneeTemp(contact) {
     let lastName = '';
-    if(contact.lastname) lastName = contact.lastname;
+    if (contact.lastname) lastName = contact.lastname;
     return `
         <label for="${contact.id}">${contact.firstname} ${lastName}
             <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
@@ -147,7 +145,7 @@ function memberTemplate(task) {
  * @param {string} taskID 
  * @returns HTML string
  */
- function templateEditMenu(taskID){
+function templateEditMenu(taskID) {
     return `
         <div class="editMenu">
             <div id="deleteButton">
@@ -257,4 +255,79 @@ function templateDescription() {
             placeholder="Enter a description" style="resize: none;"></textarea>
     </div>
     `;
+}
+
+/**
+ * returns the subtask HTML fragment
+ * @returns HTML string
+ */
+function templateSubtasks() {
+    return `
+    <div>
+        <label for="subtasks">Subtasks</label>
+        <div class="headlineSubtask">
+            <input type="text" name="subtask" id="subtask" placeholder="Add new subtask" onkeyup="showIcon()">
+            <div id="add">
+                <img src="./assets/icons/add.svg" style="cursor: pointer;">
+            </div>
+            <div id="edit" class="d-none">
+                <div class="editDiv">
+                    <img src="./assets/icons/close_blue.svg" onclick="clearSubtask()" style="cursor: pointer;">
+                    <span style="color:var(--primary); font-size: 24PX;">|</span>
+                    <img src="./assets/icons/checkButton_blue.svg" onclick="addSubtask()" style="cursor: pointer;">
+                </div>
+            </div>
+        </div>
+        <div id="contentSubtasks">
+
+        </div>
+    </div>
+    `;
+}
+
+
+function addSubtask() {
+    let text = document.getElementById('subtask').value;
+    subtasks.push({ 'text': text, 'done': false })
+    renderSubtasks();
+    document.getElementById('subtask').value = '';
+    hideIcon();
+}
+
+function clearSubtask() {
+    document.getElementById('subtask').value = '';
+    hideIcon();
+}
+
+function showIcon() {
+    document.getElementById('add').classList.add('d-none');
+    document.getElementById('edit').classList.remove('d-none');
+    //if(document.getElementById('subtask').value == '') hideIcon();
+}
+
+function hideIcon() {
+    document.getElementById('add').classList.remove('d-none');
+    document.getElementById('edit').classList.add('d-none');
+}
+
+function renderSubtasks() {
+    const element = document.getElementById('contentSubtasks');
+    element.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        element.innerHTML += `
+            <h4>${subtask.text}</h4>
+        `;
+    }
+}
+
+function renderEditSubtasks(task) {
+    const element = document.getElementById('contentSubtasks');
+    element.innerHTML = '';
+    for (let i = 0; i < task.subtasks.length; i++) {
+        const subtask = task.subtasks[i];
+        element.innerHTML += `
+            <h4>${subtask.text}</h4>
+        `;
+    }
 }
