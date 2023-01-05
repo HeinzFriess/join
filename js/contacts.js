@@ -231,7 +231,12 @@ function showDetailedContact(id) {
  * Sorts the contact list by lastname.
  */
 function sortContacts() {
-    contacts = contacts.sort((contactA, contactB) => contactA.lastname.localeCompare(contactB.lastname));
+    try {
+        contacts = contacts.sort((contactA, contactB) => contactA.lastname.localeCompare(contactB.lastname));
+    } catch (error) {
+        
+    }
+    
 }
 
 

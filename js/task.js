@@ -163,8 +163,10 @@ function emptyForm() {
  * @returns HTML assignee template
  */
 function assigneeTemp(contact) {
+    let lastName = '';
+    if(contact.lastname) lastName = contact.lastname;
     return `
-        <label for="${contact.id}">${contact.firstname} ${contact.lastname}
+        <label for="${contact.id}">${contact.firstname} ${lastName}
             <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;

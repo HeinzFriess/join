@@ -33,7 +33,7 @@
     height: 100%;
     width: 100%;
     background-color: rgba(90, 90, 90, 0.2);
-    z-index: 500;
+    z-index: 5;
     backdrop-filter: blur(4px);
 }
 
@@ -150,7 +150,7 @@
     height: 100%;
     width: 100%;
     background-color: rgba(90, 90, 90, 0.2);
-    z-index: 800;
+    z-index: 8;
     backdrop-filter: blur(4px);
 
 }

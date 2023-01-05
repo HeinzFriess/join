@@ -7,7 +7,7 @@
     height: 98px;
     background: var(--primary);
     box-shadow: var(--shadow-medium);
-    z-index: 2;
+    z-index: 5;
 }
 
 .header > img {
