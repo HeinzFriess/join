@@ -3,7 +3,7 @@
 
 let tasks = [];
 let contacts = [];
-
+let subtasks = [];
 
 /**
  * Initial function that gets executed after the document is loaded.
@@ -80,9 +80,9 @@ function logoutModalEventListener() {
             document.getElementById('logout-modal').classList.toggle('d-none');
         });
     } catch (error) {
-        
+
     }
-    
+
 }
 
 
@@ -142,11 +142,65 @@ function convertDateString(date) { // yyy-mm-dd
 /**
  * toggles the Type of the password input field between text/password
  */
-function togglePW(){
+function togglePW() {
     let pwLock = document.getElementById('inputPassword');
-    if(pwLock.type == 'text') pwLock.type = 'password';
+    if (pwLock.type == 'text') pwLock.type = 'password';
     else pwLock.type = 'text';
 }
 
+function addSubtask() {
+    let text = document.getElementById('subtask').value;
+    subtasks.push({ 'text': text, 'done': false })
+    renderSubtasks();
+    document.getElementById('subtask').value = '';
+    hideIcon();
+}
+
+function clearSubtask() {
+    document.getElementById('subtask').value = '';
+    hideIcon();
+}
+
+function showIcon() {
+    document.getElementById('add').classList.add('d-none');
+    document.getElementById('edit').classList.remove('d-none');
+    //if(document.getElementById('subtask').value == '') hideIcon();
+}
+
+function hideIcon() {
+    document.getElementById('add').classList.remove('d-none');
+    document.getElementById('edit').classList.add('d-none');
+}
+
+function renderSubtasks() {
+    const element = document.getElementById('contentSubtasks');
+    element.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        element.innerHTML += `
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
+        `;
+    }
+}
+
+function renderEditSubtasks(task) {
+    const element = document.getElementById('contentSubtasks');
+    element.innerHTML = '';
+    for (let i = 0; i < task.subtasks.length; i++) {
+        const subtask = task.subtasks[i];
+        element.innerHTML += `
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
+        `;
+    }
+}
+
+function setSubtaskStatus(task){
+    for (let i = 0; i < task.subtasks.length; i++) {
+        const subtask = task.subtasks[i];
+        subtask.done = document.getElementById("check" + i).checked;
+    }
+}
 
 init();

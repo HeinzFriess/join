@@ -86,6 +86,7 @@ function createNewTask() {
  */
 function getTaskJson() {
     const assigned = [];
+    //setSubtaskStatus();
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
     return {
         "assigned": assigned,
@@ -136,6 +137,7 @@ function deleteTask(taskID) {
 function saveChanges(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     const indexOfTask = tasks.indexOf(task);
+    setSubtaskStatus(task);
     statusCall = task.status;
     tasks.splice(indexOfTask, 1, getTaskJson());
     storeTasks();

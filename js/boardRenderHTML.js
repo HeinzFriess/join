@@ -1,4 +1,3 @@
-let subtasks = [];
 /**
  * returns the HTML for the tasks, filtered by the global "serachSTring"
  * @param {string} status 
@@ -286,48 +285,3 @@ function templateSubtasks() {
 }
 
 
-function addSubtask() {
-    let text = document.getElementById('subtask').value;
-    subtasks.push({ 'text': text, 'done': false })
-    renderSubtasks();
-    document.getElementById('subtask').value = '';
-    hideIcon();
-}
-
-function clearSubtask() {
-    document.getElementById('subtask').value = '';
-    hideIcon();
-}
-
-function showIcon() {
-    document.getElementById('add').classList.add('d-none');
-    document.getElementById('edit').classList.remove('d-none');
-    //if(document.getElementById('subtask').value == '') hideIcon();
-}
-
-function hideIcon() {
-    document.getElementById('add').classList.remove('d-none');
-    document.getElementById('edit').classList.add('d-none');
-}
-
-function renderSubtasks() {
-    const element = document.getElementById('contentSubtasks');
-    element.innerHTML = '';
-    for (let i = 0; i < subtasks.length; i++) {
-        const subtask = subtasks[i];
-        element.innerHTML += `
-            <h4>${subtask.text}</h4>
-        `;
-    }
-}
-
-function renderEditSubtasks(task) {
-    const element = document.getElementById('contentSubtasks');
-    element.innerHTML = '';
-    for (let i = 0; i < task.subtasks.length; i++) {
-        const subtask = task.subtasks[i];
-        element.innerHTML += `
-            <h4>${subtask.text}</h4>
-        `;
-    }
-}
