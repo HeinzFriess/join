@@ -196,11 +196,21 @@ function renderEditSubtasks(task) {
     }
 }
 
-function setSubtaskStatus(task){
-    for (let i = 0; i < task.subtasks.length; i++) {
-        const subtask = task.subtasks[i];
-        subtask.done = document.getElementById("check" + i).checked;
+function getSubtasks(){
+    let subtasks = [];
+    //let elements = document.querySelectorAll('input[class="subtaskCheckbox"]').nextElementSibling;
+    let elements = document.querySelectorAll('input[class="subtaskCheckbox"]');
+    //.forEach(subtask => subtasks.push(subtask.label));
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        let boool = element.checked;
+        let texxxt = element[i].nextElementSibling.textContent;
+        //ubtask.done = document.getElementById("check" + i).checked;
+        subtasks.push({'text' : texxxt, 'done' : boool})
     }
+
+    //let test = document.querySelectorAll('input[class="subtaskCheckbox"]').nextElementSibling.textContent;
+    //
 }
 
 init();

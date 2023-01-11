@@ -84,12 +84,13 @@ function memberTemplatePopup(task) {
  * @returns HTML string
  */
 function subtasksTemplatePopup(task) {
-    let html = '<span class="popupSpan">Subtasks:</span>';
+    let html = '<span class="popupSpan">Subtasks:</span><br>';
     if (task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
             subtask = task.subtasks[i];
             html += `
-                <h4>${subtask.text}</h4>
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
             `;
         }
         return html;

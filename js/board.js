@@ -86,8 +86,8 @@ function createNewTask() {
  */
 function getTaskJson() {
     const assigned = [];
-    //setSubtaskStatus();
     document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
+    
     return {
         "assigned": assigned,
         "category": document.getElementById('category').value,
@@ -97,7 +97,7 @@ function getTaskJson() {
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": statusCall,
-        "subtasks": subtasks,
+        "subtasks": getSubtasks() ? getSubtasks() : [],
         "title": document.getElementById('title').value
     };
 }
@@ -137,7 +137,7 @@ function deleteTask(taskID) {
 function saveChanges(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     const indexOfTask = tasks.indexOf(task);
-    setSubtaskStatus(task);
+    getSubtasks(task);
     statusCall = task.status;
     tasks.splice(indexOfTask, 1, getTaskJson());
     storeTasks();
