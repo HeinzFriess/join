@@ -71,7 +71,7 @@ function getColorcodeForCategory(category) {
  * collects the inputfields of the new task window and stores it to the backend
  */
 function createNewTask() {
-    tasks.push(getTaskJson());
+    tasks.push(getTaskJson(false));
     closeSlide();
     storeTasks();
     renderTasks();
@@ -84,10 +84,12 @@ function createNewTask() {
  * gets the task inputfileds and returns the taskJson
  * @returns JSON
  */
-function getTaskJson() {
+function getTaskJson(isEdit) {
     const assigned = [];
-    document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
-    
+    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee => assigned.push(assignee.value));
+    let subtasks = [];
+    if(isEdit) subtasks = getEditSubtasks() ? getEditSubtasks() : [];
+    if(!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
     return {
         "assigned": assigned,
         "category": document.getElementById('category').value,
@@ -97,7 +99,7 @@ function getTaskJson() {
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": statusCall,
-        "subtasks": getSubtasks() ? getSubtasks() : [],
+        "subtasks": subtasks,
         "title": document.getElementById('title').value
     };
 }
@@ -137,9 +139,9 @@ function deleteTask(taskID) {
 function saveChanges(taskID) {
     const task = tasks.find(({ id }) => id == taskID);
     const indexOfTask = tasks.indexOf(task);
-    getSubtasks(task);
     statusCall = task.status;
-    tasks.splice(indexOfTask, 1, getTaskJson());
+    tasks.splice(indexOfTask, 1, getTaskJson(true));
+    subtasks = [];
     storeTasks();
     renderTasks();
     closeEdit();

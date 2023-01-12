@@ -69,7 +69,7 @@ function addTask(event, isMain) {
     const description = document.getElementById('description');
 
     if (title.checkValidity() && date.checkValidity() && category.checkValidity() && assigned.length > 0) {
-        createNewTask(isMain, title.value, assigned, date.value, category.value, priority != null ? priority.value : 'low', description.value);
+        createNewTask(isMain, title.value, assigned, date.value, category.value, priority != null ? priority.value : 'low', description.value, getSubtasks());
     } else {
         reportEmptyInputs(title, assigned, date, category);
     }
@@ -86,7 +86,7 @@ function addTask(event, isMain) {
  * @param {String} priority Task priority
  * @param {Strin} description Task description
  */
-function newTask(isMain, title, assigned, date, category, priority, description) {
+function newTask(isMain, title, assigned, date, category, priority, description, subtasks) {
     tasks.push({
         "id" : Date.now().toString(36),
         "status" : "To do",
@@ -97,7 +97,7 @@ function newTask(isMain, title, assigned, date, category, priority, description)
         "category" : category,
         "priority" : priority,
         "description" : description,
-        "subtasks" : []
+        "subtasks" : subtasks
     });
 }
 
@@ -112,9 +112,9 @@ function newTask(isMain, title, assigned, date, category, priority, description)
  * @param {String} priority Task priority
  * @param {Strin} description Task description
  */
-async function createNewTask(isMain, title, assigned, date, category, priority, description) {
+async function createNewTask(isMain, title, assigned, date, category, priority, description, subtasks) {
     newTask(
-        isMain, title, assigned, date, category, priority, description
+        isMain, title, assigned, date, category, priority, description, subtasks
     );
 
     await storeTasks();

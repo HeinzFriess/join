@@ -178,7 +178,7 @@ function renderSubtasks() {
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         element.innerHTML += `
-            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)}>
             <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
         `;
     }
@@ -186,11 +186,11 @@ function renderSubtasks() {
 
 function renderEditSubtasks(task) {
     const element = document.getElementById('contentSubtasks');
-    element.innerHTML = '';
+    element.innerHTML = '';    
     for (let i = 0; i < task.subtasks.length; i++) {
         const subtask = task.subtasks[i];
         element.innerHTML += `
-            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <input type="checkbox" id="check${i}" class="subtaskEditCheckbox" ${getSubtaskCheckedString(subtask)}>
             <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
         `;
     }
@@ -198,19 +198,34 @@ function renderEditSubtasks(task) {
 
 function getSubtasks(){
     let subtasks = [];
-    //let elements = document.querySelectorAll('input[class="subtaskCheckbox"]').nextElementSibling;
-    let elements = document.querySelectorAll('input[class="subtaskCheckbox"]');
-    //.forEach(subtask => subtasks.push(subtask.label));
+    let elements = document.querySelectorAll('.subtaskCheckbox');
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
-        let boool = element.checked;
-        let texxxt = element[i].nextElementSibling.textContent;
-        //ubtask.done = document.getElementById("check" + i).checked;
-        subtasks.push({'text' : texxxt, 'done' : boool})
+        let done = element.checked;
+        let text = element.nextElementSibling.textContent;
+        subtasks.push({'text' : text, 'done' : done})
     }
 
-    //let test = document.querySelectorAll('input[class="subtaskCheckbox"]').nextElementSibling.textContent;
-    //
+    return subtasks;
+}
+
+function getEditSubtasks(){
+    let subtasks = [];
+    let elements = document.querySelectorAll('.subtaskEditCheckbox');
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        let done = element.checked;
+        let text = element.nextElementSibling.textContent;
+        subtasks.push({'text' : text, 'done' : done})
+    }
+
+    return subtasks;
+}
+
+function getSubtaskCheckedString(subtask){
+    let checkedString = '';
+    if(subtask.done) checkedString = 'checked';
+    return checkedString;
 }
 
 init();

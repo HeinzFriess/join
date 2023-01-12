@@ -89,7 +89,7 @@ function subtasksTemplatePopup(task) {
         for (let i = 0; i < task.subtasks.length; i++) {
             subtask = task.subtasks[i];
             html += `
-            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${subtask.done}>
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)}>
             <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
             `;
         }

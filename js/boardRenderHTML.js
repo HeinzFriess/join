@@ -43,7 +43,7 @@ function progressTemplate(task) {
     let finishedSubtasks = 0;
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
-        if (subtask.status == 'Done') finishedSubtasks++;
+        if (subtask.done) finishedSubtasks++;
     }
     if (subtasks.length > 0) {
         return `
@@ -134,7 +134,7 @@ function assigneeTemp(contact) {
     if (contact.lastname) lastName = contact.lastname;
     return `
         <label for="${contact.id}">${contact.firstname} ${lastName}
-            <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
+            <input class="assigneeClass" type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
 }
