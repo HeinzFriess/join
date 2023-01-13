@@ -6,6 +6,8 @@ main {
 .new-task {
     width: 422px;
     margin: 40px 85px;
+    overflow: auto;
+    max-height: 80vh;
 }
 
 .new-task form {
@@ -254,6 +256,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 200px;
     bottom: 64px;
     height: 56px;
+}
+
+.headlineSubtask {
+    border-bottom: 1px solid var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 22px;
 }
 
 

@@ -38,7 +38,7 @@ function renderPopup(taskID) {
             <span class="popupSpan">Assigned To: </span>
                 ${memberTemplatePopup(task)}
         </div>
-        <div class="">
+        <div class="popupTopics">
                 ${subtasksTemplatePopup(task)}
         </div>
         <div class="close">
@@ -84,13 +84,15 @@ function memberTemplatePopup(task) {
  * @returns HTML string
  */
 function subtasksTemplatePopup(task) {
-    let html = '<span class="popupSpan">Subtasks:</span><br>';
+    let html = '<span class="popupSpan">Subtasks:</span>';
     if (task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
             subtask = task.subtasks[i];
             html += `
-            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)}>
-            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
+            <div class="subtaskDiv">
+            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)} disabled>
+            <label for="check${i}" class="subtaskLabel">${subtask.text}</label>
+            </div>
             `;
         }
         return html;

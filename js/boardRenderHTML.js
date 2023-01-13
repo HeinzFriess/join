@@ -262,7 +262,7 @@ function templateDescription() {
  */
 function templateSubtasks() {
     return `
-    <div>
+    <div class="popupTopics">
         <label for="subtasks">Subtasks</label>
         <div class="headlineSubtask">
             <input type="text" name="subtask" id="subtask" placeholder="Add new subtask" onkeyup="showIcon()">

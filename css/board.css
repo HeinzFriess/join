@@ -245,6 +245,11 @@ progress {
 
 .headlineSubtask input {
     border-bottom: none !important;
+    font-size: var(--font-h6) imo !important;
+}
+
+.subtaskDiv {
+    padding-top: 6px;
 }
 
 
