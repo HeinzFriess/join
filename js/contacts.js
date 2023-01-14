@@ -106,7 +106,7 @@ function addContact(event) {
         showDetailedContact(id);
         notify();
     } else {
-        reportEmptyInputs(contactName, contactEmail);
+        reportEmptyContactInputs(contactName, contactEmail);
     }
 }
 
@@ -140,7 +140,7 @@ function newContact(firstname, lastname, contactEmail, contactPhone) {
  * @param {Object} contactName HTML name input
  * @param {Object} contactEmail HTML email input
  */
-function reportEmptyInputs(contactName, contactEmail) {
+function reportEmptyContactInputs(contactName, contactEmail) {
     if (!contactEmail.checkValidity()) {
         contactEmail.reportValidity();
     }

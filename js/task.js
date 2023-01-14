@@ -119,7 +119,7 @@ async function createNewTask(isMain, title, assigned, date, category, priority, 
 
     await storeTasks();
     emptyForm();
-    window.location.pathname = '/board.html';
+    window.location.href = 'board.html';
 }
 
 
