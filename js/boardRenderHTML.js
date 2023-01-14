@@ -260,7 +260,7 @@ function templateDescription() {
  * returns the subtask HTML fragment
  * @returns HTML string
  */
-function templateSubtasks() {
+function templateSubtasks(edit, taskID) {
     return `
     <div class="popupTopics">
         <label for="subtasks">Subtasks</label>
@@ -273,7 +273,7 @@ function templateSubtasks() {
                 <div class="editDiv">
                     <img src="./assets/icons/close_blue.svg" onclick="clearSubtask()" style="cursor: pointer;">
                     <span style="color:var(--primary); font-size: 24PX;">|</span>
-                    <img src="./assets/icons/checkButton_blue.svg" onclick="addSubtask()" style="cursor: pointer;">
+                    <img src="./assets/icons/checkButton_blue.svg" onclick="addSubtask(${edit}, '${taskID}')" style="cursor: pointer;">
                 </div>
             </div>
         </div>

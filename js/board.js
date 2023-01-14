@@ -215,6 +215,7 @@ function renderTaskNew() {
  */
 function renderTaskEdit(taskID) {
     let element = document.getElementById('taskEdit');
+    const task = tasks.find(({ id }) => id == taskID);
     element.innerHTML = `
     <form onsubmit="return false">
         <div>
@@ -226,10 +227,10 @@ function renderTaskEdit(taskID) {
         ${templateCategory()}
         ${templatePriority()}
         ${templateDescription()}
-        ${templateSubtasks()}
+        ${templateSubtasks(true, taskID)}
         ${templateEditMenu(taskID)}
     `;
-    const task = tasks.find(({ id }) => id == taskID);
+    
     renderAssignees();
     renderPopupEdit(task);
     renderEditSubtasks(task);

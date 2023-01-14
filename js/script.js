@@ -148,10 +148,15 @@ function togglePW() {
     else pwLock.type = 'text';
 }
 
-function addSubtask() {
+function addSubtask(edit, taskID) {
     let text = document.getElementById('subtasks').value;
-    subtasks.push({ 'text': text, 'done': false })
-    renderSubtasks();
+    if(!edit) {
+        subtasks.push({ 'text': text, 'done': false });
+        renderSubtasks()};
+    if(edit) {
+        const task = tasks.find(({ id }) => id == taskID);
+        task.subtasks.push({ 'text': text, 'done': false });
+        renderEditSubtasks(task)};
     document.getElementById('subtasks').value = '';
     hideIcon();
 }
