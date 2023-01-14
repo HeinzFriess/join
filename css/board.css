@@ -54,6 +54,11 @@ main {
     height: fit-content;
 }
 
+.categoryHead img:hover {
+    scale: 1.2;
+    transition: all 0.24s ease-in-out;
+}
+
 .categoryHead span {
     font-weight: bold;
     font-size: 23px;

@@ -4,7 +4,7 @@ main {
 }
 
 .new-task {
-    width: 422px;
+    max-width: 422px;
     margin: 40px 85px;
     overflow: auto;
     max-height: 80vh;
@@ -171,6 +171,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    padding: 1px;
 }
 
 #priority input[type="radio"] {
@@ -268,6 +269,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subtasks {
     border-bottom: none !important;
+    font-size: var(--font-body) !important;
 }
 
 .editDiv {
