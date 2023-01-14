@@ -149,7 +149,8 @@ function emptyForm() {
     document.getElementById('date').value = '';
     document.getElementById('category').value = '';
     document.getElementById('description').value = '';
-
+    clearSubtasksContent();
+    clearSubtask();
     const priority = document.querySelector('input[name="priority"]:checked');
     if (priority) {
         priority.checked = false;

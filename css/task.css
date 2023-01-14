@@ -266,6 +266,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-right: 22px;
 }
 
+.subtasks {
+    border-bottom: none !important;
+}
+
+.editDiv {
+    display: flex;
+}
+
 
 @media screen and (max-width: 700px) {
     main {
@@ -280,7 +288,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
     .new-task input[type="text"] {
-        font-size: var(--font-h4);
+        font-size: var(--font-body);
     }
 
     .new-task [for="date"],

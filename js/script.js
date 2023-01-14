@@ -37,7 +37,7 @@ async function includeHTML() {
  * Highlights the active menu item after the page is loaded. The marking takes place on the basis of the path.
  */
 function highlightActiveMenuItem() {
-    const currentPath = location.pathname;
+    const currentPath = location.pathname.replace('/join','');
 
     switch (currentPath) {
         case '/summary.html':
@@ -149,22 +149,21 @@ function togglePW() {
 }
 
 function addSubtask() {
-    let text = document.getElementById('subtask').value;
+    let text = document.getElementById('subtasks').value;
     subtasks.push({ 'text': text, 'done': false })
     renderSubtasks();
-    document.getElementById('subtask').value = '';
+    document.getElementById('subtasks').value = '';
     hideIcon();
 }
 
 function clearSubtask() {
-    document.getElementById('subtask').value = '';
+    document.getElementById('subtasks').value = '';
     hideIcon();
 }
 
 function showIcon() {
     document.getElementById('add').classList.add('d-none');
     document.getElementById('edit').classList.remove('d-none');
-    //if(document.getElementById('subtask').value == '') hideIcon();
 }
 
 function hideIcon() {
@@ -196,6 +195,10 @@ function renderEditSubtasks(task) {
     }
 }
 
+function clearSubtasksContent() {
+    document.getElementById('contentSubtasks').innerHTML = '';
+}
+
 function getSubtasks(){
     let subtasks = [];
     let elements = document.querySelectorAll('.subtaskCheckbox');
@@ -205,7 +208,6 @@ function getSubtasks(){
         let text = element.nextElementSibling.textContent;
         subtasks.push({'text' : text, 'done' : done})
     }
-
     return subtasks;
 }
 
@@ -218,7 +220,6 @@ function getEditSubtasks(){
         let text = element.nextElementSibling.textContent;
         subtasks.push({'text' : text, 'done' : done})
     }
-
     return subtasks;
 }
 

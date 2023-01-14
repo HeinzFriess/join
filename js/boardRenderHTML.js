@@ -265,7 +265,7 @@ function templateSubtasks() {
     <div class="popupTopics">
         <label for="subtasks">Subtasks</label>
         <div class="headlineSubtask">
-            <input type="text" name="subtask" id="subtask" placeholder="Add new subtask" onkeyup="showIcon()">
+            <input type="text" name="subtask" id="subtasks" placeholder="Add new subtask" onkeyup="showIcon()">
             <div id="add">
                 <img src="./assets/icons/add.svg" style="cursor: pointer;">
             </div>

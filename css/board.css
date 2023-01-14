@@ -322,6 +322,7 @@ progress {
         display: flex !important;
         background-color: white;
         box-shadow: var(--shadow-medium);
+        width: unset !important;
     }
 
     .header{
@@ -332,7 +333,7 @@ progress {
         margin: 0 !important;
         padding: 0;
         height: 100%;
-        width: auto;
+        width: unset !important;
     }
 
     #popupCategory{
