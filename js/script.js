@@ -4,6 +4,8 @@
 let tasks = [];
 let contacts = [];
 let subtasks = [];
+let url = '127.0.0.1:8000';
+let Authorization = 'token 4418ef00b7747a8a6735f8812c7dc717d1e48165'
 
 /**
  * Initial function that gets executed after the document is loaded.
@@ -90,7 +92,20 @@ function logoutModalEventListener() {
  * Loads the tasks from the backend. If no tasks are available an empty array is created.
  */
 async function loadTasks() {
-    tasks = await JSON.parse(backend.getItem('tasks')) || [];
+    //tasks = await JSON.parse(backend.getItem('tasks')) || [];
+    const response = await fetch(url= 'http://127.0.0.1:8000/ticket/' , {
+        method: "GET",
+        headers: {
+            'Authentication': Authorization,
+            'mode': "cors",
+            'Access-Control-Allow-Origin': '*',
+            'redirect': "follow",
+        }
+    });
+    
+    console.log(response);
+
+    return response.json();
 }
 
 

@@ -13,7 +13,7 @@ let searchString = '';
  * initial load of necessary functions
  */
 async function initBoard() {
-    await downloadFromServer();
+    //await downloadFromServer();
     await loadTasks();
     await loadContacts();
     renderTasks();
