@@ -3,7 +3,7 @@ const heuteInSec = Date.now();
 const secTillUrgent = 604800000; // 7Days
 
 async function init() {
-    await downloadFromServer();
+    //await downloadFromServer();
     await loadTasks();
     await loadContacts();
     renderHeadline(); 

@@ -96,6 +96,7 @@ async function loadTasks() {
     const response = await fetch(url= 'http://127.0.0.1:8000/ticket/' , {
         method: "GET",
         headers: {
+            'Content-Type': 'multipart/form-data',
             'Authentication': Authorization,
             'mode': "cors",
             'Access-Control-Allow-Origin': '*',
