@@ -39,7 +39,7 @@ async function includeHTML() {
  * Highlights the active menu item after the page is loaded. The marking takes place on the basis of the path.
  */
 function highlightActiveMenuItem() {
-    const currentPath = location.pathname.replace('/join','');
+    const currentPath = location.pathname.replace('/join', '');
 
     switch (currentPath) {
         case '/summary.html':
@@ -93,20 +93,19 @@ function logoutModalEventListener() {
  */
 async function loadTasks() {
     //tasks = await JSON.parse(backend.getItem('tasks')) || [];
-    const response = await fetch(url= 'http://127.0.0.1:8000/ticket/' , {
+    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/', {
         method: "GET",
         headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authentication': Authorization,
-            'mode': "cors",
-            'Access-Control-Allow-Origin': '*',
-            'redirect': "follow",
+            'Authorization': Authorization,
         }
-    });
-    
-    console.log(response);
+    }).then(response => response.json())
+        //.then(response => console.log(response))
+        .then(response=> {tasks = response})
 
-    return response.json();
+
+    //console.log(response);
+
+    //tasks = await response.body;
 }
 
 
@@ -114,7 +113,7 @@ async function loadTasks() {
  * Loads the contacts from the backend. If no contacts are available an empty array is created.
  */
 async function loadContacts() {
-    contacts = await JSON.parse(backend.getItem('contacts')) || [];
+    //contacts = await JSON.parse(backend.getItem('contacts')) || [];
 }
 
 
@@ -166,13 +165,15 @@ function togglePW() {
 
 function addSubtask(edit, taskID) {
     let text = document.getElementById('subtasks').value;
-    if(!edit) {
+    if (!edit) {
         subtasks.push({ 'text': text, 'done': false });
-        renderSubtasks()};
-    if(edit) {
+        renderSubtasks()
+    };
+    if (edit) {
         const task = tasks.find(({ id }) => id == taskID);
         task.subtasks.push({ 'text': text, 'done': false });
-        renderEditSubtasks(task)};
+        renderEditSubtasks(task)
+    };
     document.getElementById('subtasks').value = '';
     hideIcon();
 }
@@ -206,7 +207,7 @@ function renderSubtasks() {
 
 function renderEditSubtasks(task) {
     const element = document.getElementById('contentSubtasks');
-    element.innerHTML = '';    
+    element.innerHTML = '';
     for (let i = 0; i < task.subtasks.length; i++) {
         const subtask = task.subtasks[i];
         element.innerHTML += `
@@ -220,33 +221,33 @@ function clearSubtasksContent() {
     document.getElementById('contentSubtasks').innerHTML = '';
 }
 
-function getSubtasks(){
+function getSubtasks() {
     let subtasks = [];
     let elements = document.querySelectorAll('.subtaskCheckbox');
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
         let done = element.checked;
         let text = element.nextElementSibling.textContent;
-        subtasks.push({'text' : text, 'done' : done})
+        subtasks.push({ 'text': text, 'done': done })
     }
     return subtasks;
 }
 
-function getEditSubtasks(){
+function getEditSubtasks() {
     let subtasks = [];
     let elements = document.querySelectorAll('.subtaskEditCheckbox');
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
         let done = element.checked;
         let text = element.nextElementSibling.textContent;
-        subtasks.push({'text' : text, 'done' : done})
+        subtasks.push({ 'text': text, 'done': done })
     }
     return subtasks;
 }
 
-function getSubtaskCheckedString(subtask){
+function getSubtaskCheckedString(subtask) {
     let checkedString = '';
-    if(subtask.done) checkedString = 'checked';
+    if (subtask.done) checkedString = 'checked';
     return checkedString;
 }
 

@@ -75,9 +75,31 @@ function showPasswordResetInfo(){
     },2500);
 }
 
-function guestLogin(){
-    localStorage.setItem('userJoin', 'guest');
-    location.href = 'summary.html';
+async function guestLogin(){
+    // localStorage.setItem('userJoin', 'guest');
+    //location.href = 'summary.html';
+
+    const bData = {
+        "username": "heinz",
+        "password": "sseirF#11dj"
+
+    }
+
+    const response = await fetch(url= 'http://127.0.0.1:8000/login/' , {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "*/*"
+        },
+        body: JSON.stringify(bData)
+        
+    });
+    
+    const data = await response.json();
+
+    loadTasks();
+
+    console.log(data);
 }
 
 init();
