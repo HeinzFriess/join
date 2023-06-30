@@ -2,6 +2,9 @@
 
 
 let tasks = [];
+let categories = [];
+let states = [];
+let prioritiesdb = [];
 let contacts = [];
 let subtasks = [];
 let url = '127.0.0.1:8000';
@@ -88,6 +91,13 @@ function logoutModalEventListener() {
 }
 
 
+async function loadDBEntries(){
+    await loadTasks();
+    await loadCategories();
+    await loadPriorities();
+    await loadStates();
+}
+
 /**
  * Loads the tasks from the backend. If no tasks are available an empty array is created.
  */
@@ -100,12 +110,43 @@ async function loadTasks() {
         }
     }).then(response => response.json())
         //.then(response => console.log(response))
-        .then(response=> {tasks = response})
+        .then(response=> {
+            tasks = response;
+            //console.log('here are the tasks',tasks);
+        })
+}
 
+async function loadCategories() {
+    const response = await fetch(url = 'http://127.0.0.1:8000/category/', {
+        method: "GET",
+        headers: {
+            'Authorization': Authorization,
+        }
+    }).then(response => response.json())
+        .then(response=> {categories = response})
 
-    //console.log(response);
+}
 
-    //tasks = await response.body;
+async function loadStates() {
+    const response = await fetch(url = 'http://127.0.0.1:8000/state/', {
+        method: "GET",
+        headers: {
+            'Authorization': Authorization,
+        }
+    }).then(response => response.json())
+        .then(response=> {states = response})
+
+}
+
+async function loadPriorities() {
+    const response = await fetch(url = 'http://127.0.0.1:8000/priority/', {
+        method: "GET",
+        headers: {
+            'Authorization': Authorization,
+        }
+    }).then(response => response.json())
+        .then(response=> {prioritiesdb = response})
+
 }
 
 
@@ -121,7 +162,7 @@ async function loadContacts() {
  * Stores the tasks in the backend.
  */
 async function storeTasks() {
-    await backend.setItem('tasks', JSON.stringify(tasks));
+    //await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
 
@@ -208,13 +249,13 @@ function renderSubtasks() {
 function renderEditSubtasks(task) {
     const element = document.getElementById('contentSubtasks');
     element.innerHTML = '';
-    for (let i = 0; i < task.subtasks.length; i++) {
-        const subtask = task.subtasks[i];
-        element.innerHTML += `
-            <input type="checkbox" id="check${i}" class="subtaskEditCheckbox" ${getSubtaskCheckedString(subtask)}>
-            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
-        `;
-    }
+    // for (let i = 0; i < task.subtasks.length; i++) {
+    //     const subtask = task.subtasks[i];
+    //     element.innerHTML += `
+    //         <input type="checkbox" id="check${i}" class="subtaskEditCheckbox" ${getSubtaskCheckedString(subtask)}>
+    //         <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
+    //     `;
+    // }
 }
 
 function clearSubtasksContent() {

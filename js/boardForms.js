@@ -85,20 +85,20 @@ function memberTemplatePopup(task) {
  */
 function subtasksTemplatePopup(task) {
     let html = '<span class="popupSpan">Subtasks:</span>';
-    if (task.subtasks.length > 0) {
-        for (let i = 0; i < task.subtasks.length; i++) {
-            subtask = task.subtasks[i];
-            html += `
-            <div class="subtaskDiv">
-            <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)} disabled>
-            <label for="check${i}" class="subtaskLabel">${subtask.text}</label>
-            </div>
-            `;
-        }
-        return html;
-    }
-    else return '';
-    
+    // if (task.subtasks.length > 0) {
+    //     for (let i = 0; i < task.subtasks.length; i++) {
+    //         subtask = task.subtasks[i];
+    //         html += `
+    //         <div class="subtaskDiv">
+    //         <input type="checkbox" id="check${i}" class="subtaskCheckbox" ${getSubtaskCheckedString(subtask)} disabled>
+    //         <label for="check${i}" class="subtaskLabel">${subtask.text}</label>
+    //         </div>
+    //         `;
+    //     }
+    //     return html;
+    // }
+    // else return '';
+    return '';
 }
 
 /**
@@ -145,7 +145,7 @@ function renderPopupEdit(task) {
     prefillTaskValues(task);
     for (let i = 0; i < priorities.length; i++) {
         const priority = priorities[i].toLowerCase();
-        document.getElementById(priority).id == task.priority.toLowerCase() ? document.getElementById(priority).checked = true : false;
+        document.getElementById(priority).id == getTaskPriority(task).toLowerCase() ? document.getElementById(priority).checked = true : false;
     }
     for (let i = 0; i < task.assigned.length; i++) {
         try {

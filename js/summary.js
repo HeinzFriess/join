@@ -79,11 +79,11 @@ function countTasks(status) {
 }
 
 function renderStatistics(){
-    document.getElementById('tasksTodo').innerHTML = countTasks('To do');
+    document.getElementById('tasksTodo').innerHTML = countTasks(1);
     document.getElementById('tasksBoard').innerHTML = tasks.length;
-    document.getElementById('tasksProgress').innerHTML = countTasks('In progress');
-    document.getElementById('tasksAwaiting').innerHTML = countTasks('Awaiting feedback');
-    document.getElementById('tasksdone').innerHTML = countTasks('Done');
+    document.getElementById('tasksProgress').innerHTML = countTasks(2);
+    document.getElementById('tasksAwaiting').innerHTML = countTasks(3);
+    document.getElementById('tasksdone').innerHTML = countTasks(4);
 }
 
 init();

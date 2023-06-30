@@ -6,7 +6,7 @@
 function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
+        const task = tasks[i];        
         if (task.status == status && task.maintask && (task.title.toLowerCase().includes(searchString) || task.description.toLowerCase().includes(searchString))) {
             content.innerHTML += categoryCardTemplate(task);
         };
@@ -21,13 +21,13 @@ function render(status, content) {
 function categoryCardTemplate(task) {
     return `
     <div draggable="true" class="categoryCard" ondragstart="startDragging('${task.id}')" onclick="showDetail('${task.id}')">
-        <div class="categoryName" style="background: hsl(${getColorcodeForCategory(task.category)}, 100%, 40%)">${task.category}</div>
+        <div class="categoryName" style="background: hsl(${getColorcodeForCategory(getTaskCategory(task))}, 100%, 40%)">${getTaskCategory(task)}</div>
         <span class="cardHeadline">${task.title}</span>
         <p class="cardContent">${task.description}</p>
         <div id="progressDiv">${progressTemplate(task)}</div>
         <div class="cardFooter">
             <div id="cardMembers">${memberTemplate(task)}</div>
-            <img src="./assets/icons/${task.priority.toLowerCase()}.svg" class="cardMemberPriorityIcon">
+            <img src="./assets/icons/${getTaskPriority(task).toLocaleLowerCase()}.svg" class="cardMemberPriorityIcon">
         </div>
     </div>
     `;
@@ -39,7 +39,7 @@ function categoryCardTemplate(task) {
  * @returns HTML string
  */
 function progressTemplate(task) {
-    const subtasks = task.subtasks;
+    const subtasks = task.description.split("");
     let finishedSubtasks = 0;
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
@@ -60,7 +60,7 @@ function progressTemplate(task) {
 function taskTemplate(task) {
     return `
     <div class="popupCategoryNameDiv">
-        <p class="popupCategoryName" style="background: hsl(${getColorcodeForCategory(task.category)}, 100%, 40%)">${task.category}</p>
+        <p class="popupCategoryName" style="background: hsl(${getColorcodeForCategory(getTaskCategory(task))}, 100%, 40%)">${getTaskCategory(task)}</p>
         <img src="./assets/icons/add.svg" style="transform: rotate(45deg);" onclick="hideDetail()">
     </div>
         <span class="popupCardHeadline">${task.title}</span>
@@ -71,7 +71,7 @@ function taskTemplate(task) {
     </div>
     <div id="popupPriority" class="popupTopics displayFlexGap8">
         <span class="popupSpan">Priority: </span>
-        <p class="popupPriorityIcon">${task.priority} <img src="./assets/icons/${task.priority.toLowerCase()}.svg" alt=""></p>
+        <p class="popupPriorityIcon">${getTaskPriority(task)} <img src="./assets/icons/${getTaskPriority(task).toLowerCase()}.svg" alt=""></p>
     </div>
     `;
 }

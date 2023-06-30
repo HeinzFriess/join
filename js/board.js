@@ -14,7 +14,7 @@ let searchString = '';
  */
 async function initBoard() {
     //await downloadFromServer();
-    await loadTasks();
+    await loadDBEntries();
     await loadContacts();
     renderTasks();
     //addAllEventListenersTask();
@@ -51,10 +51,10 @@ function toggleDropdown() {
  * renders the tasks into the status aereas
  */
 function renderTasks() {
-    render('To do', toDoElement);
-    render('In progress', inProgressElement);
-    render('Awaiting feedback', awaitingFeedbackElement);
-    render('Done', doneElement);
+    render(1, toDoElement);
+    render(2, inProgressElement);
+    render(3, awaitingFeedbackElement);
+    render(4, doneElement);
 }
 
 /**
@@ -243,4 +243,20 @@ function renderTaskEdit(taskID) {
 function filterTasks() {
     searchString = document.getElementById('searchInput').value.toLowerCase();
     renderTasks();
+}
+
+function getTaskPriority(task){
+    let name = ''
+    prioritiesdb.forEach(prio => {
+        if(prio.id == task.priority ) name = prio.name;
+    });
+    return name;
+}
+
+function getTaskCategory(task){
+    let name = ''
+    categories.forEach(cat => {
+        if(cat.id == task.category ) name = cat.name;
+    });
+    return name;
 }
