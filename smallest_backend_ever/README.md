@@ -52,7 +52,7 @@ async function addUser() {
 Fill your empty array with users from the Server
 ```
 async function init() {
-    await downloadFromServer();
+    await loadDBEntries();
     users = JSON.parse(backend.getItem('users')) || [];
 }
 ```

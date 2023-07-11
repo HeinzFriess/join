@@ -71,9 +71,9 @@ function getColorcodeForCategory(category) {
  * collects the inputfields of the new task window and stores it to the backend
  */
 function createNewTask() {
-    tasks.push(getTaskJson(false));
+    //tasks.push(getTaskJson(false));
     closeSlide();
-    storeTasks();
+    //storeTasks();
     renderTasks();
     notify('Der Task wurde angelegt');
     subtasks = [];
@@ -94,7 +94,7 @@ function getTaskJson(isEdit) {
         "assigned": assigned,
         "category": document.getElementById('category').value,
         "description": document.getElementById('description').value,
-        "dueDate": document.getElementById('date').value,
+        "date": document.getElementById('date').value,
         "id": Date.now().toString(36),
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
@@ -142,7 +142,7 @@ function saveChanges(taskID) {
     statusCall = task.status;
     tasks.splice(indexOfTask, 1, getTaskJson(true));
     subtasks = [];
-    storeTasks();
+    //storeTasks(); tbd
     renderTasks();
     closeEdit();
     notify('Die Änderungen wurden übernommen')
@@ -171,7 +171,7 @@ function drop(status) {
     const indexOfTask = tasks.indexOf(task);
     task.status = status;
     tasks.splice(indexOfTask, 1, task);
-    storeTasks();
+    //storeTasks(); tbd
     renderTasks();
 }
 

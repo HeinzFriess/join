@@ -12,7 +12,8 @@
         setURL('http://developerakademie.com/smallest_backend_ever');
 
         async function init() {
-            await downloadFromServer();
+            //await downloadFromServer();
+            await loadDBEntries();
             users = JSON.parse(backend.getItem('users')) || [];
         }
 

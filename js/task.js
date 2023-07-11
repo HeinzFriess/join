@@ -5,7 +5,7 @@
  * Initial function that gets executed after the document is loaded.
  */
 async function init() {
-    await downloadFromServer();
+    //await downloadFromServer();
     await loadTasks();
     await loadContacts();
     renderAssignees();
@@ -88,12 +88,12 @@ function addTask(event, isMain) {
  */
 function newTask(isMain, title, assigned, date, category, priority, description, subtasks) {
     tasks.push({
-        "id" : Date.now().toString(36),
+        //"id" : Date.now().toString(36),
         "status" : "To do",
         "maintask" : isMain,
         "title" : title,
         "assigned" : assigned,
-        "dueDate" : date,
+        "date" : date,
         "category" : category,
         "priority" : priority,
         "description" : description,

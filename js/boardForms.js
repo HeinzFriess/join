@@ -54,23 +54,24 @@ function renderPopup(taskID) {
  */
 function memberTemplatePopup(task) {
     let html = '';
-    for (let i = 0; i < task.assigned.length; i++) {
-        const contact = contacts.find(({ id }) => id === task.assigned[i])
+    let assigned = task.assigned.split("|");
+    for (let i = 0; i < assigned.length; i++) {
+        const contact = contacts.find(({ id }) => id == assigned[i])
         if (contact) {
             let lastName = '';
             let firstLetter = '';
             let secondLetter = '';
-            if (contact.lastname) lastName = contact.lastname;
+            if (contact.last_name) lastName = contact.last_name;
             try {
-                firstLetter = contact.firstname.substring(0, 1);
-                secondLetter = contact.lastname.substring(0, 1);
+                firstLetter = contact.first_name.substring(0, 1);
+                secondLetter = contact.last_name.substring(0, 1);
             } catch (error) {
 
             }
             let initials = firstLetter + secondLetter;
             html += `<div class="popupCardMemberDiv">
                         <p class="popupCardMember" style="background: hsl(${contact.color}, 100%, 40%)">${initials}</p>
-                        <span>${contact.firstname} ${lastName}</span>
+                        <span>${contact.first_name} ${lastName}</span>
                      </div>`;
         }
         else return '';
@@ -143,8 +144,8 @@ function showEditTask(taskID) {
  */
 function renderPopupEdit(task) {
     prefillTaskValues(task);
-    for (let i = 0; i < priorities.length; i++) {
-        const priority = priorities[i].toLowerCase();
+    for (let i = 0; i < prioritiesdb.length; i++) {
+        const priority = prioritiesdb[i].name.toLowerCase();
         document.getElementById(priority).id == getTaskPriority(task).toLowerCase() ? document.getElementById(priority).checked = true : false;
     }
     for (let i = 0; i < task.assigned.length; i++) {
@@ -161,9 +162,10 @@ function renderPopupEdit(task) {
  */
 function prefillTaskValues(task) {
     document.getElementById('title').value = task.title;
-    document.getElementById('category').value = task.category;
+    const cat = getTaskCategory(task);
+    document.getElementById('category').value = cat;
     document.getElementById('description').value = task.description;
-    document.getElementById('date').value = task.dueDate;
+    document.getElementById('date').value = task.date;
 }
 
 /**

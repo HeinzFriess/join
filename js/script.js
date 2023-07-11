@@ -7,13 +7,20 @@ let states = [];
 let prioritiesdb = [];
 let contacts = [];
 let subtasks = [];
-let url = '127.0.0.1:8000';
-let Authorization = 'token 4418ef00b7747a8a6735f8812c7dc717d1e48165'
+let url = 'http://127.0.0.1:8000/'; 
+let token = '';
+let Authorization;
 
 /**
  * Initial function that gets executed after the document is loaded.
  */
 async function init() {
+    if(localStorage.getItem('token')){
+        token = localStorage.getItem('token');
+    Authorization = 'token ' + token;
+    }
+    // token = localStorage.getItem('token');
+    // Authorization = 'token ' + token;
     await includeHTML();
     highlightActiveMenuItem();
     logoutModalEventListener();
@@ -96,6 +103,7 @@ async function loadDBEntries(){
     await loadCategories();
     await loadPriorities();
     await loadStates();
+    await loadContacts();
 }
 
 /**
@@ -155,6 +163,13 @@ async function loadPriorities() {
  */
 async function loadContacts() {
     //contacts = await JSON.parse(backend.getItem('contacts')) || [];
+    const response = await fetch(url = 'http://127.0.0.1:8000/user/', {
+        method: "GET",
+        headers: {
+            'Authorization': Authorization,
+        }
+    }).then(response => response.json())
+        .then(response=> {contacts = response})
 }
 
 
@@ -163,6 +178,26 @@ async function loadContacts() {
  */
 async function storeTasks() {
     //await backend.setItem('tasks', JSON.stringify(tasks));
+}
+
+async function addTask() {
+    const response = await fetch(url = url + 'tasks/', {
+        method: "POST",
+        headers: {
+            'Authorization': Authorization,
+        }, 
+        body: {
+            "title": "2. Posted Ticket",
+            "description": "See where we End",
+            "maintask": true,
+            "assigned": "Stefan|",
+            "date": 1257542,
+            "category": 3,
+            "priority": 1,
+            "status": 1
+        }
+    }).then(response => loadTasks())
+        
 }
 
 

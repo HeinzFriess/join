@@ -23,9 +23,9 @@ let firstnameCharacters = [];
  * Initial function that gets executed after the document is loaded.
  */
 async function init() {
-    await downloadFromServer();
-    await loadContacts();
-    await loadTasks();
+    //await downloadFromServer();
+    await loadDBEntries();
+    //await loadTasks();
     renderContactList();
     addAllEventListenersContacts();
 }
@@ -55,7 +55,7 @@ function renderContactList() {
     firstnameCharacters.forEach(char => {
         contactsContainer.innerHTML += contactSeparatorTemp(char);
         contacts.forEach((contact) => {
-            if (contact.firstname.toUpperCase().startsWith(char)) {
+            if (contact.first_name.toUpperCase().startsWith(char)) {
                 contactsContainer.innerHTML += contactCardTemp(contact.id);
             }
         });
@@ -72,8 +72,8 @@ function getAllFirstnameCharacters() {
     if (contacts.length > 0) {
         contacts.forEach(contact => {
             try {
-                if (contact.firstname) {
-                    const lastCharacter = contact.firstname.charAt(0).toUpperCase();
+                if (contact.first_name) {
+                    const lastCharacter = contact.first_name.charAt(0).toUpperCase();
                     allCharacters.push(lastCharacter);
                     firstnameCharacters = new Set(allCharacters.sort());
                 }
@@ -96,9 +96,9 @@ function addContact(event) {
     const contactPhone = document.getElementById('contact-phone');
 
     if (contactName.checkValidity() && contactEmail.checkValidity()) {
-        const [firstname, ...lastname] = contactName.value.trim().split(' ');
+        const [first_name, ...last_name] = contactName.value.trim().split(' ');
 
-        const id = newContact(firstname, lastname, contactEmail, contactPhone);
+        const id = newContact(first_name, last_name, contactEmail, contactPhone);
         sortContacts();
         renderContactList();
         storeContacts();
@@ -122,9 +122,9 @@ function newContact(firstname, lastname, contactEmail, contactPhone) {
     const id = Date.now().toString(36);
 
     contacts.push({
-        "id": id,
-        "firstname": firstname.trim(),
-        "lastname": lastname.join(' ').trim(),
+        //"id": id,
+        "first_name": firstname.trim(),
+        "last_name": lastname.join(' ').trim(),
         "email": contactEmail.value,
         "password": '',
         "phone": contactPhone.value,
@@ -158,11 +158,11 @@ function updateContact(id) {
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
     const contactPhone = document.getElementById('contact-phone');
-    const contact = contacts.find(contact => contact.id === id);
+    const contact = contacts.find(contact => contact.id == id);
     const [firstname, ...lastname] = contactName.value.split(' ');
 
-    contact.firstname = firstname.trim();
-    contact.lastname = lastname.join(' ').trim();
+    contact.first_name = firstname.trim();
+    contact.last_name = lastname.join(' ').trim();
     contact.email = contactEmail.value;
     contact.phone = contactPhone.value;
 
@@ -180,7 +180,7 @@ function updateContact(id) {
  * @param {String} id Unique id of the contact
  */
 function deleteContact(id) {
-    const contact = contacts.find(contact => contact.id === id);
+    const contact = contacts.find(contact => contact.id == id);
     const index = contacts.indexOf(contact);
     contacts.splice(index, 1);
 
@@ -201,17 +201,17 @@ function showDetailedContact(id) {
     const mailEl = document.getElementById('contact-detail-mail');
     const phoneEl = document.getElementById('contact-detail-phone');
     const contactColor = document.getElementById('contact-color');
-    const contact = contacts.find(contact => contact.id === id);
+    const contact = contacts.find(contact => contact.id == id);
     let firstName = '';
     let lastName = '';
     let initial1 = '';
     let initial2 = '';
-    if (contact.firstname) {
-        firstName = contact.firstname
+    if (contact.first_name) {
+        firstName = contact.first_name
         initial1 = firstName.charAt(0);
     };
-    if (contact.lastname) {
-        lastName = contact.lastname;
+    if (contact.last_name) {
+        lastName = contact.last_name;
         initial2 = lastName.charAt(0);
     };
     contactDetails.classList.remove('d-none');
@@ -232,7 +232,7 @@ function showDetailedContact(id) {
  */
 function sortContacts() {
     try {
-        contacts = contacts.sort((contactA, contactB) => contactA.lastname.localeCompare(contactB.lastname));
+        contacts = contacts.sort((contactA, contactB) => contactA.last_name.localeCompare(contactB.last_name));
     } catch (error) {
         
     }
@@ -304,9 +304,9 @@ function clearInputFields() {
  * @param {String} id Unique id of the contact
  */
 function prefillInputFields(id) {
-    const contact = contacts.find(contact => contact.id === id);
+    const contact = contacts.find(contact => contact.id == id);
 
-    document.getElementById('contact-name').value = `${contact.firstname} ${contact.lastname}`;
+    document.getElementById('contact-name').value = `${contact.first_name} ${contact.last_name}`;
     document.getElementById('contact-email').value = contact.email;
     document.getElementById('contact-phone').value = contact.phone;
 }
@@ -322,17 +322,17 @@ function prefillInputFields(id) {
  * @returns HTML contact card template
  */
 function contactCardTemp(id) {
-    const contact = contacts.find(contact => contact.id === id);
+    const contact = contacts.find(contact => contact.id == id);
     let firstName = '';
     let lastName = '';
     let initial1 = '';
     let initial2 = '';
-    if (contact.firstname) {
-        firstName = contact.firstname
+    if (contact.first_name) {
+        firstName = contact.first_name
         initial1 = firstName.charAt(0);
     };
     if (contact.lastname) {
-        lastName = contact.lastname;
+        lastName = contact.last_name;
         //firstName  += ',';
         initial2 = lastName.charAt(0);
     };

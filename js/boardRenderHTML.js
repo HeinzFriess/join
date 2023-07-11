@@ -6,7 +6,7 @@
 function render(status, content) {
     content.innerHTML = '';
     for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];        
+        const task = tasks[i];
         if (task.status == status && task.maintask && (task.title.toLowerCase().includes(searchString) || task.description.toLowerCase().includes(searchString))) {
             content.innerHTML += categoryCardTemplate(task);
         };
@@ -67,7 +67,7 @@ function taskTemplate(task) {
         <p class="popupCardContent">${task.description}</p>
     <div id="popupDuedate" class="popupTopics displayFlexGap8">
         <span class="popupSpan">Due date: </span>
-        <p>${task.dueDate}</p>
+        <p>${task.date}</p>
     </div>
     <div id="popupPriority" class="popupTopics displayFlexGap8">
         <span class="popupSpan">Priority: </span>
@@ -131,9 +131,9 @@ function memberHtmlTemplate(members, indexLoop) {
  */
 function assigneeTemp(contact) {
     let lastName = '';
-    if (contact.lastname) lastName = contact.lastname;
+    if (contact.last_name) lastName = contact.last_name;
     return `
-        <label for="${contact.id}">${contact.firstname} ${lastName}
+        <label for="${contact.id}">${contact.first_name} ${lastName}
             <input class="assigneeClass" type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
@@ -195,25 +195,22 @@ function templateDueDate() {
  * @returns HTML string
  */
 function templateCategory() {
-    return `
+    let p1 = `
     <div>
         <label for="category">Category</label>
         <select required name="category" id="category">
-            <option value="" disabled selected hidden>Select task category</option>
-            <option value="Accounting and Finance">Accounting and Finance</option>
-            <option value="Research and Development">Research and Development</option>
-            <option value="Management">Management</option>
-            <option value="IT and EDP">IT and EDP</option>
-            <option value="Customer Service">Customer Service</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Human Resource">Human Resource</option>
-            <option value="Production">Production</option>
-            <option value="Sales">Sales</option>
-            <option value="Legal">Legal</option>
-            <option value="Backoffice">Backoffice</option>
-        </select>
+            <option value="" disabled selected hidden>Select task category</option>`;
+
+    let p2 = '';
+    categories.forEach(category => {
+        p2 += `<option value="${category.id}">${category.name}</option>`
+    });
+
+
+    let p3 = `</select>
     </div>
     `;
+    return p1 + p2 + p3;
 }
 
 /**

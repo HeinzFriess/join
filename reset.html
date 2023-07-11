@@ -18,8 +18,9 @@
         let userMail = urlParameter.get('user');
 
         async function init() {
-            await downloadFromServer();
-            await loadContacts();
+            // await downloadFromServer();
+            // await loadContacts();
+            await loadDBEntries();
         }
 
         async function changePassword() {
