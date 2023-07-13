@@ -124,6 +124,31 @@ async function loadTasks() {
         })
 }
 
+async function editTasks(task, taskID) {
+    //tasks = await JSON.parse(backend.getItem('tasks')) || [];
+    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/' + taskID + '/', {
+        method: "PUT",
+        headers: {
+            'Authorization': Authorization,
+            "Content-Type":"application/json",
+            "Content-Length": "4000",
+        }
+        , 
+        body: {
+            "title": task.title,
+            "description": task.description,
+            "maintask": true,
+            "assigned": task.assigned,
+            "date": task.date,
+            "category": task.category,
+            "priority": task.priority,
+            "status": task.status
+        }
+    })//.then(response => loadTasks())
+
+           
+}
+
 async function loadCategories() {
     const response = await fetch(url = 'http://127.0.0.1:8000/category/', {
         method: "GET",

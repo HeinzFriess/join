@@ -82,7 +82,7 @@ function taskTemplate(task) {
  * @returns HTML string
  */
 function memberTemplate(task) {
-    const members = task.assigned;
+    let members = task.assigned.split('|');
     let html = '';
     if (members.length < 4) {
         for (let i = 0; i < members.length; i++) html += memberHtmlTemplate(members, i);
@@ -104,13 +104,13 @@ function memberTemplate(task) {
 function memberHtmlTemplate(members, indexLoop) {
 
     const member = members[indexLoop];
-    const contact = contacts.find(({ id }) => id === member);
+    const contact = contacts.find(({ id }) => id == member);
     firstLetter = '';
     secondLetter = '';
     if (contact) {
         try {
-            firstLetter = contact.firstname.substring(0, 1);
-            secondLetter = contact.lastname.substring(0, 1);
+            firstLetter = contact.first_name.substring(0, 1);
+            secondLetter = contact.last_name.substring(0, 1);
         } catch (error) {
 
         }

@@ -84,9 +84,14 @@ function createNewTask() {
  * gets the task inputfileds and returns the taskJson
  * @returns JSON
  */
-function getTaskJson(isEdit) {
-    const assigned = [];
-    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee => assigned.push(assignee.value));
+function getTaskJson(isEdit, taskID) {
+    let assigned = '';
+    let assigneCount = 1;
+    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee =>{
+        assigned = assigned + assignee.value;
+        assigneCount ++;
+        if(assignee.length < assigneCount ) assigned = assigned + '|';
+    } );
     let subtasks = [];
     if(isEdit) subtasks = getEditSubtasks() ? getEditSubtasks() : [];
     if(!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
@@ -95,7 +100,7 @@ function getTaskJson(isEdit) {
         "category": document.getElementById('category').value,
         "description": document.getElementById('description').value,
         "date": document.getElementById('date').value,
-        "id": Date.now().toString(36),
+        "id": taskID,
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": statusCall,
@@ -137,13 +142,13 @@ function deleteTask(taskID) {
  * @param {string} taskID 
  */
 function saveChanges(taskID) {
-    const task = tasks.find(({ id }) => id == taskID);
-    const indexOfTask = tasks.indexOf(task);
-    statusCall = task.status;
-    tasks.splice(indexOfTask, 1, getTaskJson(true));
+    //const task = tasks.find(({ id }) => id == taskID);
+    editTasks(getTaskJson(true, taskID), taskID);
+    //statusCall = task.status;
+    //tasks.splice(indexOfTask, 1, getTaskJson(true));
     subtasks = [];
     //storeTasks(); tbd
-    renderTasks();
+    //renderTasks();
     closeEdit();
     notify('Die Änderungen wurden übernommen')
 }
