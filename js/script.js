@@ -7,7 +7,7 @@ let states = [];
 let prioritiesdb = [];
 let contacts = [];
 let subtasks = [];
-let url = 'http://127.0.0.1:8000/'; 
+let url = 'http://127.0.0.1:8000/';
 let token = '';
 let Authorization;
 
@@ -15,9 +15,9 @@ let Authorization;
  * Initial function that gets executed after the document is loaded.
  */
 async function init() {
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
         token = localStorage.getItem('token');
-    Authorization = 'token ' + token;
+        Authorization = 'token ' + token;
     }
     // token = localStorage.getItem('token');
     // Authorization = 'token ' + token;
@@ -98,7 +98,7 @@ function logoutModalEventListener() {
 }
 
 
-async function loadDBEntries(){
+async function loadDBEntries() {
     await loadTasks();
     await loadCategories();
     await loadPriorities();
@@ -118,22 +118,16 @@ async function loadTasks() {
         }
     }).then(response => response.json())
         //.then(response => console.log(response))
-        .then(response=> {
+        .then(response => {
             tasks = response;
             //console.log('here are the tasks',tasks);
         })
 }
 
-async function editTasks(task, taskID) {
-    //tasks = await JSON.parse(backend.getItem('tasks')) || [];
-    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/' + taskID + '/', {
-        method: "PUT",
-        headers: {
-            'Authorization': Authorization,
-            "Content-Type":"application/json",
-            "Content-Length": "4000",
-        }
-        , 
+async function editTasks(task) {
+    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/' + task.id + '/', {
+        method: "PUT"
+        ,
         body: {
             "title": task.title,
             "description": task.description,
@@ -143,10 +137,17 @@ async function editTasks(task, taskID) {
             "category": task.category,
             "priority": task.priority,
             "status": task.status
+        },
+
+        headers: {
+            'Authorization': Authorization,
+            "Content-Type": "application/json",
+            "Content-Length": "149",
         }
+
     })//.then(response => loadTasks())
 
-           
+
 }
 
 async function loadCategories() {
@@ -156,7 +157,7 @@ async function loadCategories() {
             'Authorization': Authorization,
         }
     }).then(response => response.json())
-        .then(response=> {categories = response})
+        .then(response => { categories = response })
 
 }
 
@@ -167,7 +168,7 @@ async function loadStates() {
             'Authorization': Authorization,
         }
     }).then(response => response.json())
-        .then(response=> {states = response})
+        .then(response => { states = response })
 
 }
 
@@ -178,7 +179,7 @@ async function loadPriorities() {
             'Authorization': Authorization,
         }
     }).then(response => response.json())
-        .then(response=> {prioritiesdb = response})
+        .then(response => { prioritiesdb = response })
 
 }
 
@@ -194,7 +195,7 @@ async function loadContacts() {
             'Authorization': Authorization,
         }
     }).then(response => response.json())
-        .then(response=> {contacts = response})
+        .then(response => { contacts = response })
 }
 
 
@@ -205,24 +206,24 @@ async function storeTasks() {
     //await backend.setItem('tasks', JSON.stringify(tasks));
 }
 
-async function addTask() {
+async function addTask(task) {
     const response = await fetch(url = url + 'tasks/', {
         method: "POST",
         headers: {
             'Authorization': Authorization,
-        }, 
+        },
         body: {
-            "title": "2. Posted Ticket",
-            "description": "See where we End",
+            "title": task.title,
+            "description": task.description,
             "maintask": true,
-            "assigned": "Stefan|",
-            "date": 1257542,
-            "category": 3,
-            "priority": 1,
-            "status": 1
-        }
+            "assigned": task.assigned,
+            "date": task.date,
+            "category": task.category,
+            "priority": task.priority,
+            "status": task.status
+        },
     }).then(response => loadTasks())
-        
+
 }
 
 
