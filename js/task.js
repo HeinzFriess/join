@@ -87,9 +87,8 @@ function addTask(event, isMain) {
  * @param {Strin} description Task description
  */
 function newTask(isMain, title, assigned, date, category, priority, description, subtasks) {
-    tasks.push({
-        //"id" : Date.now().toString(36),
-        "status" : "To do",
+    let task ={
+        "status" : 1,
         "maintask" : isMain,
         "title" : title,
         "assigned" : assigned,
@@ -98,7 +97,21 @@ function newTask(isMain, title, assigned, date, category, priority, description,
         "priority" : priority,
         "description" : description,
         "subtasks" : subtasks
-    });
+    };
+    addNewTask(task);
+    // tasks.push({
+    //     //"id" : Date.now().toString(36),
+    //     "status" : "To Do",
+    //     "maintask" : isMain,
+    //     "title" : title,
+    //     "assigned" : assigned,
+    //     "date" : date,
+    //     "category" : category,
+    //     "priority" : priority,
+    //     "description" : description,
+    //     "subtasks" : subtasks
+    // });
+    
 }
 
 

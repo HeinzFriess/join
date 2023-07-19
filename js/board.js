@@ -4,7 +4,7 @@ const toDoElement = document.getElementById('toDo');
 const inProgressElement = document.getElementById('inProgress');
 const awaitingFeedbackElement = document.getElementById('awaitingFeedback');
 const doneElement = document.getElementById('done');
-const priorities = ["Urgent", "Medium", "Low"];
+//const priorities = ["Urgent", "Medium", "Low"];
 let statusCall = '';
 let draggedElement;
 let searchString = '';
@@ -50,7 +50,8 @@ function toggleDropdown() {
 /**
  * renders the tasks into the status aereas
  */
-function renderTasks() {
+async function renderTasks() {
+    await loadTasks();
     render(1, toDoElement);
     render(2, inProgressElement);
     render(3, awaitingFeedbackElement);
@@ -77,33 +78,33 @@ function createNewTask() {
     renderTasks();
     notify('Der Task wurde angelegt');
     subtasks = [];
-    
+
 }
 
 /**
  * gets the task inputfileds and returns the taskJson
  * @returns JSON
  */
-function getTaskJson(isEdit, taskID) {
+function getTaskJson(isEdit, task) {
     let assigned = '';
     let assigneCount = 1;
-    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee =>{
+    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee => {
         assigned = assigned + assignee.value;
-        assigneCount ++;
-        if(assignee.length < assigneCount ) assigned = assigned + '|';
-    } );
+        assigneCount++;
+        if (assigned.length < assigneCount) assigned = assigned + '|';
+    });
     let subtasks = [];
-    if(isEdit) subtasks = getEditSubtasks() ? getEditSubtasks() : [];
-    if(!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
+    if (isEdit) subtasks = getEditSubtasks() ? getEditSubtasks() : [];
+    if (!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
     return {
         "assigned": assigned,
         "category": document.getElementById('category').value,
         "description": document.getElementById('description').value,
         "date": document.getElementById('date').value,
-        "id": taskID,
+        "id": task.id,
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
-        "status": statusCall,
+        "status": task.status,
         "subtasks": subtasks,
         "title": document.getElementById('title').value
     };
@@ -115,9 +116,9 @@ function getTaskJson(isEdit, taskID) {
  */
 function getPriority() {
     let priority;
-    for (let i = 0; i < priorities.length; i++) {
-        const element = document.getElementById(priorities[i].toLowerCase());
-        if (element.checked) priority = priorities[i];
+    for (let i = 0; i < prioritiesdb.length; i++) {
+        const element = document.getElementById(prioritiesdb[i].name.toLowerCase());
+        if (element.checked) priority = prioritiesdb[i].id;
     }
     return priority;
 }
@@ -142,15 +143,21 @@ function deleteTask(taskID) {
  * @param {string} taskID 
  */
 function saveChanges(taskID) {
-    //const task = tasks.find(({ id }) => id == taskID);
-    editTasks(getTaskJson(true, taskID), taskID);
+    const task = tasks.find(({ id }) => id == taskID);
+    editTasks(getTaskJson(true, task), taskID)
+        .then(Response => {
+            subtasks = [];
+            renderTasks();
+            closeEdit();
+            notify('Die Änderungen wurden übernommen')
+        }
+
+        );
     //statusCall = task.status;
     //tasks.splice(indexOfTask, 1, getTaskJson(true));
-    subtasks = [];
+    
     //storeTasks(); tbd
-    //renderTasks();
-    closeEdit();
-    notify('Die Änderungen wurden übernommen')
+
 }
 
 /**
@@ -173,9 +180,10 @@ function allowDrop(ev) {
  */
 function drop(status) {
     const task = tasks.find(({ id }) => id == draggedElement);
-    const indexOfTask = tasks.indexOf(task);
-    task.status = status;
-    tasks.splice(indexOfTask, 1, task);
+    //const indexOfTask = tasks.indexOf(task); //tasks.find(({ id }) => id == taskID);
+    task.status = states.find(({ name }) => name == status).id;
+    // tasks.splice(indexOfTask, 1, task);
+    editTasks(task);
     //storeTasks(); tbd
     renderTasks();
 }
@@ -235,7 +243,7 @@ function renderTaskEdit(taskID) {
         ${templateSubtasks(true, taskID)}
         ${templateEditMenu(taskID)}
     `;
-    
+
     renderAssignees();
     renderPopupEdit(task);
     renderEditSubtasks(task);
@@ -250,18 +258,18 @@ function filterTasks() {
     renderTasks();
 }
 
-function getTaskPriority(task){
+function getTaskPriority(task) {
     let name = ''
     prioritiesdb.forEach(prio => {
-        if(prio.id == task.priority ) name = prio.name;
+        if (prio.id == task.priority) name = prio.name;
     });
     return name;
 }
 
-function getTaskCategory(task){
+function getTaskCategory(task) {
     let name = ''
     categories.forEach(cat => {
-        if(cat.id == task.category ) name = cat.name;
+        if (cat.id == task.category) name = cat.name;
     });
     return name;
 }
