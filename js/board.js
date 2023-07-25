@@ -98,7 +98,7 @@ function getTaskJson(isEdit, task) {
     if (!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
     return {
         "assigned": assigned,
-        "category": document.getElementById('category').value,
+        "category": +document.getElementById('category').value,
         "description": document.getElementById('description').value,
         "date": document.getElementById('date').value,
         "id": task.id,

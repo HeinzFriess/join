@@ -125,19 +125,20 @@ async function loadTasks() {
 }
 
 async function editTasks(task) {
+    let payload = {
+        title: task.title,
+        description: task.description,
+        maintask: true,
+        assigned: task.assigned,
+        date: task.date,
+        category: task.category,
+        priority: task.priority,
+        status: task.status
+    }
     const response = await fetch(url = 'http://127.0.0.1:8000/ticket/' + task.id + '/', {
         method: "PUT"
         ,
-        body: {
-            "title": task.title,
-            "description": task.description,
-            "maintask": true,
-            "assigned": task.assigned,
-            "date": task.date,
-            "category": task.category,
-            "priority": task.priority,
-            "status": task.status
-        },
+        body: JSON.stringify(payload),
 
         headers: {
             'Authorization': Authorization,
@@ -145,7 +146,7 @@ async function editTasks(task) {
             "Content-Length": "149",
         }
 
-    })//.then(response => loadTasks())
+    })//.then(response => { })
 
 
 }

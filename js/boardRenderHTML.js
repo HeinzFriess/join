@@ -199,11 +199,11 @@ function templateCategory() {
     <div>
         <label for="category">Category</label>
         <select required name="category" id="category">
-            <option value="" disabled selected hidden>Select task category</option>`;
+            <option value="" disabled selected hidden >Select task category</option>`; // disabled selected hidden
 
     let p2 = '';
     categories.forEach(category => {
-        p2 += `<option value="${category.id}">${category.name}</option>`
+        p2 += `<option value="${category.id}" id="${category.name}">${category.name}</option>`
     });
 
 

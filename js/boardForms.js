@@ -162,8 +162,8 @@ function renderPopupEdit(task) {
  */
 function prefillTaskValues(task) {
     document.getElementById('title').value = task.title;
-    const cat = getTaskCategory(task);
-    document.getElementById('category').value = cat;
+    //const cat = getTaskCategory(task);
+    document.getElementById(getTaskCategory(task)).setAttribute('selected', true);
     document.getElementById('description').value = task.description;
     document.getElementById('date').value = task.date;
 }
