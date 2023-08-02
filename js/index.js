@@ -6,7 +6,7 @@ async function init() {
     // await downloadFromServer();
     // await loadTasks();
     // await loadContacts();
-    await loadDBEntries();
+    //await loadDBEntries();
     showMailIsSendInfo();
     showPasswordResetInfo();
 }
@@ -14,16 +14,7 @@ async function init() {
 async function logIn() {
     let email = document.getElementById('inputEmail').value;
     let password = document.getElementById('inputPassword').value;
-    //let contact = contacts.find( c => c.email == email && c.password == password);
-    // if (contact) {
-    //     window.location.href = `summary.html`;
-    //     localStorage.setItem('userJoin',contact.id);
-    // }
-    // else{
-    //     //console.log('user not in contacts')
-    //     wrongCredentials();
-    // }
-
+    
     const bData = {
         "username": email,
         "password": password
@@ -37,16 +28,22 @@ async function logIn() {
         },
         body: JSON.stringify(bData)
     })
-        .then(response => response.json())
         .then(response => {
-            console.log(response) 
+            if(response.ok) return response.json()
+            throw new Error('Wrong Credentials')
+        })
+        .then(response => {
+            //console.log(response)
             token = response.token;
             userId = response.user_id;
             localStorage.setItem('userJoin', userId);
             localStorage.setItem('token', token);
             window.location.href = `summary.html`;
-            
-            });
+        })
+        .catch((error) => {
+            console.log(error)
+            wrongCredentials()
+        });
 
     //const data = await response.json();
 
