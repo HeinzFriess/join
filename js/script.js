@@ -111,7 +111,7 @@ async function loadDBEntries() {
  */
 async function loadTasks() {
     //tasks = await JSON.parse(backend.getItem('tasks')) || [];
-    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/', {
+    const response = await fetch(url + 'ticket/', {
         method: "GET",
         headers: {
             'Authorization': Authorization,
@@ -135,7 +135,7 @@ async function editTasks(task) {
         priority: task.priority,
         status: task.status
     }
-    const response = await fetch(url = 'http://127.0.0.1:8000/ticket/' + task.id + '/', {
+    const response = await fetch(url + 'ticket/' + task.id + '/', {
         method: "PUT"
         ,
         body: JSON.stringify(payload),
@@ -152,7 +152,7 @@ async function editTasks(task) {
 }
 
 async function loadCategories() {
-    const response = await fetch(url = 'http://127.0.0.1:8000/category/', {
+    const response = await fetch(url + 'category/', {
         method: "GET",
         headers: {
             'Authorization': Authorization,
@@ -163,7 +163,7 @@ async function loadCategories() {
 }
 
 async function loadStates() {
-    const response = await fetch(url = 'http://127.0.0.1:8000/state/', {
+    const response = await fetch(url + 'state/', {
         method: "GET",
         headers: {
             'Authorization': Authorization,
@@ -174,7 +174,7 @@ async function loadStates() {
 }
 
 async function loadPriorities() {
-    const response = await fetch(url = 'http://127.0.0.1:8000/priority/', {
+    const response = await fetch(url + 'priority/', {
         method: "GET",
         headers: {
             'Authorization': Authorization,
@@ -190,7 +190,7 @@ async function loadPriorities() {
  */
 async function loadContacts() {
     //contacts = await JSON.parse(backend.getItem('contacts')) || [];
-    const response = await fetch(url = 'http://127.0.0.1:8000/user/', {
+    const response = await fetch(url + 'user/', {
         method: "GET",
         headers: {
             'Authorization': Authorization,
@@ -198,6 +198,30 @@ async function loadContacts() {
     }).then(response => response.json())
         .then(response => { contacts = response })
 }
+
+/**
+ * Edits the contacts
+ */
+async function editContacts(user) {
+    let payload = {
+        username: user.username,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email
+    }
+    const response = await fetch(url + 'user/' + user.id + '/', {
+        method: "PUT"
+        ,        
+        body: JSON.stringify(payload),
+
+        headers: {
+            'Authorization': Authorization,
+            "Content-Type": "application/json",
+            //"Content-Length": "149",
+        }
+    }).then(response => response.json())
+}
+
 
 
 /**
@@ -208,7 +232,7 @@ async function storeTasks() {
 }
 
 async function addTask(task) {
-    const response = await fetch(url = url + 'tasks/', {
+    const response = await fetch(url + 'tasks/', {
         method: "POST",
         headers: {
             'Authorization': Authorization,
@@ -229,23 +253,28 @@ async function addTask(task) {
 
 
 /**
- * Stores the contacts in the backend.
+ * Stores the new contact.
  */
-async function storeContacts() {
-    await backend.setItem('contacts', JSON.stringify(contacts));
-}
-
-
-// !--> Wird function noch benötigt? <--!
-function getNewContactID() {
-    let value = 0;
-    for (let i = 0; i < contacts.length; i++) {
-        const contact = contacts[i];
-        if (contact.id > value) value = contact.id + 1;
+async function storeNewContact(user) {
+    const payload = {
+        "username": user.username,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+        "password" : user.password
     }
-    return value;
-}
+    const response = await fetch(url + 'user/', {
+        method: "POST",
+        headers: {
+            'Authorization': Authorization,
+            "Content-Type": "application/json",
+            "Accept": "*/*"
+        },
+        body: JSON.stringify(payload),
+    }).then(response => loadContacts())
 
+
+}
 
 /**
  * Function to convert the date Format

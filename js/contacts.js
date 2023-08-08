@@ -89,49 +89,32 @@ function getAllFirstnameCharacters() {
 /**
  * Adds a contact to the contact list with the given data from the modal. 
  */
-function addContact(event) {
+async function addContact(event) {
     event.preventDefault();
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
-    const contactPhone = document.getElementById('contact-phone');
+    const contactPassword = document.getElementById('contact-password');
 
     if (contactName.checkValidity() && contactEmail.checkValidity()) {
-        const [first_name, ...last_name] = contactName.value.trim().split(' ');
-
-        const id = newContact(first_name, last_name, contactEmail, contactPhone);
+        const first_name = contactName.value.trim().split(' ')[0];
+        const last_name = contactName.value.trim().split(' ')[1];
+        const contact = {
+            'username': last_name+first_name,
+            'first_name' : first_name,
+            'last_name' : last_name,
+            'email' : contactEmail.value,
+            'password' : contactPassword.value
+        }
+        console.log(contact);
         sortContacts();
         renderContactList();
-        storeContacts();
+        await storeNewContact(contact);
         hideModals();
-        showDetailedContact(id);
+        //showDetailedContact(id);
         notify();
     } else {
         reportEmptyContactInputs(contactName, contactEmail);
     }
-}
-
-
-/**
- * Creates a new contact.
- * @param {String} firstname Contact firstname
- * @param {String} lastname Contact lastnam
- * @param {HTMLElement} contactEmail Contact email
- * @param {HTMLElement} contactPhone contact phone
- */
-function newContact(firstname, lastname, contactEmail, contactPhone) {
-    const id = Date.now().toString(36);
-
-    contacts.push({
-        //"id": id,
-        "first_name": firstname.trim(),
-        "last_name": lastname.join(' ').trim(),
-        "email": contactEmail.value,
-        "password": '',
-        "phone": contactPhone.value,
-        "color": Math.floor(Math.random() * 355)
-    });
-
-    return id;
 }
 
 
@@ -157,21 +140,29 @@ function reportEmptyContactInputs(contactName, contactEmail) {
 function updateContact(id) {
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
-    const contactPhone = document.getElementById('contact-phone');
+    //const contactPassword = document.getElementById('contact-password');
     const contact = contacts.find(contact => contact.id == id);
     const [firstname, ...lastname] = contactName.value.split(' ');
 
     contact.first_name = firstname.trim();
     contact.last_name = lastname.join(' ').trim();
     contact.email = contactEmail.value;
-    contact.phone = contactPhone.value;
+    //contact.phone = contactPhone.value;
 
-    renderContactList();
-    showDetailedContact(id);
-    storeContacts();
+    
+    //showDetailedContact(id);
+    //storeContacts();
+    editContacts(contact)
+        .then( result => {
+            notify('Succesfully edited')
+            renderContactList();
+        }, 
+        err => {
+            notify(err);
+        });
     hideModals();
-    showDetailedContact(id);
-    notify('Succesfully saved!');
+    //showDetailedContact(id);
+    //notify('Succesfully saved!');
 }
 
 
@@ -295,7 +286,7 @@ function hideContact() {
 function clearInputFields() {
     document.getElementById('contact-name').value = '';
     document.getElementById('contact-email').value = '';
-    document.getElementById('contact-phone').value = '';
+    document.getElementById('contact-password').value = '';
 }
 
 
@@ -308,7 +299,7 @@ function prefillInputFields(id) {
 
     document.getElementById('contact-name').value = `${contact.first_name} ${contact.last_name}`;
     document.getElementById('contact-email').value = contact.email;
-    document.getElementById('contact-phone').value = contact.phone;
+    //document.getElementById('contact-phone').value = contact.phone;
 }
 
 

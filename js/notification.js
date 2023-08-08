@@ -1,6 +1,6 @@
 'use strict';
 
-function notify(message = 'Succesfully created!') {
+function notify(message) {
     const notifyEl = document.getElementById('notification');
 
     notifyEl.innerHTML = message;
