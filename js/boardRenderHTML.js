@@ -39,15 +39,14 @@ function categoryCardTemplate(task) {
  * @returns HTML string
  */
 function progressTemplate(task) {
-    const subtasks = task.description.split("");
     let finishedSubtasks = 0;
-    for (let i = 0; i < subtasks.length; i++) {
-        const subtask = subtasks[i];
+    for (let i = 0; i < task.subtasks.length; i++) {
+        const subtask = task.subtasks[i];
         if (subtask.done) finishedSubtasks++;
     }
-    if (subtasks.length > 0) {
+    if (task.subtasks.length > 0) {
         return `
-                <progress id="file" value="${finishedSubtasks}" max="${subtasks.length}"></progress> ${finishedSubtasks}/${subtasks.length} Done`;
+                <progress id="file" value="${finishedSubtasks}" max="${task.subtasks.length}"></progress> ${finishedSubtasks}/${task.subtasks.length} Done`;
     }
     else return '';
 }
@@ -141,17 +140,17 @@ function assigneeTemp(contact) {
 
 /**
  * returns the editMenu HTML fragment
- * @param {string} taskID 
+ * @param {string} task
  * @returns HTML string
  */
-function templateEditMenu(taskID) {
+function templateEditMenu(task) {
     return `
         <div class="editMenu">
             <div id="deleteButton">
-                <Button type="button" class="btn-primary" onclick="deleteTask('${taskID}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt=""></Button>
+                <Button type="button" class="btn-primary" onclick="deleteTask('${task.id}')">Delete <img style="rotate: 45deg" src="./assets/icons/add_white.svg" alt=""></Button>
             </div>
             <div id="saveButton">
-                <Button type="button" class="btn-primary" onclick="saveChanges('${taskID}')">Ok <img src="./assets/icons/checkButton.svg" alt=""></Button>
+                <Button type="button" class="btn-primary" onclick="callEditTask('${task.id}')">Ok <img src="./assets/icons/checkButton.svg" alt=""></Button>
             </div>
         </div>
     </form>
@@ -196,7 +195,7 @@ function templateDueDate() {
  */
 function templateCategory() {
     let p1 = `
-    <div>
+    <div class="category">
         <label for="category">Category</label>
         <select required name="category" id="category">
             <option value="" disabled selected hidden >Select task category</option>`; // disabled selected hidden

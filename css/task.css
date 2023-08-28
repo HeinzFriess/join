@@ -125,7 +125,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow-x: auto;
 }
 
-.assignee-container > label {
+.assignee-container>label {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -133,7 +133,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
-.assignee-container > label:hover {
+.assignee-container>label:hover {
     color: var(--white);
     background: var(--primary);
 
@@ -153,7 +153,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 }
 
-.assignee-container input:checked ~ .checkmark {
+.assignee-container input:checked~.checkmark {
     background: url(./../assets/icons/checked.svg) no-repeat;
 }
 
@@ -201,29 +201,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-image: url(/assets/icons/low.svg);
 }
 
-#priority input[type="radio"]:checked + label[for="urgent"] i {
+#priority input[type="radio"]:checked+label[for="urgent"] i {
     background-image: url(/assets/icons/urgent_white.svg);
 }
 
-#priority input[type="radio"]:checked + label[for="medium"] i {
+#priority input[type="radio"]:checked+label[for="medium"] i {
     background-image: url(/assets/icons/medium_white.svg);
 }
 
-#priority input[type="radio"]:checked + label[for="low"] i {
+#priority input[type="radio"]:checked+label[for="low"] i {
     background-image: url(/assets/icons/low_white.svg);
 }
 
-#priority input[type="radio"]:checked + label[for="urgent"] {
+#priority input[type="radio"]:checked+label[for="urgent"] {
     color: var(--white);
     background: var(--urgent);
 }
 
-#priority input[type="radio"]:checked + label[for="medium"] {
+#priority input[type="radio"]:checked+label[for="medium"] {
     color: var(--white);
     background: var(--medium);
 }
 
-#priority input[type="radio"]:checked + label[for="low"] {
+#priority input[type="radio"]:checked+label[for="low"] {
     color: var(--white);
     background: var(--low);
 }
@@ -276,6 +276,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
 }
 
+.category {
+    display: flex;
+    flex-direction: column;
+}
+
 
 @media screen and (max-width: 700px) {
     main {
@@ -303,7 +308,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .new-task input[type="date"] {
         font-size: var(--font-body);
     }
-    
+
     .new-task select[id="category"] {
         font-size: var(--font-body);
     }
@@ -311,7 +316,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .checkmark {
         font-size: var(--font-body);
     }
-    
+
     #assignee {
         font-size: var(--font-body);
     }

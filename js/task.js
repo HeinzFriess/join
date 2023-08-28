@@ -8,7 +8,10 @@ async function init() {
     //await downloadFromServer();
     await loadTasks();
     await loadContacts();
+    await loadCategories();
+    await loadPriorities();
     renderAssignees();
+    renderCategory();
     addAllEventListenersTask();
 }
 
@@ -22,7 +25,7 @@ function addAllEventListenersTask() {
     const clearBtn = document.getElementById('clear-task');
 
     assigneeMenu.addEventListener('click', toggleDropdown);
-    addTaskBtn.addEventListener('click', (event) => addTask(event, true));
+    addTaskBtn.addEventListener('click', (event) => add_Task(event, true));
     clearBtn.addEventListener('click', emptyForm);
 }
 
@@ -37,6 +40,16 @@ function renderAssignees() {
     contacts.forEach(contact => {
         assigneeContainer.innerHTML += assigneeTemp(contact);
     })
+}
+
+/**
+ * Renders the categories (all available categories) into the dropdown selection.
+ */
+function renderCategory() {
+    const categoryContainer = document.getElementById('category-container');
+
+    categoryContainer.innerHTML = templateCategory();
+
 }
 
 
@@ -58,18 +71,29 @@ function toggleDropdown() {
  * @param {event} event Event listener event
  * @param {Boolean} isMain Indicator if created event is a main event
  */
-function addTask(event, isMain) {
+function add_Task(event, isMain) {
     event.preventDefault();
-    const title = document.getElementById('title');
-    const assigned = [];
-    document.querySelectorAll('input[type="checkbox"]:checked').forEach(assignee => assigned.push(assignee.value));
+    const title = document.getElementById('title'); 
+    let assigned = '';
+    let assignArray = document.querySelectorAll('input[type="checkbox"]:checked')
+    for (let index = 0; index < assignArray.length; index++) {
+        const assignee = assignArray[index];
+        assigned = assigned + assignee.value;
+        if(assignee !== assignArray[assignArray.length-1]) assigned = assigned + '|';
+    }
     const date = document.getElementById('date');
     const category = document.getElementById('category');
-    const priority = document.querySelector('input[name="priority"]:checked');
+    const prio = document.querySelector('input[name="priority"]:checked') || '';
+    const prioVal = prio.value;
+    let priority;
+    prioritiesdb.forEach(prio => {
+        if(prio.name.toLowerCase() === prioVal) priority = prio.id
+    });
+    //const priority = prio.value;
     const description = document.getElementById('description');
 
     if (title.checkValidity() && date.checkValidity() && category.checkValidity() && assigned.length > 0) {
-        createNewTask(isMain, title.value, assigned, date.value, category.value, priority != null ? priority.value : 'low', description.value, getSubtasks());
+        createNewTask(isMain, title.value, assigned, date.value, category.value, priority != null ? priority : 'low', description.value, getSubtasks());
     } else {
         reportEmptyInputs(title, assigned, date, category);
     }
@@ -87,31 +111,19 @@ function addTask(event, isMain) {
  * @param {Strin} description Task description
  */
 function newTask(isMain, title, assigned, date, category, priority, description, subtasks) {
-    let task ={
-        "status" : 1,
-        "maintask" : isMain,
-        "title" : title,
-        "assigned" : assigned,
-        "date" : date,
-        "category" : category,
-        "priority" : priority,
-        "description" : description,
-        "subtasks" : subtasks
+    let task = {
+        "status": 1,
+        "maintask": isMain,
+        "title": title,
+        "assigned": assigned,
+        "date": date,
+        "category": category,
+        "priority": priority,
+        "description": description,
+        "subtasks": JSON.stringify(subtasks)
     };
-    addNewTask(task);
-    // tasks.push({
-    //     //"id" : Date.now().toString(36),
-    //     "status" : "To Do",
-    //     "maintask" : isMain,
-    //     "title" : title,
-    //     "assigned" : assigned,
-    //     "date" : date,
-    //     "category" : category,
-    //     "priority" : priority,
-    //     "description" : description,
-    //     "subtasks" : subtasks
-    // });
-    
+
+    return task;
 }
 
 
@@ -126,13 +138,16 @@ function newTask(isMain, title, assigned, date, category, priority, description,
  * @param {Strin} description Task description
  */
 async function createNewTask(isMain, title, assigned, date, category, priority, description, subtasks) {
-    newTask(
+    const task = newTask(
         isMain, title, assigned, date, category, priority, description, subtasks
     );
+    if (task) {
+        await addTask(task);
+        emptyForm();
+        notify('Der Task wurde angelegt');
+        window.location.href = 'board.html';
+    }
 
-    await storeTasks();
-    emptyForm();
-    window.location.href = 'board.html';
 }
 
 
@@ -145,11 +160,11 @@ async function createNewTask(isMain, title, assigned, date, category, priority, 
  */
 function reportEmptyInputs(title, assigned, date, category) {
     category.reportValidity();
-        date.reportValidity();
-        if (assigned.length === 0) {
-            document.getElementById('assignee-check').reportValidity();
-        }
-        title.reportValidity();
+    date.reportValidity();
+    if (assigned.length === 0) {
+        document.getElementById('assignee-check').reportValidity();
+    }
+    title.reportValidity();
 }
 
 
@@ -178,13 +193,12 @@ function emptyForm() {
  */
 function assigneeTemp(contact) {
     let lastName = '';
-    if(contact.lastname) lastName = contact.lastname;
+    if (contact.last_name) lastName = contact.last_name;
     return `
-        <label for="${contact.id}">${contact.firstname} ${lastName}
+        <label for="${contact.id}">${contact.first_name} ${lastName}
             <input type="checkbox" name="${contact.id}" id="${contact.id}" value="${contact.id}">
             <span class="checkmark"></span>
         </label>`;
 }
-
 
 init();

@@ -120,6 +120,9 @@ async function loadTasks() {
         //.then(response => console.log(response))
         .then(response => {
             tasks = response;
+            tasks.forEach(task => {
+                if(task.subtasks.length > 1) task.subtasks = JSON.parse(task.subtasks);
+            });
             //console.log('here are the tasks',tasks);
         })
 }
@@ -129,12 +132,14 @@ async function editTasks(task) {
         title: task.title,
         description: task.description,
         maintask: true,
+        subtasks: JSON.stringify(task.subtasks),
         assigned: task.assigned,
         date: task.date,
         category: task.category,
         priority: task.priority,
         status: task.status
     }
+    console.log(task);
     const response = await fetch(url + 'ticket/' + task.id + '/', {
         method: "PUT"
         ,
@@ -146,7 +151,7 @@ async function editTasks(task) {
             "Content-Length": "149",
         }
 
-    })//.then(response => { })
+    }).then(response => { renderTasks();})
 
 
 }
@@ -224,29 +229,25 @@ async function editContacts(user) {
 
 
 
-/**
- * Stores the tasks in the backend.
- */
-async function storeTasks() {
-    //await backend.setItem('tasks', JSON.stringify(tasks));
-}
-
 async function addTask(task) {
-    const response = await fetch(url + 'tasks/', {
+    const payload = {
+        "title": task.title,
+        "description": task.description,
+        "maintask": true,
+        "subtasks": JSON.stringify(task.subtasks),
+        "assigned": task.assigned,
+        "date": task.date,
+        "category": task.category,
+        "priority": task.priority,
+        "status": task.status
+    }
+    const response = await fetch(url + 'ticket/', {
         method: "POST",
         headers: {
             'Authorization': Authorization,
+            "Content-Type": "application/json",
         },
-        body: {
-            "title": task.title,
-            "description": task.description,
-            "maintask": true,
-            "assigned": task.assigned,
-            "date": task.date,
-            "category": task.category,
-            "priority": task.priority,
-            "status": task.status
-        },
+        body: JSON.stringify(payload),
     }).then(response => loadTasks())
 
 }
@@ -263,7 +264,7 @@ async function storeNewContact(user) {
         "email": user.email,
         "password" : user.password
     }
-    const response = await fetch(url + 'user/', {
+    const response = await fetch(url + 'adduser/', {
         method: "POST",
         headers: {
             'Authorization': Authorization,
@@ -340,13 +341,13 @@ function renderSubtasks() {
 function renderEditSubtasks(task) {
     const element = document.getElementById('contentSubtasks');
     element.innerHTML = '';
-    // for (let i = 0; i < task.subtasks.length; i++) {
-    //     const subtask = task.subtasks[i];
-    //     element.innerHTML += `
-    //         <input type="checkbox" id="check${i}" class="subtaskEditCheckbox" ${getSubtaskCheckedString(subtask)}>
-    //         <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
-    //     `;
-    // }
+    for (let i = 0; i < task.subtasks.length; i++) {
+        const subtask = task.subtasks[i];
+        element.innerHTML += `
+            <input type="checkbox" id="check${i}" class="subtaskEditCheckbox" ${getSubtaskCheckedString(subtask)}>
+            <label for="check${i}" class="subtaskLabel">${subtask.text}</label><br>
+        `;
+    }
 }
 
 function clearSubtasksContent() {

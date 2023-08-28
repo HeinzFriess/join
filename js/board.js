@@ -69,30 +69,17 @@ function getColorcodeForCategory(category) {
 }
 
 /**
- * collects the inputfields of the new task window and stores it to the backend
- */
-function createNewTask() {
-    //tasks.push(getTaskJson(false));
-    closeSlide();
-    //storeTasks();
-    renderTasks();
-    notify('Der Task wurde angelegt');
-    subtasks = [];
-
-}
-
-/**
  * gets the task inputfileds and returns the taskJson
  * @returns JSON
  */
 function getTaskJson(isEdit, task) {
     let assigned = '';
-    let assigneCount = 1;
-    document.querySelectorAll('input[class="assigneeClass"]:checked').forEach(assignee => {
+    let assignArray = document.querySelectorAll('input[type="checkbox"]:checked')
+    for (let index = 0; index < assignArray.length; index++) {
+        const assignee = assignArray[index];
         assigned = assigned + assignee.value;
-        assigneCount++;
-        if (assigned.length < assigneCount) assigned = assigned + '|';
-    });
+        if(assignee !== assignArray[assignArray.length-1]) assigned = assigned + '|';
+    }
     let subtasks = [];
     if (isEdit) subtasks = getEditSubtasks() ? getEditSubtasks() : [];
     if (!isEdit) subtasks = getSubtasks() ? getSubtasks() : [];
@@ -105,7 +92,7 @@ function getTaskJson(isEdit, task) {
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": task.status,
-        "subtasks": subtasks,
+        "subtasks": JSON.stringify(subtasks),
         "title": document.getElementById('title').value
     };
 }
@@ -123,42 +110,6 @@ function getPriority() {
     return priority;
 }
 
-/**
- * deletes the task from the backend
- * @param {string} taskID 
- */
-function deleteTask(taskID) {
-    const task = tasks.find(({ id }) => id == taskID);
-    const indexOfTask = tasks.indexOf(task);
-    tasks.splice(indexOfTask, 1);
-    storeTasks();
-    renderTasks();
-    closeEdit();
-    notify(`Der Task wurde gelöscht`);
-
-}
-
-/**
- * saves the changes of the taks to the backend
- * @param {string} taskID 
- */
-function saveChanges(taskID) {
-    const task = tasks.find(({ id }) => id == taskID);
-    editTasks(getTaskJson(true, task), taskID)
-        .then(Response => {
-            subtasks = [];
-            renderTasks();
-            closeEdit();
-            notify('Die Änderungen wurden übernommen')
-        }
-
-        );
-    //statusCall = task.status;
-    //tasks.splice(indexOfTask, 1, getTaskJson(true));
-    
-    //storeTasks(); tbd
-
-}
 
 /**
  * drag and drop functionality
@@ -241,7 +192,7 @@ function renderTaskEdit(taskID) {
         ${templatePriority()}
         ${templateDescription()}
         ${templateSubtasks(true, taskID)}
-        ${templateEditMenu(taskID)}
+        ${templateEditMenu(task)}
     `;
 
     renderAssignees();
@@ -272,4 +223,17 @@ function getTaskCategory(task) {
         if (cat.id == task.category) name = cat.name;
     });
     return name;
+}
+
+function callEditTask(taskID){
+    const task = tasks.find(({ id }) => id == taskID);
+    editTasks(getTaskJson(true, task), taskID)
+        .then(Response => {
+            subtasks = [];
+            renderTasks();
+            closeEdit();
+            notify('Die Änderungen wurden übernommen')
+        }
+
+        );
 }

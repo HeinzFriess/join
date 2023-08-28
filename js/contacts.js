@@ -269,6 +269,8 @@ function showModalAddTask() {
     modalBackground.classList.add('modal-background-blur');
     modalAddTask.classList.remove('d-none');
     modalAddTask.classList.add('modal-slide-in-right');
+    //renderAssignees();
+    // tbd contacts and category to render from db
 }
 
 

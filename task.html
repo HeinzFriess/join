@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/navigation.css">
     <link rel="stylesheet" href="./css/task.css">
-    <!-- <script src="./js/mini_backend.js"></script> -->
     <script defer src="./js/notification.js"></script>
     <script defer src="./js/script.js"></script>
     <script defer src="./js/task.js"></script>
+    <script src="./js/boardRenderHTML.js"></script>
 
 </head>
 
@@ -46,22 +46,7 @@
                         <input type="date" name="date" id="date" required>
                     </div>
                     <!-- Category -->
-                    <div>
-                        <label for="category">Category</label>
-                        <select name="category" id="category" required>
-                            <option value="" disabled selected hidden>Select task category</option>
-                            <option value="Accounting and Finance">Accounting and Finance</option>
-                            <option value="Research and Development">Research and Development</option>
-                            <option value="Management">Management</option>
-                            <option value="IT and EDP">IT and EDP</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Human Resource">Human Resource</option>
-                            <option value="Production">Production</option>
-                            <option value="Sales">Sales</option>
-                            <option value="Legal">Legal</option>
-                            <option value="Backoffice">Backoffice</option>
-                        </select>
+                    <div id="category-container" >
                     </div>
                     <!-- Priority -->
                     <div id="priority">
