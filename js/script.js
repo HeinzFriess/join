@@ -120,9 +120,14 @@ async function loadTasks() {
         //.then(response => console.log(response))
         .then(response => {
             tasks = response;
-            tasks.forEach(task => {
-                if(task.subtasks.length > 1) task.subtasks = JSON.parse(task.subtasks);
-            });
+            // tasks.forEach(task => {
+            //     try {
+            //         if(task.subtasks.length > 1) task.subtasks = JSON.parse(task.subtasks);
+            //         else task.subtasks = [];
+            //     } catch (error) {
+            //         console.log('Error', error);
+            //     }                
+            // });
             //console.log('here are the tasks',tasks);
         })
 }
@@ -132,7 +137,7 @@ async function editTasks(task) {
         title: task.title,
         description: task.description,
         maintask: true,
-        subtasks: JSON.stringify(task.subtasks),
+        subtasks: task.subtasks, //JSON.stringify(task.subtasks),
         assigned: task.assigned,
         date: task.date,
         category: task.category,
@@ -234,7 +239,7 @@ async function addTask(task) {
         "title": task.title,
         "description": task.description,
         "maintask": true,
-        "subtasks": JSON.stringify(task.subtasks),
+        "subtasks": task.subtasks,
         "assigned": task.assigned,
         "date": task.date,
         "category": task.category,

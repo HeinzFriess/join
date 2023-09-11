@@ -120,7 +120,7 @@ function newTask(isMain, title, assigned, date, category, priority, description,
         "category": category,
         "priority": priority,
         "description": description,
-        "subtasks": JSON.stringify(subtasks)
+        "subtasks": subtasks
     };
 
     return task;

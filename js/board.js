@@ -92,9 +92,11 @@ function getTaskJson(isEdit, task) {
         "maintask": true,
         "priority": getPriority() ? getPriority() : 'low',
         "status": task.status,
-        "subtasks": JSON.stringify(subtasks),
+        "subtasks": subtasks, //JSON.stringify(task.subtasks),
         "title": document.getElementById('title').value
     };
+    // console.log(JSON.stringify(subtasks));
+    // return '';
 }
 
 /**
