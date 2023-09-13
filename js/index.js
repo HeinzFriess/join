@@ -20,7 +20,7 @@ async function logIn() {
         "password": password
     }
 
-    const response = await fetch(url = 'http://127.0.0.1:8000/login/', {
+    const response = await fetch(url + 'login/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

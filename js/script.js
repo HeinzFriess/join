@@ -7,7 +7,8 @@ let states = [];
 let prioritiesdb = [];
 let contacts = [];
 let subtasks = [];
-let url = 'http://127.0.0.1:8000/';
+//let url = 'http://127.0.0.1:8000/';
+let url = 'https://heinzjoin.pythonanywhere.com/';
 let token = '';
 let Authorization;
 
