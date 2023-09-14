@@ -17,7 +17,7 @@ function renderHeadline() {
     const contact = contacts.find(c => c.id == userID);
     let firstName = '';
     let lastName = '';
-        if (contact) {
+        if (contact && !(contact.first_name == "Guest")) {
         if(contact.first_name) firstName = contact.first_name;
         if(contact.last_name) lastName = contact.last_name;
         element.innerHTML = `

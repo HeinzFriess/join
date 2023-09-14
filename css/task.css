@@ -124,6 +124,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 10px;
     box-shadow: var(--shadow-medium);
     overflow-x: auto;
+    z-index: 5;
 }
 
 .assignee-container>label {

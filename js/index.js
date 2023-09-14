@@ -100,30 +100,41 @@ function showPasswordResetInfo() {
 }
 
 async function guestLogin() {
+    console.log('Function guetLogin called')
     // localStorage.setItem('userJoin', 'guest');
     //location.href = 'summary.html';
 
     const bData = {
-        "username": "heinz",
+        "email": "guest@join.com",
         "password": "sseirF#11dj"
 
     }
 
-    const response = await fetch(url = 'http://127.0.0.1:8000/login/', {
+    const response = await fetch(url + 'login/', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "*/*"
         },
         body: JSON.stringify(bData)
+    })
+        .then(response => {
+            if(response.ok) return response.json()
+            throw new Error('Wrong Credentials')
+        })
+        .then(response => {
+            //console.log(response)
+            token = response.token;
+            userId = response.user_id;
+            localStorage.setItem('userJoin', userId);
+            localStorage.setItem('token', token);
+            window.location.href = `summary.html`;
+        })
+        .catch((error) => {
+            console.log(error)
+            wrongCredentials()
+        });
 
-    });
-
-    const data = await response.json();
-
-    loadTasks();
-
-    console.log(data);
 }
 
 init();
