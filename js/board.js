@@ -133,11 +133,8 @@ function allowDrop(ev) {
  */
 function drop(status) {
     const task = tasks.find(({ id }) => id == draggedElement);
-    //const indexOfTask = tasks.indexOf(task); //tasks.find(({ id }) => id == taskID);
     task.status = states.find(({ name }) => name == status).id;
-    // tasks.splice(indexOfTask, 1, task);
     editTasks(task);
-    //storeTasks(); tbd
     renderTasks();
 }
 

@@ -20,8 +20,6 @@ async function init() {
         token = localStorage.getItem('token');
         Authorization = 'token ' + token;
     }
-    // token = localStorage.getItem('token');
-    // Authorization = 'token ' + token;
     await includeHTML();
     highlightActiveMenuItem();
     logoutModalEventListener();
@@ -121,15 +119,6 @@ async function loadTasks() {
         //.then(response => console.log(response))
         .then(response => {
             tasks = response;
-            // tasks.forEach(task => {
-            //     try {
-            //         if(task.subtasks.length > 1) task.subtasks = JSON.parse(task.subtasks);
-            //         else task.subtasks = [];
-            //     } catch (error) {
-            //         console.log('Error', error);
-            //     }                
-            // });
-            //console.log('here are the tasks',tasks);
         })
 }
 

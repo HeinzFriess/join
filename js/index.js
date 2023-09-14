@@ -3,10 +3,6 @@ let newPassword = urlParameter.get('newPassword');
 let mailIsSend = urlParameter.get('mailSend');
 
 async function init() {
-    // await downloadFromServer();
-    // await loadTasks();
-    // await loadContacts();
-    //await loadDBEntries();
     showMailIsSendInfo();
     showPasswordResetInfo();
 }
@@ -44,8 +40,6 @@ async function logIn() {
             console.log(error)
             wrongCredentials()
         });
-
-    //const data = await response.json();
 
 }
 
