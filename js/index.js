@@ -16,7 +16,7 @@ async function logIn() {
     let password = document.getElementById('inputPassword').value;
     
     const bData = {
-        "username": email,
+        "email": email,
         "password": password
     }
 

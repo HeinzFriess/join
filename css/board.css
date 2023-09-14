@@ -27,6 +27,16 @@ main {
 }
 
 .category {
+    /* width: 280px; */
+    padding-top: 24px;
+    padding: 8px;
+    position: relative;
+    /* height: 600px; */
+    background: white;
+    z-index: 3;
+}
+
+.categoryBase {
     width: 280px;
     padding-top: 24px;
     padding: 8px;

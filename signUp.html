@@ -34,7 +34,7 @@
 
         async function postSignup(user) {
             const bData = {
-                "username": user.username,
+                "username": user.email,
                 "first_name": user.first_name,
                 "last_name": user.last_name,
                 "email": user.email,
@@ -68,8 +68,7 @@
                 firstname = name.split(' ')[0];
                 lastname = name.split(' ')[1];
             }
-            let username = lastname.toLowerCase() + firstname.toLowerCase();
-            return user = ({ 'first_name': firstname, 'last_name': lastname, 'email': email, 'password': password, 'username': username });
+            return user = ({ 'first_name': firstname, 'last_name': lastname, 'email': email, 'password': password});
         }
 
         //init();

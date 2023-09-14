@@ -121,6 +121,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     max-height: 300px;
     background-color: var(--white);
     border: 1px solid var(--gray-light);
+    border-radius: 10px;
     box-shadow: var(--shadow-medium);
     overflow-x: auto;
 }

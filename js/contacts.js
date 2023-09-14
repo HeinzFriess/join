@@ -93,7 +93,7 @@ async function addContact(event) {
     event.preventDefault();
     const contactName = document.getElementById('contact-name');
     const contactEmail = document.getElementById('contact-email');
-    const contactPassword = document.getElementById('contact-password');
+    // const contactPassword = document.getElementById('contact-password');
 
     if (contactName.checkValidity() && contactEmail.checkValidity()) {
         const first_name = contactName.value.trim().split(' ')[0];
@@ -209,8 +209,8 @@ function showDetailedContact(id) {
     nameEl.innerHTML = `${firstName} ${lastName}`;
     mailEl.innerHTML = contact.email ?? '';
     mailEl.href = `mailto:${contact.email}`;
-    phoneEl.innerHTML = contact.phone ?? '';
-    phoneEl.href = `tel:${contact.phone}`;
+    // phoneEl.innerHTML = contact.phone ?? '';
+    // phoneEl.href = `tel:${contact.phone}`;
     contactColor.style = `background: hsl(${contact.color}, 100%, 40%)`;
     contactColor.children[0].innerHTML = `${initial1}${initial2}`;
     editContactBtn.onclick = () => showModalAddContacts('edit', id);
@@ -288,7 +288,7 @@ function hideContact() {
 function clearInputFields() {
     document.getElementById('contact-name').value = '';
     document.getElementById('contact-email').value = '';
-    document.getElementById('contact-password').value = '';
+    // document.getElementById('contact-password').value = '';
 }
 
 
