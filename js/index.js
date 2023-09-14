@@ -100,10 +100,6 @@ function showPasswordResetInfo() {
 }
 
 async function guestLogin() {
-    console.log('Function guetLogin called')
-    // localStorage.setItem('userJoin', 'guest');
-    //location.href = 'summary.html';
-
     const bData = {
         "email": "guest@join.com",
         "password": "sseirF#11dj"
