@@ -48,8 +48,10 @@
                     return response.json().then((errorData) => {
                         if (response.status === 400 && errorData.password) {
                             notify(errorData.password);
+                        } else if (response.status === 400 && errorData.email) {
+                            notify('Email already in use: '+ errorData.email);
                         } else {
-                            notify(errorData);
+                            notify(JSON.stringify(errorData));
                         }
                     });
                 } else {
@@ -63,7 +65,7 @@
                 });
 
 
-            
+
         }
 
 
