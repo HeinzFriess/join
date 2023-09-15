@@ -17,7 +17,7 @@
     </style>
     <script>
         let user = [];
-        
+
         async function init() {
             //await downloadFromServer();
             //await loadContacts();
@@ -43,11 +43,27 @@
                     "Accept": "*/*"
                 },
                 body: JSON.stringify(bData),
-            }).then(response => {
-                notify('user generated');
-                window.location.href = 'index.html';
+            }).then((response) => {
+                if (!response.ok) {
+                    return response.json().then((errorData) => {
+                        if (response.status === 400 && errorData.password) {
+                            notify(errorData.password);
+                        } else {
+                            notify(errorData);
+                        }
+                    });
+                } else {
+                    notify('SignUp sucessful')
+                    setTimeout(function () {
+                        window.location.href = 'index.html';
+                    }, 3000);
+                }
             })
+                .catch((error) => {
+                });
 
+
+            
         }
 
 
@@ -65,7 +81,7 @@
                 firstname = nameArray[0];
                 lastname = nameArray[1];
             }
-            return user = ({ 'first_name': firstname, 'last_name': lastname, 'email': email, 'password': password});
+            return user = ({ 'first_name': firstname, 'last_name': lastname, 'email': email, 'password': password });
         }
 
     </script>
@@ -94,11 +110,10 @@
                 <div id="cardInput" class="tooltip">
                     <input type="password" required placeholder="Password" id="inputPassword" class="noBorder">
                     <img id="passwordLock" src="assets/img/lockIcon.png" onclick="togglePW()" alt="">
-                    <span class="tooltiptext">Pwd minlength=8, 1 special caracter, 1 number</span>
                 </div>
 
                 <div id="cardButtons">
-                    <button class="btn-primary" onclick="signUp()">Sign up</button>
+                    <button class="btn-primary">Sign up</button>
                 </div>
             </form>
 
