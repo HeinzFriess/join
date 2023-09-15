@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/signUp.css">
     <script defer src="./js/script.js"></script>
+    <script defer src="./js/notification.js"></script>
     <style>
 
     </style>
@@ -43,6 +44,7 @@
                 },
                 body: JSON.stringify(bData),
             }).then(response => {
+                notify('user generated');
                 window.location.href = 'index.html';
             })
 
@@ -53,14 +55,15 @@
             let name = document.getElementById('inputName').value;
             let email = document.getElementById('inputEmail').value;
             let password = document.getElementById('inputPassword').value;
-            let firstname = ' ';
-            let lastname = ' ';
-            if (name.split < 2) {
-                lastname = name.split(' ')[0];
+            let firstname = '';
+            let lastname = '';
+            const nameArray = name.split(' ');
+            if (nameArray.length < 2) {
+                firstname = name;
             }
             else {
-                firstname = name.split(' ')[0];
-                lastname = name.split(' ')[1];
+                firstname = nameArray[0];
+                lastname = nameArray[1];
             }
             return user = ({ 'first_name': firstname, 'last_name': lastname, 'email': email, 'password': password});
         }
@@ -101,6 +104,7 @@
 
         </div>
     </div>
+    <div class="notification" id="notification"></div>
 
 </body>
 
